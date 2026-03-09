@@ -1,0 +1,10 @@
+# Rekordbox library files (personal data)
+rekordbox.xml
+rekordbox_*.xml
+
+# OS files
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
