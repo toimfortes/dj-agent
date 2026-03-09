@@ -24,7 +24,7 @@ Cue points in Rekordbox's DB are stored across multiple linked tables with compl
 
 ## Step 1: Direct DB Write (do this FIRST, with Rekordbox closed)
 
-**Requires Rekordbox to be closed.**
+**CRITICAL: Always ask the user to confirm Rekordbox is closed before proceeding.** Do NOT assume it is closed. Rekordbox overwrites the DB while running, so any writes will be lost silently. Use AskUserQuestion to confirm.
 
 Writes:
 - Energy ratings → My Tag system (`DjmdMyTag` / `DjmdSongMyTag` tables)
