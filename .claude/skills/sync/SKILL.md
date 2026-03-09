@@ -5,44 +5,31 @@ description: Write results back to Rekordbox - XML export for cues/titles/artist
 
 # Sync to Rekordbox
 
-Two sync methods, used together:
+Not everything can be synced the same way. Some data goes via direct DB write, some must be imported via XML. Both methods are used together in a single sync.
 
-## 1. XML Export (cues, titles, artists, genres, colours)
+## Why two methods?
 
-Generates a Rekordbox-compatible XML that can be imported via Bridge.
+Cue points in Rekordbox's DB are stored across multiple linked tables with complex relationships, beat grid references, and internal checksums. Writing them directly risks corruption. XML import is Rekordbox's official supported way to bring in cues — it handles all the internal linking safely.
 
-- Filename: `rekordbox_YYYY-MM-DD_HHMMSS.xml`
-- Output directory: `~/Documents/DJ/dj-agent/`
-- **Never write energy or tags to Comments or Label in XML** — energy goes to My Tag via DB
-- Pass through BPM and key unchanged
-- Set colour based on energy rating
+## What goes where
 
-### Import Steps
+| Data | Method | Why |
+|------|--------|-----|
+| Hot cue points | **XML import** | Complex DB structure, XML is the safe route |
+| Track title & artist | **XML import** | Works reliably via import |
+| Genre | **Both** | XML import for new values, DB for casing fixes |
+| Rating & colour | **XML import** | Mapped from energy |
+| Energy tags (My Tag) | **DB only** | My Tags don't exist in XML format |
+| Comments cleanup | **DB only** | Clearing old agent tags |
 
-1. Open Rekordbox
-2. Preferences > Advanced > Database > rekordbox xml
-3. Set "Imported Library" path to the generated XML file
-4. Click OK
-5. In sidebar, expand "rekordbox xml"
-6. Find your playlist > select all > right-click > Import to Collection
-
-### What gets updated on import
-- Track title, artist, genre
-- Rating and colour (mapped from energy)
-- Hot cue points (POSITION_MARK elements)
-
-### What Rekordbox preserves
-- Existing cue points, beat grids
-- BPM and key (passed through unchanged)
-- Playlists and playlist order
-
-## 2. Direct DB Write (My Tags, Comments cleanup)
+## Step 1: Direct DB Write (do this FIRST, with Rekordbox closed)
 
 **Requires Rekordbox to be closed.**
 
-- Energy ratings > My Tag system (`DjmdMyTag` / `DjmdSongMyTag` tables)
+Writes:
+- Energy ratings → My Tag system (`DjmdMyTag` / `DjmdSongMyTag` tables)
 - Clear old agent tags from Comments field
-- Genre casing fixes (e.g. "BOUNCE" > "Bounce")
+- Genre casing fixes (e.g. "BOUNCE" → "Bounce")
 
 ```python
 from pyrekordbox import Rekordbox6Database
@@ -52,10 +39,38 @@ db.session.commit()
 db.close()
 ```
 
-## Workflow
+## Step 2: XML Export (generate the file)
 
-1. Ask user which method: XML only, DB only, or both
-2. If DB: confirm Rekordbox is closed
-3. Generate XML and/or write to DB
-4. Show summary of what was written
-5. Save memory file
+Generates a Rekordbox-compatible XML for manual import.
+
+- Filename: `rekordbox_YYYY-MM-DD_HHMMSS.xml`
+- Output directory: `~/Documents/DJ/dj-agent/`
+- **Never write energy or tags to Comments or Label in XML**
+- Pass through BPM and key unchanged
+- Set colour based on energy rating
+
+## Step 3: XML Import (user does this manually in Rekordbox)
+
+1. Open Rekordbox
+2. Preferences → Advanced → Database → rekordbox xml
+3. Set "Imported Library" path to the generated XML file
+4. Click OK
+5. In sidebar, expand "rekordbox xml"
+6. Find your playlist → select all → right-click → Import to Collection
+
+### What gets updated on import
+- Track title, artist, genre
+- Rating and colour (mapped from energy)
+- Hot cue points (POSITION_MARK elements)
+
+### What Rekordbox preserves
+- Existing cue points and beat grids
+- BPM and key (passed through unchanged)
+- Playlists and playlist order
+
+## Agent Workflow
+
+1. Do the DB write first (Rekordbox must be closed)
+2. Generate the XML export
+3. Tell user to open Rekordbox and import the XML
+4. Save memory file
