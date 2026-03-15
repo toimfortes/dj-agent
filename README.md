@@ -27,6 +27,8 @@ Requires Rekordbox 6 or 7.
 | `health` | Library health report — no modifications |
 | `sync` / `write back` | Write results back to Rekordbox (XML + DB) |
 
+All commands can be run on the full library or scoped to a specific playlist (e.g. "calculate energy for Disco").
+
 ## How it works
 
 1. You import tracks into Rekordbox (BPM, beat grid, key detection)
@@ -34,6 +36,15 @@ Requires Rekordbox 6 or 7.
 3. Results are written back via XML export (cues, titles, artists) and direct DB writes (My Tag energy)
 
 BPM and Key are never touched — Rekordbox is the source of truth.
+
+## What this agent doesn't do
+
+- **BPM detection** — Rekordbox handles this
+- **Key detection** — Rekordbox handles this
+- **Beat grid analysis** — Rekordbox handles this
+- **Waveform generation** — Rekordbox handles this
+
+Import your tracks into Rekordbox first and let it do the audio analysis. This agent picks up where Rekordbox leaves off — the enrichment that Rekordbox can't do on its own.
 
 ## Energy calibration
 
