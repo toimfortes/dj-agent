@@ -46,6 +46,28 @@ BPM and Key are never touched — Rekordbox is the source of truth.
 
 Import your tracks into Rekordbox first and let it do the audio analysis. This agent picks up where Rekordbox leaves off — the enrichment that Rekordbox can't do on its own.
 
+## Demo
+
+Running `magic` on the Acid playlist (20 tracks):
+
+### Before
+
+No energy tags. Several tracks have artist names stuck in the title field, and some titles contain ANSI/HTML entity artifacts (`SOÑA&290R`, `&amp;`).
+
+![Before — no energy tags, messy metadata](docs/before.png)
+
+### After
+
+Energy ratings (7-10) written to My Tag. Artist names extracted from titles into the Artist column. Garbled title characters fixed.
+
+![After — energy tags, cleaned metadata](docs/after.png)
+
+### Hot cue detection
+
+Structural analysis detects intros, drops, breakdowns, and outros — written as colour-coded hot cues (A-H).
+
+![Hot cues — intro, drops, breakdowns](docs/hot-cues.png)
+
 ## Energy calibration
 
 The agent uses `energy_references.json` — user-provided energy ratings for sample tracks across each playlist. This calibrates the audio analysis to match your perception of energy, not just loudness.

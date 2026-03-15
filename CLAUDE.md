@@ -46,6 +46,8 @@ If `essentia-tensorflow` fails, use `librosa` alone.
 - `db.get_song_my_tag()` doesn't exist — use `db.session.query(DjmdSongMyTag)`
 - Energy parent tag ID: `'2480700835'`
 - HTML entities in filenames are **literal on disk** — never `html.unescape()` paths, only title/artist display fields
+- `content.ArtistName` is a read-only proxy — set artist via `content.ArtistID = artist_obj.ID` (get/create `DjmdArtist` first)
+- `content.Title` is a direct column — safe to set directly
 - **Never use `RekordboxXml` for XML generation** — it double-encodes paths. Use `xml.etree.ElementTree` (see sync skill for details).
 
 ## Commands
