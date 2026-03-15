@@ -1,0 +1,6717 @@
+{
+  "version": 1,
+  "processed_tracks": {
+    "1ca2289585f7b088a0322b88d6510caf4d863a4488b0a2d5c243062a090f6933": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/KI_KI/5%20Mins%20Of%20Acid/KI_KI-5_Mins_Of_Acid-Original_Mix-62714366%20-.mp3",
+      "artist": "KI/KI",
+      "title": "5 Mins Of Acid (Original Mix)",
+      "energy": 10,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544880"
+    },
+    "0e59d4fdbd8fb192aec41494072d20ac31620d02d80ca3aebcf14627f6b8217f": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/ACID%20DROP%20M%c3%8bRO.wav",
+      "artist": "",
+      "title": "ACID DROP M\u00cbRO",
+      "energy": 9,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-08T12:04:48.812523"
+    },
+    "4ef508801b3754f52968a0fe96f702ee41cdcfbb0aa36b9317442b1e64aeedbc": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Mark%20Broom,%20Roku,%20Ben%20Sims/Acid%20Amnesia/Mark_Broom__Roku__Ben_Sims-Acid_Amnesia-Orig.mp3",
+      "artist": "Mark Broom, Roku, Ben Sims",
+      "title": "Acid Amnesia (Original Mix)",
+      "energy": 10,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544736"
+    },
+    "5e19757d9415fc97fa3196dc81cfe80894db7cd8553e594e2c6abb00d9af9769": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/base%20in%20the%20place%20-%20polar.wav",
+      "artist": "POLAR",
+      "title": "Base In The Place",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544615",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 51483,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 60387,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 81677,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 86709,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "0de0ea41d8ddeed75b29c1e105f8f607d9cbbd29f5f6b26c0e5ba6992b6e2fe4": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Tony%20De%20Vit%20Bring%20The%20Beat%20Back%20Remix.wav",
+      "artist": "Tony De Vit",
+      "title": "Bring the Beat Back (Remix)",
+      "energy": 7,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544708",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 60779,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 149610,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 210389,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 324545,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 324545,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "8fe6195c6ecdc554f9818e66622f9f730e40c0dc5f221c261a7d4a8a52501bbc": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Gwen%20Stefani%20What%20You%20Waiting%20For%20Edit.wav",
+      "artist": "Gwen Stefani",
+      "title": "What You Waiting For (Edit)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544715",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 12000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 148645,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 176516,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 222967,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 234967,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 284903,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 284903,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "8e8bbc14f623fa96f391ef8c2c0bcba437ee636b2cc4f91d74dd704f9b7bc31b": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Tomcraft/Loneliness%20%5bPoolhaus%20Remix%5d/Tomcraft-Loneliness__Poolhaus_Remix_-Poolhau.mp3",
+      "artist": "Tomcraft",
+      "title": "Loneliness (Poolhaus Remix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-08T12:04:52.507679"
+    },
+    "fa6543d5e8613b48dae54790172cb65e16f2b495425ce950ded68cc876a870ca": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Paul%20Van%20Dyk,%20Phuture,%20DJ%20Pierre/Acid%20Traxxx/Paul_Van_Dyk__Phuture__DJ_Pierre-Acid_Traxxx.mp3",
+      "artist": "Paul Van Dyk, Phuture, DJ Pierre",
+      "title": "Acid Traxxx (Original Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544875"
+    },
+    "b16945c352c181e6becaa633cf04b21923645c77d3ff22a077eb704c24759cc9": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Matty%20Ralph/UnknownAlbum/Matty%20Ralph%20-%20The%20Power%20(SNAP!)%20MASTER%20-%2010A.wav",
+      "artist": "Matty Ralph",
+      "title": "The Power (SNAP!)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544818"
+    },
+    "37426b268f2f5c2a5c743e55e1e8da56c70f145fc9394e8892ff395a48e1af2b": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Alter%20Ego/UnknownAlbum/Operation%20Blade%20scot%20project%20remix%20Alter%20Ego.aif",
+      "artist": "Alter Ego",
+      "title": "Operation Blade scot project remix",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544743"
+    },
+    "c9824003b11b32cedf4131f41d5fe2a99e606c31bc250e9b48e5d1ab3c0743c4": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/22-01-2026/Doja%20Cat%20Boss%20Bitch%20Alis%20Con%20Rework.wav",
+      "artist": "Doja Cat",
+      "title": "Boss Bitch (Alis Con Rework)",
+      "energy": 7,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544913",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 25945,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 64864,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 78243,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 142702,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 149189,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 233513,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 235135,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "de55a9a24fdd66913066948d38268b3d9a83ff5790481b4bf9ed8d7f377ba364": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Justin%20Jay,%20coldsweat,%20DJ%20Deeon/Back%20To%20The%20Groove/Justin_Jay__coldsweat__DJ_Deeon-Back_To_The_.mp3",
+      "artist": "Justin Jay, coldsweat, DJ Deeon",
+      "title": "Back To The Groove (Original Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544842"
+    },
+    "7f9da54fb9ad0f6dc5d595b8b462438004c06cf62d35762dcb6252b2a57e636c": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Noise%20Mafia%20Shake%20That%20Free%20DL.wav",
+      "artist": "Noise Mafia",
+      "title": "Shake That",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544721"
+    },
+    "1a96f0b0aab7e511a1c26c95e89b8fcf630ee1fa07fb555a13f2a75965515a21": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Omaks/Crowd%20Control/Omaks-Crowd_Control-Original_Mix-62170404%20-%20.mp3",
+      "artist": "Omaks",
+      "title": "Crowd Control (Original Mix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544886"
+    },
+    "ae23e68898bdf4402ada9459cac3e4922a831346841674a7fccc3a9f0d961a20": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Hannah%20Laing,%20rhys%20from%20the%20sticks/4am%20In%20A%20Rave%20_%20Speed%20Is%20A%20Deed%20(EP)/Hannah_Laing__rhys_from_the_sticks-4am_In_A_.mp3",
+      "artist": "Hannah Laing, rhys from the sticks",
+      "title": "4am In A Rave (Extended Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544895",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 169795,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 181224,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 284081,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 287346,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "35f1251385490f6312551d242e2cf708e123bd85ef37af8f17967804ebd85c44": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Funk%20Tribu/Phonky%20Tribu/Funk_Tribu-Phonky_Tribu-Original_Club_Mix-62.mp3",
+      "artist": "Funk Tribu",
+      "title": "Phonky Tribu (Original Club Mix)",
+      "energy": 10,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544812"
+    },
+    "f8fae2fd96882abad2c7195cfa235a11e49a121bf9437107210f76988db2231d": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Rihanna%20-%20SOS%20(zwilling.%20%26%20DJ%20Achim%20Feuervog.wav",
+      "artist": "Rihanna",
+      "title": "SOS (zwilling. & DJ Achim Feuervogel Edit)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-08T12:05:00.148055"
+    },
+    "e01b46e762535addf0032d26be732cf3c97aa8df03af0a5d7de09ea22fc7401b": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Hannah%20Laing%20-%20Fuck%20With%20The%20DJ%20.mp3",
+      "artist": "Hannah Laing",
+      "title": "Fuck With The DJ",
+      "energy": 10,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544924",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 43668,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 139485,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 179762,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 213680,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 213680,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "63f04d6921fbb5346405db160e582b4283d701c7f0cdd884caed198e3cb43f7f": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Fuck%20Tha%20Police%20Revoxx%20Edit.wav",
+      "artist": "N.W.A",
+      "title": "Fuck Tha Police (Revoxx Edit)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544764",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 11200,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 51600,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 75600,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 205200,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 205200,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "515722be2244a757ad723103c0821209d975b26d44b676ac73de7ac7ba37d0af": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Noise%20Mafia%20Vogue%20In%20Paris.wav",
+      "artist": "Noise Mafia",
+      "title": "Vogue in Paris",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544728"
+    },
+    "7576d5c8ceddf653c7e33e885c8331b182d26fdb990a90d56493cdc84d27f925": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Safri%20Duo/UnknownAlbum/Safri_Duo-Played_A_Live-ZAA_Remix-65249377.mp3",
+      "artist": "Safri Duo",
+      "title": "Played A Live (ZAA Remix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544785"
+    },
+    "9084972171cf4d6a982010c59d583756f8e0d478c3943719431c2ef350f2347a": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Whoop%20There%20It%20Is%20by%20POLAR.wav",
+      "artist": "POLAR",
+      "title": "Whoop There It Is",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544650",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 5200,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 38800,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 64000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 154800,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 158400,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "e0bcd73d0ce6a05c77067e3c6799d6784f051e9f9078796c032b0ac457516699": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Renegade%20Master%20RALLY%20EDIT.wav",
+      "artist": "Wildchild",
+      "title": "Renegade Master (Rally Edit)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544694",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 25600,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 49200,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "6169b1d43fcf92b9598b46f1b366a8204fcd5b11863aefe5c25dfb826fdff781": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/DJ%20Schaffbuxx%20-%20Renegate%20(Dallaniel%20Masterin.wav",
+      "artist": "DJ Schaffbuxx",
+      "title": "Renegate (Dallaniel Mastering)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544798"
+    },
+    "8ac518953c8be0c9562ce446ea1445150d3edf1a1a75a414b26569946184993a": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Ready%20for%20the%20Rumble%20M%c3%8bRO%20Edit%20(1).wav",
+      "artist": "",
+      "title": "Ready for the Rumble M\u00cbRO Edit (1)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-08T12:05:04.708736"
+    },
+    "205891682d0393f2d9da83d22734437531993276152926dabc5522a071bc010e": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/The%20Shapeshifters%20-%20Lola%27s%20Theme%20(Tim%20Theo%20H.wav",
+      "artist": "The Shapeshifters",
+      "title": "Lola's Theme (Tim Theo Hardgroove Edit)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544792"
+    },
+    "dfe023fe0093c2d2dea1982773cc1cc7c5c2003d8313fa8a225e1dd708f2f263": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Audio%20Bullys%20We%20Dont%20Care%20Keno%20Edit.mp3",
+      "artist": "Audio Bullys",
+      "title": "We Don't Care (Keno Edit)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544680",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 42000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 64000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 118000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 158400,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 267200,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 267200,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "5ba61dbfc3ea3e011d449f6b67d2c7cdfd04682b24f87c030c2a2c9b920473d1": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Pnau,%20Empire%20Of%20The%20Sun/Aeiou/Pnau__Empire_Of_The_Sun-Aeiou-Pegassi_Club_M.mp3",
+      "artist": "Pnau, Empire Of The Sun",
+      "title": "Aeiou (Pegassi Club Mix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544849"
+    },
+    "44ef531a15848fe6db45c316bcefcad31122460d17f47195ee5b381887a7cd0b": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/ARGOT%20-%20DRUMS%20GO%20LIKE%20THIS.wav",
+      "artist": "ARGOT",
+      "title": "DRUMS GO LIKE THIS",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544770"
+    },
+    "642255fdab96d4e2ba03cbceb240ab435a9eda805e7accb77bcff095aa15d888": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/beatport_tracks_2025-10%20(1)/DSTBL%20-%20Wonderland%20(Original%20Mix).mp3",
+      "artist": "DSTBL",
+      "title": "Wonderland (Original Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544900",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 72000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 78000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 124500,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 144000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 288375,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 288375,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "82749b7e2e742263f0dd7468940299d01cb11f154bff95721d8891f475d79f8d": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/07-03-2026/Biscits%20-%20Wait%20A%20Minute%20.mp3",
+      "artist": "Biscits",
+      "title": "Wait A Minute",
+      "energy": 7,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544940",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 107142,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 177142,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 210000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 210000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "16f54b0c4531b79db81114332d542f4162c1bf0b1d19eaf390a76cdcd28ccb93": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Sterbinszky,%20MYNEA,%20Rackwheel/La%20Isla%20Bonita/Sterbinszky__MYNEA__Rackwheel-La_Isla_Bonita.mp3",
+      "artist": "Sterbinszky, MYNEA, Rackwheel",
+      "title": "La Isla Bonita (Extended Mix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544826"
+    },
+    "8b7643ba30c25393f8d92ef4b89ebd8c5bdeea19dbb5e70f309ec585b50d4f3c": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Fresh%20Prince%20M%c3%8bRO%20Edit.wav",
+      "artist": "",
+      "title": "Fresh Prince M\u00cbRO Edit",
+      "energy": 9,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-08T12:05:09.905406"
+    },
+    "a2d0c1251cc877d5092084a4c817f9ac9aecae7270772ea3c23ac07b5a45ccec": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Electric%20Universe,%20Avalon/Plant%20Medicine/Electric_Universe__Avalon-Plant_Medicine-Ori.mp3",
+      "artist": "Electric Universe, Avalon",
+      "title": "Plant Medicine (Original Mix)",
+      "energy": 7,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544856"
+    },
+    "ace7e82ef0f01730ddbfae7a2a536c905c7934b6c268644e303a191d813b7bfc": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Ludacris/UnknownAlbum/Ludacris%20-%20Whats%20Your%20Fantasy%20(Shemm%20Rave%20Re.wav",
+      "artist": "Ludacris",
+      "title": "Whats Your Fantasy (Shemm Rave Remix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544862"
+    },
+    "13cb62042efb9024d4a07d93037c9d300002204577ff96c78d5bc2878d63df6e": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Riverside%20KIRK%20Flip.mp3",
+      "artist": "KIRK",
+      "title": "Riverside (Flip)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544639",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 12387,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 109935,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 111483,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 272516,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 272516,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "beb16e628d88e27028bd32eaf1816b8e0ca16b0b436573ee2381a01784ce9077": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Pegassi/Yoyoyo/Pegassi-Yoyoyo-Original_Mix-62715012%20-%2011A%20-.mp3",
+      "artist": "Pegassi",
+      "title": "Yoyoyo (Original Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544835"
+    },
+    "90811160b5bc1094fa824f4cb4fd0d39181f03ecaefa193ef322b05a8561d143": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Hertz/Barracuda/Hertz%20-%20The%20Badman%20(Original%20Mix).mp3",
+      "artist": "Hertz",
+      "title": "The Badman (Original Mix)",
+      "energy": 10,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544868"
+    },
+    "c5d1f57b6f6deb14848163abb31ac78de916b49c79bb93677aa113e72c12e315": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Hurts%20%26%20JOKESONYOU/UnknownAlbum/Hurts%20%26%20JOKESONYOU%20-%20Make%20the%20crowd%20go.wav",
+      "artist": "Hurts & JOKESONYOU",
+      "title": "Make the crowd goJH",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-08T12:05:15.296762"
+    },
+    "0354587fa135ae894232199b3353716dd7dc2853cdd2dcee1f3842ef39d348cd": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Funk%20Tribu%20All%20Of%20It%20Healy%20Edit%20Master.wav",
+      "artist": "Funk Tribu",
+      "title": "All of It (Healy Edit)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544701"
+    },
+    "96d05d73c6ab36e3c3afc9e316946af26acf639aa56200e614b40dc4e036f7b9": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/TRYPDO%20x%20ANOMALY/UnknownAlbum/TRYPDO%20x%20ANOMALY%20-%20ACIDIC%20SURGE%20MH1644%20-%204A%20.aif",
+      "artist": "TRYPDO x ANOMALY",
+      "title": "ACIDIC SURGE",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544805"
+    },
+    "2b408071e2c881e8265844e17557a2f5a772a2f55798c8f52784e277f8444d59": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Ready%20for%20the%20Rumble%20M%C3%8BRO%20Edit%20(1).wav",
+      "artist": "M\u00cbRO",
+      "title": "Ready for the Rumble (Edit)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544662",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30967,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 97548,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 99096,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 226064,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 229161,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "6e2098e981e25c82afa5e33cd7e88a1a772a38412c20b840b8ace915ae3dc4fb": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/ACID%20DROP%20M%C3%8BRO.wav",
+      "artist": "M\u00cbRO",
+      "title": "Acid Drop",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544672",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 21677,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 48000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 99096,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 142451,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "e2af33e58cf11790e6bf938e206bcbfbabe9519c9e28c3860002234aa5ce165e": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Fresh%20Prince%20M%C3%8BRO%20Edit.wav",
+      "artist": "M\u00cbRO",
+      "title": "Fresh Prince (Edit)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544687",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 16400,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 24800,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 144000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 153200,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 192000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 192000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "8f1ef9df5498dda7b9078a0a8cf4021e414abe1aa609e693c1739142219a7510": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Tomcraft/Loneliness%20%5BPoolhaus%20Remix%5D/Tomcraft-Loneliness__Poolhaus_Remix_-Poolhau.mp3",
+      "artist": "Tomcraft",
+      "title": "Loneliness (Poolhaus Remix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544751"
+    },
+    "33a46cbab893e00358980025198436b9a700026f16be4f71d912fb42c3ac53ba": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/Hurts%20&%20JOKESONYOU/UnknownAlbum/Hurts%20&%20JOKESONYOU%20-%20Make%20the%20crowd%20go.wav",
+      "artist": "Hurts & JOKESONYOU",
+      "title": "Make the crowd goJH",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544758"
+    },
+    "4e0032829a435dfd55f3f8fa763cee8c777e52ab31dd6058821b588983c92051": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Bouncy/Contents/UnknownArtist/UnknownAlbum/Rihanna%20-%20SOS%20(zwilling.%20&%20DJ%20Achim%20Feuervog.wav",
+      "artist": "Rihanna",
+      "title": "SOS (zwilling. & DJ Achim Feuervogel Edit)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544777"
+    },
+    "c44b906346ae48cf0335f375f2eba40c513693d95f39a2e0557a3a21c9b51843": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/22-01-2026/Jesse%20Bloch%20-%20Disco%20Lines%20x%20Tinashe%20-%20No%20Broke%20Boys%20(Jesse%20Bloch&#39;s%20Hard%20Edit)%20.mp3",
+      "artist": "Jesse Bloch",
+      "title": "Disco Lines x Tinashe - No Broke Boys (Jesse Bloch's Hard Edit)",
+      "energy": 7,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544907",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 11625,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 24000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 48000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 84000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 125625,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 167625,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 180000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "07b96e68431b67831f70e7b2747444bcd4350760f9b8646b2eeab4cdc05d3abd": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/22-01-2026/BEAUZ%20-%20Bel%20Mercy%20feat.%20Nokia%20#VKUSMUZ%20.mp3",
+      "artist": "BEAUZ",
+      "title": "Bel Mercy feat. Nokia",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544919",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 24000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 117000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 117000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "289cfdd02d3f4a11438468b9035f86303eead8a0f7621bc9431d3f51702c6d2a": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/GI&#216;%20-%20SISTEM%20ERROR%20(2025)%20.mp3",
+      "artist": "GI\u00d8",
+      "title": "SISTEM ERROR",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544929",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 58148,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 108518,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 142222,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 170740,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 195555,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 192962,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "7d0e5cdd6e47df9ad53580fceef411b3db8c52a1b5df035a025d9ccea93e454e": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/D&#39;Angello%20&amp;%20Francis%20-%20Kernkraft%20400%20.mp3",
+      "artist": "D'Angello & Francis",
+      "title": "Kernkraft 400",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T21:43:45.544935",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 8689,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 36413,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 118344,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 211034,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 213103,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "45af969675b885c7ff3504abefd0427cd41836feba4f61d6ba6d514628203233": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Opolopo__Natasha_Watts-Situationship-Extended_Mix-69565528.mp3",
+      "artist": "Opolopo, Natasha Watts",
+      "title": "Situationship (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944423",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 35500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 360500,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 360500,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "e0fd2ab8415706c3fe29731b4d399e3eea9f49d3465b8f4060ce1e2c2962197a": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Nu%20Genea%20Tienat%C3%A8%20Jo%20Crimaldi%20YARIN%20Edit.wav",
+      "artist": "Nu Genea",
+      "title": "Tienat\u00e8 (Jo Crimaldi YARIN Edit)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944471",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30967,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 265161,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 265161,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "1fc1b79578422c9efafc2f361f68298899b856e29f9c77b9dab7ce31211669d2": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/FlashDancers-Power_Of_Luv-Extended_Mix-69565496.mp3",
+      "artist": "FlashDancers",
+      "title": "Power Of Luv (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944477",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 123809,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 144761,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 236190,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 240952,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "e9e979aecb0b59437f6f64a49f4781c20c623e4f74cb7da3b5d1c8e0ac340cf3": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Nu%20Genea%20Straniero%20Vaulx%20Edit.wav",
+      "artist": "Nu Genea",
+      "title": "Straniero (Vaulx Edit)",
+      "energy": 7,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944484",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 65322,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 92903,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 154838,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 185806,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 261290,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 263225,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 325161,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 325161,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "f630236794c5ffb2dea48d670952fc53a19d66a410bdeabfc899d7d9eb04efb3": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Ghostbusterz-Gimme_2Nite-Funky_Mix-68842175.mp3",
+      "artist": "Ghostbusterz",
+      "title": "Gimme 2Nite (Funky Mix)",
+      "energy": 9,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944488",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 13333,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 121904,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 137142,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 274285,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 290000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "82d8b9f5d836d7a6e1a436b7055af745d54f42b81e62ebb1a3739002debb61ec": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Alexander_Technique__Todd_Terry-The_Ross-Original_Mix-68212076.mp3",
+      "artist": "Alexander Technique, Todd Terry",
+      "title": "The Ross (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944491",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 167619,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 188571,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 243809,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 259047,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 335714,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 335714,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "a055dc9d42916ece3b845d978508eb434bacf2260e9cf804fc25763a45a4520d": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/THE_BEATBANGERS-Gettin_Here-Extended_Mix-68842166.mp3",
+      "artist": "THE BEATBANGERS",
+      "title": "Gettin Here (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944494",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 168000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 181500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 278000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 281500,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "2364a568062261156630a22920a0e7da19a7e0ac56c4908542ebeb0b043fcca2": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Brothas___Sistas-Got_2_Be_Real-Extended_Mix-68842163.mp3",
+      "artist": "Brothas & Sistas",
+      "title": "Got 2 Be Real (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944496",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 152903,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 167903,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 261290,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 262741,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "438e67df1e64adac30f1087c7b825487b333d1095a487e2f4582d2c423547f8a": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Lissat__Tarrant__NL_-Everybody_Stay_Alive___Jump-Original_Mix-68842156.mp3",
+      "artist": "Lissat, Tarrant (NL)",
+      "title": "Everybody Stay Alive & Jump (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944500",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 14400,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 139200,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 168960,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 260160,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 276480,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "6fb75ee2bc569bba92f30036b0b34f4a58e308375d4b2b12791871c24c40f265": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Jackers_Revenge-Let_There_Be_House-Original_Mix-68842162.mp3",
+      "artist": "Jackers Revenge",
+      "title": "Let There Be House (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944502",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 44761,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 60952,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 168095,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 198095,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 274285,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 290952,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "ed681055ac4d88cde1cb1a4a55a9a92eb1762b298cf8083b0ffdc2145a054872": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/CamelPhat__Max_Milner-Hope__Remix_-Pacha_VIP_Mix-68212121.mp3",
+      "artist": "CamelPhat, Max Milner",
+      "title": "Hope (Remix) (Pacha VIP Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944505",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 346229,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 352622,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "bcefda74281ba982e9a559e3c8a4f34636c787b4391090d351f8dbd85aefb079": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/GhostMasters-Been_Around_The_World-Extended_Mix-68842214.mp3",
+      "artist": "GhostMasters",
+      "title": "Been Around The World (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944509",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 22956,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 39130,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 292173,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 292173,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "75213f1692518905d9399137d252df815a0da49bf5979989831c1cbd849c485f": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Birdee-Don_t_You_Want_My_Love-Vocal_Extended_Mix-69566191.mp3",
+      "artist": "Birdee",
+      "title": "Don't You Want My Love (Vocal Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944511",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 14400,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 317760,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 330720,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 422880,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 453600,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "42fb99e23bcd6b84c39d98d11a60d5dd7158c06af26ddf3865450f517f9ac382": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/The_Shapeshifters-Lola_s_Theme__Remix_-Tripolism_Extended_Remix-68211982.mp3",
+      "artist": "The Shapeshifters",
+      "title": "Lola's Theme (Remix) (Tripolism Extended Remix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944514",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 77419,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 108387,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 201290,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 224032,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 433548,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 433548,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "a618ed95e55c74efabacc93048d52c6ea146d427570e5ac3490b5d6f307974a8": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Disco_Gurls-California_Luv-Extended_Mix-68842183.mp3",
+      "artist": "Disco Gurls",
+      "title": "California Luv (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944517",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 283278,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 287213,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "5571cca91726c2d1871bc887148c122881796b35cae81c9c848d3d5617c3aea1": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Purple_Disco_Machine-Beat_Fantasy-Radio_Edit-68212112.mp3",
+      "artist": "Purple Disco Machine",
+      "title": "Beat Fantasy (Radio Edit)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944520",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 15121,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 53658,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 61951,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 186341,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 186341,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "fa0fe1967836b00993668cfeabc33797bc6ddae1ace64263ffe4d2b12c888da9": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/One_Trick_Pony__DE_SOFFER-9PM__Till_I_Come_-Extended_Mix-68842211.mp3",
+      "artist": "One Trick Pony, DE SOFFER",
+      "title": "9PM (Till I Come) (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944524",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 42580,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 252580,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 267580,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "902f845586c050f8793336a8a23ae3d4baf797b44a331f4c8a4d83c9abd2196d": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Jackers_Revenge-Nasty_Girl-Original_Mix-68842150.mp3",
+      "artist": "Jackers Revenge",
+      "title": "Nasty Girl (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944526",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 150000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 195000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 255000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 270000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "f420fa101bc617b9805ce0788689c49f118310b8e973ab9d8f114cd16d42b747": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Geovanni-Discoside-Original_Mix-68842194.mp3",
+      "artist": "Geovanni",
+      "title": "Discoside (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944529",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 162923,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 177230,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 246923,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 257538,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 369230,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 369230,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "60b12d8b325bee184f7c3940f92e89038198567f951e960984d66b77df20c526": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Da_Lukas-Nasty_Disco-Original_Mix-68842224.mp3",
+      "artist": "Da Lukas",
+      "title": "Nasty Disco (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944532",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 983,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 412131,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 418032,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "a35a89cdaf492c7dfa8aba5250e1d230d049ded5c690eaf3d34f6d36efe7a2f1": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Ghostbusterz-Gimme_2Nite-Funky_Mix-68842175.mp3",
+      "artist": "Ghostbusterz",
+      "title": "Gimme 2Nite (Funky Mix)",
+      "energy": 9,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944543",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 13333,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 121904,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 137142,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 274285,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 290000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "41ec4abc2a5235ba27147e5e9b228e9b71c11d0360682e3db752c2d27af25d8c": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/THE_BEATBANGERS-Gettin_Here-Extended_Mix-68842166.mp3",
+      "artist": "THE BEATBANGERS",
+      "title": "Gettin Here (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944549",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 168000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 181500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 278000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 281500,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "5a05e0c5f7659782844db9c9006660104d2c43157bc2544ed0546eeebd5b1119": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Brothas___Sistas-Got_2_Be_Real-Extended_Mix-68842163.mp3",
+      "artist": "Brothas & Sistas",
+      "title": "Got 2 Be Real (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944556",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 152903,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 167903,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 261290,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 262741,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "cf7fafb29e6a23d8cf5aeedda2e87389b2d03f6e645a3e8e4707c479b55d1743": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Lissat__Tarrant__NL_-Everybody_Stay_Alive___Jump-Original_Mix-68842156.mp3",
+      "artist": "Lissat, Tarrant (NL)",
+      "title": "Everybody Stay Alive & Jump (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944563",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 14400,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 139200,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 168960,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 260160,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 276480,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "924b51047a7393183b035c2354d4c9960fcd007f804cacadd825f4e0a3e849da": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Jackers_Revenge-Let_There_Be_House-Original_Mix-68842162.mp3",
+      "artist": "Jackers Revenge",
+      "title": "Let There Be House (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944569",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 44761,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 60952,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 168095,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 198095,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 274285,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 290952,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "fd512c9894ca80e4e0caba1ec67b3619f10ba8e207a66b34fbd2d46f748833a1": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Disco_Gurls-California_Luv-Extended_Mix-68842183.mp3",
+      "artist": "Disco Gurls",
+      "title": "California Luv (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 283278,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 287213,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "fb69ac8032ef1c401c43a02d581d9aff6fe153e1cad29226cc8397b56e70d1df": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Jackers_Revenge-Nasty_Girl-Original_Mix-68842150.mp3",
+      "artist": "Jackers Revenge",
+      "title": "Nasty Girl (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944580",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 150000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 195000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 255000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 270000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "69d572f1da2c991ac0e8ec955e235b9020f948755776fc9b01f6091304e53e58": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Geovanni-Discoside-Original_Mix-68842194.mp3",
+      "artist": "Geovanni",
+      "title": "Discoside (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944585",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 162923,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 177230,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 246923,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 257538,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 369230,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 369230,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "16f26127246b85fba5bc09cde9f1d1ef69c8f685364651e4ee9136d50f98e2c1": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Laurent_Simeca-Cold_Heart-Original_Mix-68842159.mp3",
+      "artist": "Laurent Simeca",
+      "title": "Cold Heart (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944591",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 34285,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 70476,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 148095,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 161904,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 222857,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 222857,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "4cfcaf5f251dc627012f9ffbd433f9548ad8ef68e6a402eff8b9529d6867ac75": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Stev_Dive__Martina_Budde-Express_Yourself-Extended_Mix-68842149.mp3",
+      "artist": "Stev Dive, Martina Budde",
+      "title": "Express Yourself (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944597",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 153600,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 175680,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 291840,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 300480,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "2e7d9d72cc8ebdc30379c9d91ad2ff3a2c96e2ea96005df23a819958a3e64cfb": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Mother_Funkerz-One_Night_In_A_Disco-Extended_Mix-68842147.mp3",
+      "artist": "Mother Funkerz",
+      "title": "One Night In A Disco (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944603",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 301487,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 304462,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "7bff0501440a7f8d3bf33b9fde56498fdc15dcdecd4848c3a76b5870dd2fc645": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Nikko__Babes_On_The_Run-Play_That_Funky-Original_Mix-68842195.mp3",
+      "artist": "Nikko, Babes On The Run",
+      "title": "Play That Funky (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944609",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 61428,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 90952,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 283809,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 306190,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "1442647b1b9d65a794732c6ff2b33a43aa10184694f105dcd0303323dd18de55": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Roast_Beatz-Turn_The_Party_Out-Original_Mix-68842173.mp3",
+      "artist": "Roast Beatz",
+      "title": "Turn The Party Out (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944615",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 61417,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 71338,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 149763,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 181889,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 210236,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 212125,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 272598,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 272598,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "86ac3103d9912ef4340679e9c3f8c881ef983553d87e60d54178d2245bf02492": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Valentinos-Electric_Avenue-Original_Mix-68842189.mp3",
+      "artist": "Valentinos",
+      "title": "Electric Avenue (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944620",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 109920,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 138240,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 189120,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 231840,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "3d1a22d0e8211d52e31178e01ae6938ced6f2ae03e599462ba62f42bb1380a6e": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Damir_Pushkar__Wekingz-Where_Are_We_Going_Out-Extended_Mix-68842176.mp3",
+      "artist": "Damir Pushkar, Wekingz",
+      "title": "Where Are We Going Out (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944627",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 29767,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 119069,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 148372,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 238139,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 253023,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 327441,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 364651,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "51b0b8067ddf0301b00c26a40006a4f268b8b957f98d59b74e5748212453e20a": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Angelo_Ferreri-Don_t_Give_Up-Original_Mix-68842185.mp3",
+      "artist": "Angelo Ferreri",
+      "title": "Don't Give Up (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944634",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30483,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 372580,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 372580,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "ef11b460e61e750d6b0bccecd19f6606720322f7529ff197a69b4d5bdd2f81ca": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/FlashDancers-Bamboleia-Extended_Mix-68842197.mp3",
+      "artist": "FlashDancers",
+      "title": "Bamboleia (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944639",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 13548,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 47419,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 79838,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 255967,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 256451,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "a992d1bee3e02e94470b6fc027594ab9e907f7a12d060c4b2c0e965bd821f889": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Col_Lawton-Mr_Funk__EP_-Original_Mix-68842164.mp3",
+      "artist": "Col Lawton",
+      "title": "Mr Funk (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944645",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 350476,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 350476,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "450019266dcd9e120c1f247a9c77472d982350ee600e83634122d099b1610e14": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Nari__Giorgio_V.-Yeke_Yeke-Original_Mix-68842161.mp3",
+      "artist": "Nari, Giorgio V.",
+      "title": "Yeke Yeke (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944650",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 45714,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 79523,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 196190,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 224285,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 285714,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 288571,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "a90ab86d05a3e23825c787001d34bfa85b118fb979adf3e430741dba342beed0": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Brothas___Sistas-Somebody_2_Love-Extended_Mix-68842190.mp3",
+      "artist": "Brothas & Sistas",
+      "title": "Somebody 2 Love (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944656",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 11250,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 105000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 118593,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 270000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 271406,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "a2e59bfc223d3a23b3cf526610f22b1f3b8e3d2d428e87a3ce55acdf5bd8b206": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Block___Crown-Mighty_Real-Original_Mix-68842154.mp3",
+      "artist": "Block & Crown",
+      "title": "Mighty Real (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944661",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 44531,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 75000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 133125,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 180000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 251250,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 270000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "ab9a97ce41273ff965bac14b07533479e2d9fbdf588ef938eed5bdedbf7a948d": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Mother_Hackerz-Things-Extended_Mix-68842141.mp3",
+      "artist": "Mother Hackerz",
+      "title": "Things (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944666",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 15126,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 282352,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 283865,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "d0f86781aa19dc84f3cbe9a1b48bcb3f82c6636d0a54160f8473f241e1d72f24": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Stephan_M__Steve_Tosi-Danza_Kuduro-Original_Mix-68842201.mp3",
+      "artist": "Stephan M, Steve Tosi",
+      "title": "Danza Kuduro (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944672",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 47716,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 53385,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 130866,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 144094,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 257480,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 257480,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "ee402924a7a072f016fbdc480adefe0032f8384a098e6225ab9e1db22290ddc4": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Top_Gunz-Be_My_American_Boy-Extended_Mix-68842180.mp3",
+      "artist": "Top Gunz",
+      "title": "Be My American Boy (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944677",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 45714,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 60000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 169523,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 174761,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 243809,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 246190,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "3dce7ac66cf15a46df38f75421552e1aee194d1c037975d1870525490313b2a9": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Zip%20DJ%20Tracks%20Apr%2028%202025/Block___Crown__DJ_Groovemonkey-Back_To_Survive-Original_Mix-68842170.mp3",
+      "artist": "Block & Crown, DJ Groovemonkey",
+      "title": "Back To Survive (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944683",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 197142,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 213333,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 259047,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 274285,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 304761,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 321904,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "2307592247030533ccf881213b86490ffd7667f83327369941414218c5baf6d5": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Laurent_Simeca-Cold_Heart-Original_Mix-68842159.mp3",
+      "artist": "Laurent Simeca",
+      "title": "Cold Heart (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944686",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 34285,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 70476,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 148095,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 161904,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 222857,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 222857,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "f43742111a68631bb2d375e19b2e59e91d3803b23ba299a0595f781f698b99f1": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Stev_Dive__Martina_Budde-Express_Yourself-Extended_Mix-68842149.mp3",
+      "artist": "Stev Dive, Martina Budde",
+      "title": "Express Yourself (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944689",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 153600,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 175680,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 291840,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 300480,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "e19bea84982690c653b19ec5cbadd3f1a40b99b7889746d81eb664f670461ecd": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Mother_Funkerz-One_Night_In_A_Disco-Extended_Mix-68842147.mp3",
+      "artist": "Mother Funkerz",
+      "title": "One Night In A Disco (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944692",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 301487,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 304462,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "15f18931e0ce3d978c301944654a5aa8e0ebcd78ff58bf0fe485ccbb276aba84": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Nikko__Babes_On_The_Run-Play_That_Funky-Original_Mix-68842195.mp3",
+      "artist": "Nikko, Babes On The Run",
+      "title": "Play That Funky (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944694",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 61428,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 90952,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 283809,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 306190,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "d185fcc779188c89bc4928dcfa39376e5d6edb3d5df794c5cc8cc2469e7e8e2c": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Roast_Beatz-Turn_The_Party_Out-Original_Mix-68842173.mp3",
+      "artist": "Roast Beatz",
+      "title": "Turn The Party Out (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944697",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 61417,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 71338,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 149763,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 181889,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 210236,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 212125,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 272598,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 272598,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "37a2a1249b07e698da21ce3b512910b25530878735911afc7eb177ec99452631": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Olive_F-Hot_Sauce-Extended_Mix-68211988.mp3",
+      "artist": "Olive F",
+      "title": "Hot Sauce (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944699",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 334488,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 334488,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "0da6cdb943f0e6363572d7c40443abc5065d7b3cde8444ffc3c367b888f389a3": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Valentinos-Electric_Avenue-Original_Mix-68842189.mp3",
+      "artist": "Valentinos",
+      "title": "Electric Avenue (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944702",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 109920,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 138240,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 189120,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 231840,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "fc6741285f826a68435ad5cbe64681ea58bc59119e0e325c8c5848eb6ef987e8": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Damir_Pushkar__Wekingz-Where_Are_We_Going_Out-Extended_Mix-68842176.mp3",
+      "artist": "Damir Pushkar, Wekingz",
+      "title": "Where Are We Going Out (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944705",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 29767,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 119069,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 148372,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 238139,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 253023,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 327441,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 364651,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "2504b575a2c69f40c9761dcfb60b0f95abd1a228475bc69740d4a3f5c6d64828": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Angelo_Ferreri-Don_t_Give_Up-Original_Mix-68842185.mp3",
+      "artist": "Angelo Ferreri",
+      "title": "Don't Give Up (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944707",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30483,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 372580,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 372580,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "9d9a26648c0c43bc5aa55c8cf34da96c6c8bbbf4f2d0e68fdd12830d282ae640": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/FlashDancers-Bamboleia-Extended_Mix-68842197.mp3",
+      "artist": "FlashDancers",
+      "title": "Bamboleia (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944710",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 13548,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 47419,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 79838,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 255967,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 256451,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "ae4a5432f6f801cdab8b9d4b3766a468239867ede44dc0d348a9bd92e0ba45de": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Todd_Terry__Gypsymen-Babarabatiri__Remix_-David_Penn_Remix-68842137.mp3",
+      "artist": "Todd Terry, Gypsymen",
+      "title": "Babarabatiri (David Penn Remix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944716",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 63870,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 138870,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 154838,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 185322,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 255483,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 394838,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 394838,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "8d561a5130508103f815e2047bdb0e093f45b0b21028929fadba24230268a89f": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Stoley-Push_That-Extended_Mix-68842451.mp3",
+      "artist": "Stoley",
+      "title": "Push That (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944721",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 61395,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 74418,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 147906,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 191627,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "a443173bdf212cf4067c975869b21992e55d23d04899ca7c7467b74926cff1e4": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/San_Pacho__Nevve-Go_Getta-Extended_Mix-68841912.mp3",
+      "artist": "San Pacho, Nevve",
+      "title": "Go Getta (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944727",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 14531,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 43125,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 74531,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 130312,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 163125,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 270000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 270000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "e71040b7feaeaa5552f8238acfc1478e54c683b94e8d38ebdd45ed7c591358b6": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/CID-Pass_Out-Extended_Mix-68842051.mp3",
+      "artist": "CID",
+      "title": "Pass Out (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944731",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 60000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 90000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 135937,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 178593,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 270468,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 285000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "3aaa6109e67c09f069278f669c1e16be392eb41d0f1c1af483e9384c9d533bd3": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/OMRI.-Dance_All_Night__EP_-Dont_Wanna_Fight-68841267.mp3",
+      "artist": "OMRI.",
+      "title": "Dance All Night (Dont Wanna Fight)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944737",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 213120,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 218880,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "bdc8d0934d77885c96af34b8dc86dacc3074bfc670b9be7bb241ca5f1e0cd954": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Kyle_Watson-At_Ya-Extended_Mix-68842044.mp3",
+      "artist": "Kyle Watson",
+      "title": "At Ya (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944743",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 13846,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 238153,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 269538,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "c7a1b7303a6582b1478d1e828b321778159d15e1980d2bccee26b84972d1c796": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Odetari__AYYBO-Hypnotic_Data_2.0-AYYBO_Remix-68841262.mp3",
+      "artist": "Odetari, AYYBO",
+      "title": "Hypnotic Data 2.0 (AYYBO Remix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944748",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 39375,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 99843,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 129375,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 189375,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 189375,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "79fbe55c3d11b4cef710a9935b47a28470060b5aab28f9e9cea8acab9272ff5e": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Draxx__ITA_-Jump-Extended_Mix-68841823.mp3",
+      "artist": "Draxx (ITA)",
+      "title": "Jump (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944754",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 148125,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 195000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 300468,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 330000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "149c4c171a227a77391eab8613ed627006519bb9d40bc080582ee4366c4e417c": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/RafaEL__Millero-Say_That-Original_Mix-68841311.mp3",
+      "artist": "RafaEL, Millero",
+      "title": "Say That (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944759",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 204677,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 247741,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 325161,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 325161,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "c69f8c2888070657b2944123db681205fbc21d56643968fcb47a844c5ad35e0a": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Apex_Martin-2C-Original_Mix-68842416.mp3",
+      "artist": "Apex Martin",
+      "title": "2C (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944764",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 96000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 118153,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 184615,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 221538,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "cbb70aef067a56358bafca49e1b7d5b8b0535f734d858bb579ba853875f43d37": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Martin_Ikin__Winnie_Ama-Control_It-Extended_Mix-68842387.mp3",
+      "artist": "Martin Ikin, Winnie Ama",
+      "title": "Control It (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944770",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 92307,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 107076,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 137076,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 198000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 258461,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 288000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "1366e0b2ec33d7a6d625154235ee262cf20a8b4bbff3df83df5e22618b8a858d": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Vintage_Culture__Bhaskar__Meca__The_Vic-Tina-Original_Mix-68841220.mp3",
+      "artist": "Vintage Culture, Bhaskar, Meca, The Vic",
+      "title": "Tina (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944776",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 33281,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 123281,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 185156,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 258281,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 258281,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "0c5c4d03f24630540f1b3292f0b8ea9e297451d04f3a97f377a8d274f68e01aa": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/AYYBO-Certified-Original_Mix-68842168.mp3",
+      "artist": "AYYBO",
+      "title": "Certified (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944782",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 59531,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 90000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 179531,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 209062,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "a24870386e147fa59e954d4cfd5e465b2f852c2dd788abeac7c15d04e9073754": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Max_Styler-Don_t_Stop__EP_-Original_Mix-68841329.mp3",
+      "artist": "Max Styler",
+      "title": "Inferno (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944788",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 58593,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 89531,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 142500,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 180000,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "57119921075cc108ce2f6c861db92ffb877e97dcba9f28b5ae0bc7e4fc5df9f3": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Shermanology-Beat_Of_The_Drum-Extended_Mix-68842441.mp3",
+      "artist": "Shermanology",
+      "title": "Beat Of The Drum (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944793",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 59531,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 90000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 405000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 405000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "509d3d88f6b835897ae971d5237cc387771766c7122229a112789dafe38f5e9f": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Dances_With_White_Girls__AYYBO-Play_Some_Records-Extended_Mix-68841223.mp3",
+      "artist": "Dances With White Girls, AYYBO",
+      "title": "Play Some Records (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944799",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 272125,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 272125,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "47a4dcfc6183d4fc64809deb54cca4ae1ad032c46218b7a39fc026a17e847552": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/San_Pacho__Greg__BR_-Lights_Off-Original_Mix-68842009.mp3",
+      "artist": "San Pacho, GREG (BR)",
+      "title": "Lights Off (Original Mix)",
+      "energy": 9,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944805",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 41076,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 73384,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 128769,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 155076,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 169846,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 175384,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "71ac87c6500ee5ea3cd081a5839f4d0ad3447de616515a95cc767ef445fac353": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Marco_Lys__Maverick_Sabre__Tom_Breu__Vintage_Culture-Weak__Remix_-Marco_Lys_Remix__Extended-68841258.mp3",
+      "artist": "Marco Lys, Maverick Sabre, Tom Breu, Vintage Culture",
+      "title": "Weak (Remix) (Marco Lys Remix -Extended)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944813",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 245156,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 285000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 390000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 390000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "fe88b103ad18d7ee8c82ff9c79da96db60c6d3e71919d8e36bafdc2c943a0266": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Kaleena_Zanders-Looking_For_Joy-Extended_Mix-68841254.mp3",
+      "artist": "Kaleena Zanders",
+      "title": "Looking For Joy (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944819",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 31406,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 45000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 217500,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 217500,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "53b7911834cce3de2a3eba6240fd741ebb2eb80dbe1871da11aef749cdf4a8af": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Chris_Lake__Abel_Balder-Ease_My_Mind-Extended_Mix-68842473.mp3",
+      "artist": "Chris Lake, Abel Balder",
+      "title": "Ease My Mind (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944825",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 60952,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 228571,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 287142,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 366190,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 380952,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "4fc0cf717bb2a373b1e418bb94c11c36e3d8301e51e697c160a708ebc3ae966b": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Chris_Lake__Ragie_Ban-Toxic-Extended_Mix-68841761.mp3",
+      "artist": "Chris Lake, Ragie Ban",
+      "title": "Toxic (Extended Mix)",
+      "energy": 7,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944830",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 14418,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 66511,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 90232,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 168837,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 208837,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 267906,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 267906,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "8088885b56a62464a558e6e0db7e11a56619f22a3e214d3d072f7e232d7c78a2": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Dennis_Cruz-Going_Down-Original_Mix-68841309.mp3",
+      "artist": "Dennis Cruz",
+      "title": "Going Down (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944835",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 88593,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 120000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 345000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 345000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "6123c387c4933d884dc81b0920bf8a007ed5979110568547de15bbb000aaecd1": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Trace__UZ___Reenday-Detox__EP_-Original_Mix-68842111.mp3",
+      "artist": "Trace (UZ), Reenday",
+      "title": "Days Back (Original Mix)",
+      "energy": 9,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944841",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 271406,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 300000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "0d638f206ce9049b7a64537752b36a0fe7ff65ba3c26bd8d30ea914c0546646c": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/Thomas_Newson__GUZ__NL_-Get_Raw__EP_-Extended_Mix-68841999.mp3",
+      "artist": "Thomas Newson, GUZ (NL)",
+      "title": "Get Raw (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944847",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 88125,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 103593,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 152812,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 172500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 300468,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 300468,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "74d881e1f57c76c469e55ee13f49ab3fb5f49b2d50adc14203aef6e77e8ff7c7": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ZipDJ%20Tracks%20Apr%2028%202025/BYOR-Comeback-Extended_Mix-68841233.mp3",
+      "artist": "BYOR",
+      "title": "Comeback (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944852",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 199680,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 199680,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "0db452791a38f610eb7ca9cffdb9deb86a80d04079f6e2caf83fc64193bfe228": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Micky_More___Andy_Tee__Anduze-Karma_Sutra-Extended_Mix-69565522.mp3",
+      "artist": "Micky More & Andy Tee, Anduze",
+      "title": "Karma Sutra (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944855",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30483,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 364354,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 394838,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "ba9048fb57f95479763c50c47efa04c8cff5204a1023e058a5447009980efc56": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Adri_Block-Roller_Disco-Nu_Disco_Mix-68842221.mp3",
+      "artist": "Adri Block",
+      "title": "Roller Disco (Nu Disco Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944857",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 13548,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 124354,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 139354,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 278709,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 294193,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "95540d85f7103ffe4f3c4db589bb6b5ecc6706fd111d54f6868ed1d215a9e2bd": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Arty__Nadia_Ali__BT-Must_Be_The_Love__Simon_Doty_Remix_-Simon_Doty_Extended_Remix-68212055.mp3",
+      "artist": "ARTY, Nadia Ali, BT",
+      "title": "Must Be The Love (Simon Doty Extended Remix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944860",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 212812,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 240000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 420000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 422812,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "a0cc0dc7a231f0af1bf8e36c69949790c086bce59413f139cc8c45e56161f4c3": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Col_Lawton-Mr_Funk__EP_-Original_Mix-68842164.mp3",
+      "artist": "Col Lawton",
+      "title": "Mr Funk (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944863",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 350476,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 350476,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "50bf8e05f296f84f1d58026d041bde8f1052d004cc01697d4cfcea4d6fda1f9d": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Caribou__Solomun-Climbing-Solomun_Club_Edit-68212004.mp3",
+      "artist": "Caribou",
+      "title": "Climbing (Solomun Club Edit)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944866",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 29531,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 503906,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 503906,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "f13a8fb48da4b270ae220dd4fb7d3b1916d4138642388d6751224f2d5afa6252": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Adome%20Nyueto%20Party%20Edit%20by%20Sopp.mp3",
+      "artist": "Adome",
+      "title": "Nyueto Party (Edit by Sopp)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944870",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 15483,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 338225,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 352258,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "50047c9388426eb6cf16ada55bd24b75069628ff6cdf1e9a854c6f8c09432249": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Antonello_Ferrari__Febbre_Dell_anima-Love_Will_Save_The_Day-Antonello_Ferrari_Club_Mix-69565516.mp3",
+      "artist": "Antonello Ferrari, Febbre Dell'anima",
+      "title": "Love Will Save The Day (Antonello Ferrari Club Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944874",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 393934,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 398360,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "ecb9f4aa10fdf0e685d6bb6d391b81e3ac15bc8fae288fe625f82c6f62fca10f": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Lifelike-Beatbox-Italo_Club_Mix-68842218.mp3",
+      "artist": "Lifelike",
+      "title": "Beatbox (Italo Club Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944876",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 28739,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 314621,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 331764,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "abd478e7fc5affac219055cfa718fd92ecacc0f8b76183269cf473ab3975a8b3": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Jamiroquai-Little_L__Remix_-Dave_Lee_Disco_Re_Blend-69566054.mp3",
+      "artist": "Jamiroquai",
+      "title": "Little L (Remix) (Dave Lee Disco Re-Blend)",
+      "energy": 7,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944879",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 79672,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 110163,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 252295,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 267049,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 489836,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 489836,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "61d2410ae3dfcddc89bd2fd0bfdcf1bb72965eb1e767ffa1177db1e024dbb1d9": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Nari__Giorgio_V.-Saturday_Night__EP_-Original_Mix-69565501.mp3",
+      "artist": "Nari, Giorgio V.",
+      "title": "Saturday Night (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944882",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 14516,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 288387,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 291774,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "a2cb6c6437c713a79f3ce58636fca64dc669e3598ad08019d747f59cd8cd9d6d": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Jaegerossa-Out_Stretching-Original_Mix-69565512.mp3",
+      "artist": "Jaegerossa",
+      "title": "Out Stretching (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944884",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 23305,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 87272,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 117024,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 298512,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 305950,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 453223,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 453223,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "6457acd3f8495c72596ab5d29b6157a5e9a31e73cf93122e3a54a987c3ad64bf": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Nari__Giorgio_V.-Yeke_Yeke-Original_Mix-68842161.mp3",
+      "artist": "Nari, Giorgio V.",
+      "title": "Yeke Yeke (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944887",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 45714,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 79523,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 196190,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 224285,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 285714,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 288571,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "d6e95ebd0e7b6294578181ffcb18b109c17507d7ca47c0021c960b09ccff9e6f": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Heritage_Listed-Feelin_It__EP_-Original_Mix-69565486.mp3",
+      "artist": "Heritage Listed",
+      "title": "Feelin It (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944890",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 61428,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 75238,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 137142,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 150000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 236190,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 243333,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 236190,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "174e11e31a1f8e2512cc8af512afe54c7c9cc36af84547c7c5a18a6d7b37289a": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Ne_Yo-Closer_2025-Tommy_MC_Club_Mix-69750786.mp3",
+      "artist": "Ne-Yo",
+      "title": "Closer 2025 (Tommy MC Club Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944895",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 29538,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 73384,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 280615,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 280615,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "3ba499b42bc77c21130834a9935e2abd5e6d043594604b679bddd3d4d4e09e13": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Steven_Caretti-Take_It_Off-Extended_Mix-69750811.mp3",
+      "artist": "Steven Caretti",
+      "title": "Take It Off (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944901",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 60952,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 98571,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 152380,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 213333,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "b0c6b4191ec1a0a4e2300533931810804443947167939dd7c89bab572f5b3eb4": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/4BrownBottles-Cappadocia-Extended_Mix-69750808.mp3",
+      "artist": "4BrownBottles",
+      "title": "Cappadocia (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944906",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 59032,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 94838,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 155806,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 187741,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 309677,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 309677,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "9999b0fe26f2b51e187ed284c604200968850e88f855499d7799040c3c9e85c4": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Mirko___Meex-Ain_t_Right-Extended_Mix-69750785.mp3",
+      "artist": "Mirko & Meex",
+      "title": "Ain't Right (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944912",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 186774,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 209032,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 340645,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 340645,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "44ac198e07bc9add51b7e824b79c8d34747662b8dc77086ba477cc7b1e35beb4": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Macca_Grills__Jaki_Nelson-Movin__Up-Extended_Mix-69750815.mp3",
+      "artist": "Macca Grills, Jaki Nelson",
+      "title": "Movin' Up (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944918",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 15937,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 60000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 98437,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "164ff444db3d0ad5cdfa252e235bff459ccbd01e3ae13e439ac4f54333fb2b83": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Pawsa-Dog_Days-Extended_Mix-69750749.mp3",
+      "artist": "Pawsa",
+      "title": "Dog Days (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944923",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 27938,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 87938,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 98931,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 161679,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 232671,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 333435,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 333435,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "0266b91496a4039cbbd433b248e3fb2df36d2fbd3d4a5f45ed4b639203234650": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Sabroso-Shake_That-Original_Mix-69750787.mp3",
+      "artist": "Sabroso",
+      "title": "Shake That (Original Mix)",
+      "energy": 9,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944928",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 184320,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 207360,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 384000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 384000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "8c592f889608880bf0c7315a0a3dace3187626042b6d53ff657d77587e5d9a04": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Shacklo-Paradise__EP_-Original_Mix-69750813.mp3",
+      "artist": "Shacklo",
+      "title": "Paradise (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944933",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 31428,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 412857,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 420000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "da504600525a1d76e6d7380887bb44ac701217007fb6b11c97ba00c767ad20ce": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Ron_Carroll__Provi-Celebration-Extended_Mix-69750791.mp3",
+      "artist": "Ron Carroll, Provi",
+      "title": "Celebration (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944939",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 52500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 97500,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 112500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 218437,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 218437,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "aa95741d66a561df4ced03ee0333b28b2b8a2e0d73354b4e3ee52f51057cb468": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Pawsa-Collect_The_Commas-Extended_Mix-69750746.mp3",
+      "artist": "Pawsa",
+      "title": "Collect The Commas (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944944",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 29770,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 227175,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 247786,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "0a453f5c530b611943c029313ac8fae828993fe3f38de3b986c6317a6308f526": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Soundsinsane__Diego_Antoine-What_You_Saying_Girl-Original_Mix-69750795.mp3",
+      "artist": "Soundsinsane, Diego Antoine",
+      "title": "What You Saying Girl (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944950",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30720,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 168960,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 176640,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 284640,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 311040,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "f6e298e97b5d020f713b4ed18e341a52bb2e4596aa27c156c7cbc492f8d565c4": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Sellier-For_The_Soul-Extended_Mix-69750792.mp3",
+      "artist": "Sellier",
+      "title": "For The Soul (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944956",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 132923,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 139846,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 265846,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 265846,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "0c62a47070feafc6507802c8efd85567f068d9a7014de8bf30aad1c62b0f4f80": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Tal_Fussman-NO_DISCO__EP_-Original_Mix-69750802.mp3",
+      "artist": "Tal Fussman",
+      "title": "No Disco (Original Mix)",
+      "energy": 9,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944961",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 225000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 240000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 360000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 360000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "fe21bc2c72aca2d74aa915ab956e1e26b37d38c7cb3732928fd7f0be2af10739": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Change__Tanya_Michelle_Smith-Got_2_Get_Up-Micky_More___Andy_Tee_Prime_Time_Remix-69750798.mp3",
+      "artist": "Change, Tanya Michelle Smith",
+      "title": "Got 2 Get Up (Micky More & Andy Tee Prime Time Remix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944968",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 16500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 256000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 284500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 384000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 384000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "341a22d56a187db4567bd23a48a3887e34954dfe9d1dfef813796e33f5d5f4f7": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Eternal_Self-Ahora-Original_Mix-69750797.mp3",
+      "artist": "Eternal Self",
+      "title": "Ahora (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944973",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 32500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 161000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 203500,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 316000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 316000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "522391e0d22a95acbd10267e75810b3f7a6dbeb16a7f3756a356eccadf45ff3d": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Pawsa-To_Cool_To_Be_Careless-Extended_Mix-69750753.mp3",
+      "artist": "Pawsa",
+      "title": "To Cool To Be Careless (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944978",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 29062,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 397500,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 397500,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "18330f988b14285bf106862b55d5551bf17f44701dc17f97c10f92fc215a801c": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20May%2027%202025/Daniel_Steinberg-Bailamos-Extended_Mix-69750806.mp3",
+      "artist": "Daniel Steinberg",
+      "title": "Bailamos (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944984",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 30000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 346406,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 346406,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "1c2a14c992f288fa85b4483f9924d3e955487b29b5569a97f278d42525d80627": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20Apr%2028%202025/GhostMasters-Been_Around_The_World-Extended_Mix-68842214.mp3",
+      "artist": "GhostMasters",
+      "title": "Been Around The World (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944989",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 22956,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 39130,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 292173,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 292173,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "67c133abbd20f7b9a185a4481b69f43f169dd88a2b02b17ef228da36cec9d943": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20Apr%2028%202025/One_Trick_Pony__DE_SOFFER-9PM__Till_I_Come_-Extended_Mix-68842211.mp3",
+      "artist": "One Trick Pony, DE SOFFER",
+      "title": "9PM (Till I Come) (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.944995",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 42580,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 252580,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 267580,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "96ab15251f6c7dc1976bb7f73f1799978397df4b541f2f3a60811ba0786047ee": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20Apr%2028%202025/Da_Lukas-Nasty_Disco-Original_Mix-68842224.mp3",
+      "artist": "Da Lukas",
+      "title": "Nasty Disco (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945000",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 983,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 412131,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 418032,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "eef4b543b195dc7aeb10ce5c8ac8377bd274ac79e5017239749158600838057a": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20Apr%2028%202025/Adri_Block-Roller_Disco-Nu_Disco_Mix-68842221.mp3",
+      "artist": "Adri Block",
+      "title": "Roller Disco (Nu Disco Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945005",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 13548,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 124354,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 139354,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 278709,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 294193,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "c434d2893683f97bf1a31f8a949dbf23fa2a6aba379217a6b1f49dfbd49ce11a": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top%20Downloads%20Apr%2028%202025/Lifelike-Beatbox-Italo_Club_Mix-68842218.mp3",
+      "artist": "Lifelike",
+      "title": "Beatbox (Italo Club Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945010",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 28739,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 314621,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 331764,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "92715e5926b67597b802206987c39ada29f1090e9edf24c59edf30c762b54dcc": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Brothas___Sistas-Somebody_2_Love-Extended_Mix-68842190.mp3",
+      "artist": "Brothas & Sistas",
+      "title": "Somebody 2 Love (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945013",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 11250,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 105000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 118593,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 270000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 271406,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "7d2387cd7a910afc8c08a24912723b1911be1878439a37096be389a4dfd00343": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Block___Crown-Mighty_Real-Original_Mix-68842154.mp3",
+      "artist": "Block & Crown",
+      "title": "Mighty Real (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945016",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 44531,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 75000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 133125,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 180000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 251250,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 270000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "488146bc0aa44652dc8deb0ae5138ac789b962c05ba197a6afaf82ccaefa2b97": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Morttimer_Snerd_III__Steve_Miggedy_Maestro-Shoot_Choo_Down-Miggedys_Dizko_Slap-69565533.mp3",
+      "artist": "Morttimer Snerd III, Steve Miggedy Maestro",
+      "title": "Shoot Choo Down (Miggedys Dizko Slap)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945019",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 218048,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 233658,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 523414,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 537560,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "46a7b41e70996cd3fe515de5626d40170052134969a168fca0198ede01456f15": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Mother_Hackerz-Things-Extended_Mix-68842141.mp3",
+      "artist": "Mother Hackerz",
+      "title": "Things (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945022",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 15126,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 282352,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 283865,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "4317ee13ce68d1a4f60e67b9896c2c27c3cb76e2e67234e6a188b36a911d7873": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Luke_Alessi-After_Five__EP_-Extended-68212046.mp3",
+      "artist": "Luke Alessi",
+      "title": "After Five (Extended) (Extended)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945024",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 373333,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 373333,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "0fcffe37866bc59a15e253e0135b24a9b1fea783542d439d55c4b12a98378c5b": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Chris_Lake__Abel_Balder-Ease_My_Mind-Extended_Mix-68211968.mp3",
+      "artist": "Chris Lake, Abel Balder",
+      "title": "Ease My Mind (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945029",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 60952,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 228571,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 287142,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 366190,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 380952,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "b871ce2b018ea6d2660cd2003502cb60cd38b53ed8d694ee3e4d2683e5dadb47": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Disclosure_ft._Al_Green-Feel_Like_I_Do-Radio_Edit-69565478.mp3",
+      "artist": "Disclosure ft. Al Green",
+      "title": "Feel Like I Do (Radio Edit)",
+      "energy": 7,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945032",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 9142,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 50285,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 54857,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 96000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 100571,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 173714,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 182857,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "7d78e20d933e4308372e8078ba7c1fa1440a0dda596d68824c84ba7684286922": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Stephan_M__Steve_Tosi-Danza_Kuduro-Original_Mix-68842201.mp3",
+      "artist": "Stephan M, Steve Tosi",
+      "title": "Danza Kuduro (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945035",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 47716,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 53385,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 130866,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 144094,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 257480,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 257480,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "c595c99b546f9ecaa2cd0b199e1e3d9605ff72e31823becb4918e64f2be71b4e": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Rafael_Cerato__Laherte-Healing__EP_-Extended_Mix-68212019.mp3",
+      "artist": "Rafael Cerato, Laherte",
+      "title": "Healing (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945037",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 15000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 116129,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 169838,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 286451,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 286451,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "4be83227e6aa7b5044e6957a0f8ceba544ed711c4f6a48dac3060e0ed45ebaf4": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Il%20Veliero%20Vhyce%20Edit.wav",
+      "artist": "Il Veliero",
+      "title": "Vhyce Edit",
+      "energy": 7,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945042",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 62459,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 125409,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 157377,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 378196,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 402295,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "f6369838cb92df7d34e17651bfde70c831cede6184406028a6d5bb227ab941e9": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Disko_Junkie-Lady__Hear_Me_Tonight_-Extended_Mix-68211996.mp3",
+      "artist": "Disko Junkie",
+      "title": "Lady (Hear Me Tonight) (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945044",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 28800,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 354720,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 370080,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "2ceaa4fa214f2daa00de286b85b06ac95642698cba04b61ac9d8aa52c11fb558": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Top_Gunz-Be_My_American_Boy-Extended_Mix-68842180.mp3",
+      "artist": "Top Gunz",
+      "title": "Be My American Boy (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945047",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 45714,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 60000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 169523,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 174761,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 243809,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 246190,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "9d6bf93963e88c77a6812666572211c9fcbad90f7e2c7c8d7891d1e931349de2": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/David_Herrero-Palote-Original_Mix-68212081.mp3",
+      "artist": "David Herrero",
+      "title": "Palote (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945050",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 37619,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 350476,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 350476,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "12ff98dc008c8e3a1d5e020ee8336e87b88383dec6e4c1bbdff1295cd5c470fe": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Da_Lukas-Satisfy_Your_Soul-Extended_Mix-69565969.mp3",
+      "artist": "Da Lukas",
+      "title": "Satisfy Your Soul (Extended Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945052",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 68500,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 80000,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 418000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 418000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "84edfe0500b91b0f78197513458b624428d67787a11c1dfc2cc36ae6abb40713": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Barry_Can_t_Swim-Kimbara-Original_Mix-68212117.mp3",
+      "artist": "Barry Can't Swim",
+      "title": "Kimbara (Original Mix)",
+      "energy": 7,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945055",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 48480,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 94560,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 125280,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 172800,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 186720,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "62e0e3eae3c8550716da618470b5d8e6ce4a606bc13d3dac997bd8d7c1a945b6": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Jaegerossa-Boulevard_Life-Original_Mix-69566273.mp3",
+      "artist": "Jaegerossa",
+      "title": "Boulevard Life (Original Mix)",
+      "energy": 7,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945057",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 102782,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 171130,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 265043,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 278608,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 413739,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 429913,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "3e72950d1324b1fdfacd5f3b5d6cc38deccce8cd2446aef61da45d69fae11877": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/ANOTR__Kabusa_Oriental_Choir-Falling_Feels_Like_Flying-Original_Mix-68212042.mp3",
+      "artist": "ANOTR, Kabusa Oriental Choir",
+      "title": "Falling Feels Like Flying (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945060",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 315000,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 315000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "cf206a47ba2aa7254291e1c8f9c2120263e7703bbd711c5e8839d15c291ec7a4": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Block___Crown__DJ_Groovemonkey-Back_To_Survive-Original_Mix-68842170.mp3",
+      "artist": "Block & Crown, DJ Groovemonkey",
+      "title": "Back To Survive (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945063",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 197142,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 213333,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 259047,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 274285,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 304761,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 321904,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "7f816afd6446b5db4eb6722a41cbe9cfaf5893cc3c735eed4c2aadc824ac0969": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/Woody_Braun-Motorbooty_Ryde-Original_Mix-69566799.mp3",
+      "artist": "Woody Braun",
+      "title": "Motorbooty Ryde (Original Mix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945066",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 0,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 316721,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 317704,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 316721,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "d13dc8304f68d87da888563c9a70d1e168e16f04217a8118d97cf50ed4ecd503": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Disco/The_Philly_All_Stars-I_Don_t_Love_You_Anymore-Eric_Kupper_Remix-69566720.mp3",
+      "artist": "The Philly All Stars",
+      "title": "I Don't Love You Anymore (Eric Kupper Remix)",
+      "energy": 8,
+      "energy_source": "auto",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-09T22:15:19.945068",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 303500,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 305000,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    }
+  },
+  "energy_corrections": [],
+  "energy_calibration": {},
+  "custom_tag_rules": [],
+  "tag_corrections": [],
+  "settings": {},
+  "last_run": "2026-03-15T18:14:02.354093",
+  "artist_corrections": [
+    {
+      "original_title": "Riverside KIRK Flip",
+      "artist": "KIRK",
+      "title": "Riverside (Flip)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Whoop There It Is by POLAR",
+      "artist": "POLAR",
+      "title": "Whoop There It Is",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Ready for the Rumble M\u00cbRO Edit (1)",
+      "artist": "M\u00cbRO",
+      "title": "Ready for the Rumble (Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "ACID DROP M\u00cbRO",
+      "artist": "M\u00cbRO",
+      "title": "Acid Drop",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Audio Bullys We Dont Care Keno Edit",
+      "artist": "Audio Bullys",
+      "title": "We Don't Care (Keno Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Fresh Prince M\u00cbRO Edit",
+      "artist": "M\u00cbRO",
+      "title": "Fresh Prince (Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Renegade Master RALLY EDIT",
+      "artist": "Wildchild",
+      "title": "Renegade Master (Rally Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Fuck Tha Police Revoxx Edit",
+      "artist": "N.W.A",
+      "title": "Fuck Tha Police (Revoxx Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Tony De Vit Bring The Beat Back Remix",
+      "artist": "Tony De Vit",
+      "title": "Bring the Beat Back (Remix)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Noise Mafia Shake That Free DL",
+      "artist": "Noise Mafia",
+      "title": "Shake That",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Noise Mafia Vogue In Paris",
+      "artist": "Noise Mafia",
+      "title": "Vogue in Paris",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Doja Cat Boss Bitch Alis Con Rework",
+      "artist": "Doja Cat",
+      "title": "Boss Bitch (Alis Con Rework)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Funk Tribu All Of It Healy Edit Master",
+      "artist": "Funk Tribu",
+      "title": "All of It (Healy Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Gwen Stefani What You Waiting For Edit",
+      "artist": "Gwen Stefani",
+      "title": "What You Waiting For (Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "base in the place - polar",
+      "artist": "POLAR",
+      "title": "Base In The Place",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Nu Genea Tienat\u00e8 Jo Crimaldi YARIN Edit",
+      "artist": "Nu Genea",
+      "title": "Tienat\u00e8 (Jo Crimaldi YARIN Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Nu Genea Straniero Vaulx Edit",
+      "artist": "Nu Genea",
+      "title": "Straniero (Vaulx Edit)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Adome Nyueto Party Edit by Sopp",
+      "artist": "Adome",
+      "title": "Nyueto Party (Edit by Sopp)",
+      "source": "user_confirmed"
+    },
+    {
+      "original_title": "Il Veliero Vhyce Edit",
+      "artist": "Il Veliero",
+      "title": "Vhyce Edit",
+      "source": "user_confirmed"
+    }
+  ],
+  "energy_reference_examples": {
+    "Acid": [
+      {
+        "artist": "EARGASM GOD",
+        "title": "SO\u00d1AR",
+        "energy": 10
+      },
+      {
+        "artist": "Bae Blade",
+        "title": "Freak (Original Mix)",
+        "energy": 9
+      },
+      {
+        "artist": "Charli Xcx",
+        "title": "Guess (DJ Daddy Trance Edit)",
+        "energy": 8
+      },
+      {
+        "artist": "Distorted Dreams",
+        "title": "Acid Cry (Extended Mix)",
+        "energy": 8
+      },
+      {
+        "artist": "Maddix, Olly James & Hannah Laing",
+        "title": "Transmission",
+        "energy": 7
+      }
+    ],
+    "Afrohouse": [
+      {
+        "artist": "Tayllor",
+        "title": "Suspicious Minds (Extended Mix)",
+        "energy": 4
+      },
+      {
+        "artist": "Andrey Exx, TuraniQa",
+        "title": "Si To Si (Extended Mix)",
+        "energy": 5
+      },
+      {
+        "artist": "AMEME, Baron (FR)",
+        "title": "Like That (Extended Mix)",
+        "energy": 3
+      },
+      {
+        "artist": "Marine Abtan, Adore (FR)",
+        "title": "SING IT BACK feat. Marine Abtan (Original Mix)",
+        "energy": 4
+      },
+      {
+        "artist": "Simone Vitullo & Seraphiel",
+        "title": "Every Breath You Take (Extended Mix)",
+        "energy": 4
+      }
+    ],
+    "Amapiano (185)": [
+      {
+        "artist": "Tyler ICU, Nicole Elocin, Kabza De Small, DJ Maphorisa",
+        "title": "Bella Ciao (Original Mix)",
+        "energy": 3
+      },
+      {
+        "artist": "Tyla",
+        "title": "Chanel (Clean)",
+        "energy": 5
+      },
+      {
+        "artist": "Navaro, uLazi",
+        "title": "Baba Wethu (Original Mix)",
+        "energy": 3
+      },
+      {
+        "artist": "M.J, Soul Jam, DBN Gogo, Mr Pilato, Mfana Mdu, Massive95k, Ego Slimflow",
+        "title": "Ghana Ghana (Original Mix)",
+        "energy": 3
+      },
+      {
+        "artist": "Driipgod, Blaq Oak Musiq, Grootman A Malinga",
+        "title": "Le Ngoma (Original Mix)",
+        "energy": 3
+      }
+    ],
+    "Bouncy": [
+      {
+        "artist": "BEAUZ",
+        "title": "Bel Mercy feat. Nokia",
+        "energy": 9
+      },
+      {
+        "artist": "Mark Broom, Roku, Ben Sims",
+        "title": "Acid Amnesia (Original Mix)",
+        "energy": 8
+      },
+      {
+        "artist": "KIRK",
+        "title": "Riverside (Flip)",
+        "energy": 9
+      },
+      {
+        "artist": "Gwen Stefani",
+        "title": "What You Waiting For (Edit)",
+        "energy": 8
+      },
+      {
+        "artist": "TRYPDO x ANOMALY",
+        "title": "ACIDIC SURGE",
+        "energy": 10
+      }
+    ],
+    "Disco": [
+      {
+        "artist": "Adome",
+        "title": "Nyueto Party (Edit by Sopp)",
+        "energy": 6
+      },
+      {
+        "artist": "Ghostbusterz",
+        "title": "Gimme 2Nite (Funky Mix)",
+        "energy": 7
+      },
+      {
+        "artist": "Antonello Ferrari, Febbre Dell'anima",
+        "title": "Love Will Save The Day (Antonello Ferrari Club Mix)",
+        "energy": 5
+      },
+      {
+        "artist": "Morttimer Snerd III, Steve Miggedy Maestro",
+        "title": "Shoot Choo Down (Miggedys Dizko Slap)",
+        "energy": 6
+      },
+      {
+        "artist": "Woody Braun",
+        "title": "Motorbooty Ryde (Original Mix)",
+        "energy": 6
+      }
+    ],
+    "Disco #2": [
+      {
+        "artist": "Ghostbusterz",
+        "title": "Gimme 2Nite (Funky Mix)",
+        "energy": 6
+      },
+      {
+        "artist": "Birdee",
+        "title": "Don't You Want My Love (Vocal Extended Mix)",
+        "energy": 7
+      },
+      {
+        "artist": "Dmitry Sid",
+        "title": "Taki Taki (Original Mix)",
+        "energy": 5
+      },
+      {
+        "artist": "Ghostbusterz",
+        "title": "Tainted (Original Mix)",
+        "energy": 6
+      },
+      {
+        "artist": "Jaegerossa",
+        "title": "Boulevard Life (Original Mix)",
+        "energy": 4
+      }
+    ],
+    "Hard Techno": [
+      {
+        "artist": "Krenon",
+        "title": "Volvernos a Amar (Schranz Edit)",
+        "energy": 10
+      },
+      {
+        "artist": "Fatima Hajji",
+        "title": "Antracita (Original Mix)",
+        "energy": 10
+      },
+      {
+        "artist": "M83",
+        "title": "Outro (Wanton Hardtechno Remix v2)",
+        "energy": 10
+      },
+      {
+        "artist": "Bassjackers",
+        "title": "Beethoven's Aria F\u00fcr Elise (Extended Mix)",
+        "energy": 9
+      },
+      {
+        "artist": "ASCO",
+        "title": "Palladio",
+        "energy": 9
+      }
+    ],
+    "House": [
+      {
+        "artist": "Sandy Rivera",
+        "title": "I Can't Stop (Joseph Capriati Extended Groove Remix)",
+        "energy": 6
+      },
+      {
+        "artist": "Lock 'N Load",
+        "title": "Blow Ya Mind (DJ Daddy Trance Extended Remix)",
+        "energy": 9
+      },
+      {
+        "artist": "Dancing On Lego",
+        "title": "Sun Is Shining (Original Mix)",
+        "energy": 4
+      },
+      {
+        "artist": "4Moon Music",
+        "title": "Zephyr (Extended Mix)",
+        "energy": 5
+      },
+      {
+        "artist": "Caribou",
+        "title": "Climbing (Solomun Club Edit)",
+        "energy": 6
+      }
+    ],
+    "Melodic:Tech House": [
+      {
+        "artist": "Massano",
+        "title": "Signs Of Saturn (Original Mix)",
+        "energy": 8
+      },
+      {
+        "artist": "Rotceh",
+        "title": "My Side (Extended Mix)",
+        "energy": 8
+      },
+      {
+        "artist": "Blondish, Eran Hersh, Darmon, Madonna",
+        "title": "Sorry (Miss Monique Remix)",
+        "energy": 7
+      },
+      {
+        "artist": "Mau P",
+        "title": "Drugs From Amsterdam (Maddix Extended Remix)",
+        "energy": 8
+      },
+      {
+        "artist": "Hunter Game, Noah Kulaga",
+        "title": "All I Wanted (Original Mix)",
+        "energy": 7
+      }
+    ],
+    "Psytrance": [
+      {
+        "artist": "Vini Vici, TERRA, Sandhog",
+        "title": "Gyoza (Original Mix)",
+        "energy": 10
+      },
+      {
+        "artist": "Astrix",
+        "title": "Intergalactic Agreement (Remix)",
+        "energy": 10
+      },
+      {
+        "artist": "Psy Trance Mafia, Infected Mushroom, Blastoyz",
+        "title": "Boomba (Original Mix)",
+        "energy": 9
+      },
+      {
+        "artist": "Hyde, Technology",
+        "title": "Stardust (Original Mix)",
+        "energy": 10
+      },
+      {
+        "artist": "Mekkanikka, Audiosonic",
+        "title": "Psychedelic Jesus (Original Mix)",
+        "energy": 10
+      }
+    ],
+    "Techno": [
+      {
+        "artist": "Viviana Casanova",
+        "title": "Party Don't Stop (Original Mix)",
+        "energy": 9
+      },
+      {
+        "artist": "Gaga, Mateo!",
+        "title": "Temple (Original Mix)",
+        "energy": 8
+      },
+      {
+        "artist": "Will Be Demon, W\u00e4m Bex",
+        "title": "Lollypop (Original Mix)",
+        "energy": 8
+      },
+      {
+        "artist": "?",
+        "title": "Abracadabra (Techno Remix)",
+        "energy": 9
+      },
+      {
+        "artist": "K\u00c4BALTT",
+        "title": "Crying Injustice (Original Mix)",
+        "energy": 9
+      }
+    ],
+    "Trance": [
+      {
+        "artist": "Micha Mendel",
+        "title": "Future Peace (Solarstone Pure Extended Mix)",
+        "energy": 8
+      },
+      {
+        "artist": "John O'Callaghan",
+        "title": "Music Takes Me Higher (Extended Mix)",
+        "energy": 9
+      },
+      {
+        "artist": "Anna Lee",
+        "title": "Brave Hearts (Extended Mix)",
+        "energy": 9
+      },
+      {
+        "artist": "York, Ben Nicky",
+        "title": "On The Beach (Extended Mix)",
+        "energy": 10
+      },
+      {
+        "artist": "Spacer Woman, Champagne Soul",
+        "title": "Never Forgotten (Original Mix)",
+        "energy": 9
+      }
+    ]
+  }
+}
