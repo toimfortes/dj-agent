@@ -1,4 +1,4 @@
-# DJ Librarian
+# DJ Agent
 
 An AI agent that enriches your Rekordbox library — energy ratings, cue points, metadata cleanup, duplicate detection — powered by Claude Code.
 
