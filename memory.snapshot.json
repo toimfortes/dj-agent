@@ -6264,6 +6264,1016 @@
           "colour": "yellow"
         }
       ]
+    },
+    "4cb8719bf0039bfc7861186885eb6dffbec814b743a9f526cf91624aa719dddf": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/15.10.2025%20%E2%80%93%20ALL%20electronicfresh.com%20(TECHNO%2070%20TRACKS)/Bae%20Blade%20-%20Freak%20(Original%20Mix).mp3",
+      "artist": "Bae Blade",
+      "title": "Freak (Original Mix)",
+      "energy": 9,
+      "energy_source": "reference",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 5479,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 23359,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 37082,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 63390,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 82779,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 126223,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 142245,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "cfbd5d3fafbf8c18b886e58c9dfd0bcbe874d0a543ea2f279abb078a9faf6e2a": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/17-01-26/The%20Obsessed%20&amp;%20DBF%20-%20Colombia%20(Original%20Mix)%20.mp3",
+      "artist": "The Obsessed & DBF",
+      "title": "Colombia (Original Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 19226,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 54195,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 71447,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 108530,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 123878,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 152299,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 164745,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "a20d9c6e8021e7f0ba05fd195ba4becf81e7950d56960ef1d2b97eedd9cf4203": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/ZipDJ%20Tracks%20Sept%204%202025/KI_KI-3.5_Mins_Of_Acid-Original_Mix-73107103.mp3",
+      "artist": "KI/KI",
+      "title": "3.5 Mins Of Acid (Original Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 6849,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 20178,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 44373,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 72957,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 92810,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 144149,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 171107,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "888d4675304becfd1d482c16d001a289227510a13857af43b55c9369f9e0a446": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/EARGASM%20GOD%20%20-%20SO&%23209;AR%20.mp3",
+      "artist": "EARGASM GOD",
+      "title": "SO\u00d1AR",
+      "energy": 10,
+      "energy_source": "reference",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 35224,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 47484,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 68963,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 86889,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 211858,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 318183,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 333763,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "501b0ed9ff3c4aeee3bf5415fda5e41c2e63b15d416432fb2887b65a0670089c": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Da%20Hool%20-%20Bottrop%20.mp3",
+      "artist": "Da Hool",
+      "title": "Bottrop",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 15139,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 37918,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 63088,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 84776,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 101540,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 122833,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 140689,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "6e27835bc5944075ed70abf88b1e4f78822b5ba222ab030becc32e6112eb333e": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/beatport_tracks_2025-10%20(1)/KOSMIC%20-%20In%20My%20Mind%20(Original%20Mix).mp3",
+      "artist": "KOSMIC",
+      "title": "In My Mind (Original Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 20387,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 32415,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 51850,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 65062,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 83568,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 106626,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 127152,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "c6b265c0e7f6bfd056cb35d3ce5cc08c239ca9886d1347d4f6a671b06d47cef7": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/A.N.I.%20-%20Bubble%20Bounce%20.mp3",
+      "artist": "A.N.I.",
+      "title": "Bubble Bounce",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 2089,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 14233,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 30998,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 47484,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 92136,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 118444,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 132400,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "71c2a46af186428c40861fb7a04799c85278aacc7f914dda1400239b024e6bf7": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/17-01-26/Distorted%20Dreams%20-%20Acid%20Cry%20(Extended%20Mix)%20.mp3",
+      "artist": "Distorted Dreams",
+      "title": "Acid Cry (Extended Mix)",
+      "energy": 8,
+      "energy_source": "reference",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 17693,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 31857,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 46834,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 70008,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 113754,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 129126,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 249568,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "586bc3568cbc7d641b7df394ae29fee92d0ea0b156b6a55f48860abd02d9fe9b": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/22-01-2026/Charli%20Xcx%20-%20Guess%20(DJ%20Daddy%20Trance%20Edit)%20.mp3",
+      "artist": "Charli Xcx",
+      "title": "Guess (DJ Daddy Trance Edit)",
+      "energy": 8,
+      "energy_source": "reference",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 10054,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 24102,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 55472,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 86563,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 101958,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 243530,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 257764,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "c9991da1eea99a494e269071edd4f49d73e2b811901037a5fc541771503b7e32": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/Novah%20-%20Papi%20.mp3",
+      "artist": "Novah",
+      "title": "Papi",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 9009,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 23545,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 44628,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 69009,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 94435,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 131819,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 147005,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "fda049b3705816b4887e6177cc26d4f6fcbf51e2abc4eb2cd30f7e482b0a8eb8": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/15.10.2025%20%E2%80%93%20ALL%20electronicfresh.com%20(TECHNO%2070%20TRACKS)/Jody%206%20-%20Love%20The%20Way%20You%20Love%20Me%20(Original%20Mix).mp3",
+      "artist": "Jody 6",
+      "title": "Love The Way You Love Me (Original Mix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 3088,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 22360,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 51501,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 87910,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 101680,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 133630,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 298631,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "134c5af305f7f013c93cb09b263890c46d12c5634a4a668d1a5747d8eadfc5f2": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/ZipDJ%20Tracks%20Sept%204%202025/Kiki__Marlon_Hoffstadt-Losing_Control-Original_Mix-73107150.mp3",
+      "artist": "Kiki, Marlon Hoffstadt",
+      "title": "Losing Control (Original Mix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 5619,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 26819,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 49528,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 74745,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 91509,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 106718,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 134791,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "d58150ae86d65bf6d039513063417bcacff97cc8c1b1a0667aa24d28ffd552bf": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/15.10.2025%20%E2%80%93%20ALL%20electronicfresh.com%20(TECHNO%2070%20TRACKS)/Akona%20-%20Acid%20Diva%20(Extended%20Mix)%20-%20www.djsoundtop.com.mp3",
+      "artist": "Akona",
+      "title": "Acid Diva (Extended Mix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 17972,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 58653,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 72260,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 121788,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 160357,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 202292,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 289041,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "89147198e62e93bd902fb0844055681b3f8dc5a8a7785b3c7fcccb98dba6ae7f": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/04-12-2025/24.%20Pawlowski,%20Vikina,%20BYORN%20-%20LA%20TEMPERATURA%20(Original%20Mix).mp3",
+      "artist": "Pawlowski, Vikina, BY\u00d8RN",
+      "title": "LA TEMPERATURA (Original Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 9171,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 30743,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 43235,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 61022,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 99056,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 115565,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 133793,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "8edf19fae3cfd95aa4cc2f438fce50e7ca5e803aa2722b5dd8a41f1442b233a9": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/04-12-2025/7.%20tmpl%20-%20My%20Party%20(Extended%20Mix).mp3",
+      "artist": "tmpl",
+      "title": "My Party (Extended Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 15580,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 32368,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 46764,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 75209,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 119977,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 138344,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 233546,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "894a736c86e09cedb6de0a41b7430acd46a72eca37a3b6faa02f3c3643bc288c": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/NOVAH%20-%20ACID%20.mp3",
+      "artist": "NOVAH",
+      "title": "ACID",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 17020,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 32507,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 50944,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 66060,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 79203,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 116308,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 139157,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
+    },
+    "dc22c588fca75393d543ff693967d3c4c21d51c8d4375117ed89b7836423975c": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Maddix,%20Olly%20James%20&amp;%20Hannah%20Laing%20-%20Transmission%20.mp3",
+      "artist": "Maddix, Olly James & Hannah Laing",
+      "title": "Transmission",
+      "energy": 7,
+      "energy_source": "reference",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 21757,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 51571,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 66525,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 122531,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 163422,
+          "name": "Drop",
+          "colour": "red"
+        }
+      ]
+    },
+    "882e7c8692033a00a07fdabe48218b41b08321cfdf46541e2bcb130894897ece": {
+      "path": "file://localhost/Users/nataliemclaren/Downloads/Hannah_Laing-Fuck_Knows-Extended_Mix-75887738.mp3",
+      "artist": "Hannah Laing",
+      "title": "Fuck Knows (Extended Mix)",
+      "energy": 8,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 2507,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 18366,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 39102,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 100379,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 127732,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 215248,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 305946,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "9ec364cdd80f172e8a23fc8e1772990f62dfc8dd903712cdea8bb8b25315d48c": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/04-12-2025/17.%20Giorgia%20Angiuli%20-%20ACID%20TEMPLE%20(Extended%20Mix).mp3",
+      "artist": "Giorgia Angiuli",
+      "title": "ACID TEMPLE (Extended Mix)",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 10240,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 30348,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 44535,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 80642,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 100101,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 135859,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 181858,
+          "name": "Outro",
+          "colour": "yellow"
+        }
+      ]
+    },
+    "107aa58bd9c4172f8b87143143310c8fe22b422fd3c9e029f8f825cde856d409": {
+      "path": "file://localhost/Users/nataliemclaren/Documents/DJ/09-12-2025/KYANU,%20Trancemaster%20Krause%20-%20Discofans%20Extended%20Mix%20-%20www.djsoundtop.com.mp3",
+      "artist": "KYANU, Trancemaster Krause",
+      "title": "Discofans Extended Mix",
+      "energy": 9,
+      "energy_source": "calibrated",
+      "tags_source": "auto",
+      "analysed_at": "2026-03-15T18:37:47.386574",
+      "cues": [
+        {
+          "position_ms": 0,
+          "name": "Intro",
+          "colour": "green"
+        },
+        {
+          "position_ms": 18622,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 35480,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 55774,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 74118,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 88305,
+          "name": "Drop",
+          "colour": "red"
+        },
+        {
+          "position_ms": 117376,
+          "name": "Breakdown",
+          "colour": "blue"
+        },
+        {
+          "position_ms": 217826,
+          "name": "Breakdown",
+          "colour": "blue"
+        }
+      ]
     }
   },
   "energy_corrections": [],

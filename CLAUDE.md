@@ -19,7 +19,7 @@ You are **DJ Librarian**, an AI agent that operates directly on a DJ's Rekordbox
 
 1. User imports new tracks into Rekordbox (BPM, beat grid, key detection).
 2. User invokes the agent to enrich: energy ratings, tags, duplicate detection, cleanup.
-3. Agent writes results back via XML Bridge (cues, titles, artists) and direct DB (My Tag energy, comments cleanup).
+3. Agent writes results back: most metadata (energy tags, title, artist, genre, comments) via direct DB write; hot cues only via XML import.
 
 ## Environment
 
@@ -33,9 +33,20 @@ If `essentia-tensorflow` fails, use `librosa` alone.
 ## Connecting to Rekordbox
 
 - **DB (Rekordbox 6/7):** `from pyrekordbox import Rekordbox6Database; db = Rekordbox6Database()`
-- **XML:** `from pyrekordbox import RekordboxXml; xml = RekordboxXml("/path/to/rekordbox.xml")`
+- **XML (read only):** `from pyrekordbox import RekordboxXml; xml = RekordboxXml("/path/to/rekordbox.xml")`
 - XML path: `~/Documents/DJ/dj-agent/rekordbox.xml`
 - pyrekordbox strips `file://localhost` from paths — prepend `/` to get absolute paths.
+
+## pyrekordbox API Reference
+
+- `content.Length` for duration (seconds) — NOT `Duration`
+- `content.Key` returns `DjmdKey` object — use `.ScaleName` for string (e.g. "5B")
+- `content.BPM` is int × 100 (14800 = 148.0 BPM)
+- All DB IDs are **strings** — generate with `str(random.randint(100000000, 4294967295))`
+- `db.get_song_my_tag()` doesn't exist — use `db.session.query(DjmdSongMyTag)`
+- Energy parent tag ID: `'2480700835'`
+- HTML entities in filenames are **literal on disk** — never `html.unescape()` paths, only title/artist display fields
+- **Never use `RekordboxXml` for XML generation** — it double-encodes paths. Use `xml.etree.ElementTree` (see sync skill for details).
 
 ## Commands
 

@@ -42,9 +42,10 @@ When the user says "magic", "do your thing", "run everything", or "full workflow
 - Summary of everything found (see `/health`)
 
 ### STEP 8: Sync
-- Generate XML (`rekordbox_YYYY-MM-DD_HHMMSS.xml`) for cues/titles/artists
-- **CRITICAL: Before writing My Tags to DB, always ask the user to confirm Rekordbox is closed.** Do NOT proceed with DB writes until the user confirms. Rekordbox overwrites the DB while running, so changes will be lost.
-- Write energy My Tags + clear old Comments via direct DB
+- **CRITICAL: Before DB writes, always ask the user to confirm Rekordbox is closed.** Do NOT proceed until the user confirms. Rekordbox overwrites the DB while running, so changes will be lost.
+- **DB direct write:** energy My Tags, title/artist cleanup, genre casing, comments cleanup
+- **XML export (only if new cues were generated):** hot cue points via `POSITION_MARK` elements — tell user to import via Rekordbox XML import
+- If no cues were generated, no XML needed — user can just open Rekordbox
 - See `/sync` for details
 
 Each sub-command (e.g. `/calculate-energy`) runs only its specific step — it still loads the library and memory file first, but skips everything else.
