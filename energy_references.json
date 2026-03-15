@@ -1,0 +1,86 @@
+{
+  "Acid": [
+    {"artist": "EARGASM GOD", "title": "SOÑAR", "energy": 10},
+    {"artist": "Bae Blade", "title": "Freak (Original Mix)", "energy": 9},
+    {"artist": "Charli Xcx", "title": "Guess (DJ Daddy Trance Edit)", "energy": 8},
+    {"artist": "Distorted Dreams", "title": "Acid Cry (Extended Mix)", "energy": 8},
+    {"artist": "Maddix, Olly James & Hannah Laing", "title": "Transmission", "energy": 7}
+  ],
+  "Afrohouse": [
+    {"artist": "Tayllor", "title": "Suspicious Minds (Extended Mix)", "energy": 4},
+    {"artist": "Andrey Exx, TuraniQa", "title": "Si To Si (Extended Mix)", "energy": 5},
+    {"artist": "AMEME, Baron (FR)", "title": "Like That (Extended Mix)", "energy": 3},
+    {"artist": "Marine Abtan, Adore (FR)", "title": "SING IT BACK feat. Marine Abtan (Original Mix)", "energy": 4},
+    {"artist": "Simone Vitullo & Seraphiel", "title": "Every Breath You Take (Extended Mix)", "energy": 4}
+  ],
+  "Amapiano": [
+    {"artist": "Tyler ICU, Nicole Elocin, Kabza De Small, DJ Maphorisa", "title": "Bella Ciao (Original Mix)", "energy": 3},
+    {"artist": "Tyla", "title": "Chanel (Clean)", "energy": 5},
+    {"artist": "Navaro, uLazi", "title": "Baba Wethu (Original Mix)", "energy": 3},
+    {"artist": "M.J, Soul Jam, DBN Gogo, Mr Pilato, Mfana Mdu, Massive95k, Ego Slimflow", "title": "Ghana Ghana (Original Mix)", "energy": 3},
+    {"artist": "Driipgod, Blaq Oak Musiq, Grootman A Malinga", "title": "Le Ngoma (Original Mix)", "energy": 3}
+  ],
+  "Bouncy": [
+    {"artist": "BEAUZ", "title": "Bel Mercy feat. Nokia", "energy": 9},
+    {"artist": "Mark Broom, Roku, Ben Sims", "title": "Acid Amnesia (Original Mix)", "energy": 8},
+    {"artist": "KIRK", "title": "Riverside (Flip)", "energy": 9},
+    {"artist": "Gwen Stefani", "title": "What You Waiting For (Edit)", "energy": 8},
+    {"artist": "TRYPDO x ANOMALY", "title": "ACIDIC SURGE", "energy": 10}
+  ],
+  "Disco": [
+    {"artist": "Adome", "title": "Nyueto Party (Edit by Sopp)", "energy": 6},
+    {"artist": "Ghostbusterz", "title": "Gimme 2Nite (Funky Mix)", "energy": 7},
+    {"artist": "Antonello Ferrari, Febbre Dell'anima", "title": "Love Will Save The Day (Antonello Ferrari Club Mix)", "energy": 5},
+    {"artist": "Morttimer Snerd III, Steve Miggedy Maestro", "title": "Shoot Choo Down (Miggedys Dizko Slap)", "energy": 6},
+    {"artist": "Woody Braun", "title": "Motorbooty Ryde (Original Mix)", "energy": 6}
+  ],
+  "Disco #2": [
+    {"artist": "Ghostbusterz", "title": "Gimme 2Nite (Funky Mix)", "energy": 6},
+    {"artist": "Birdee", "title": "Don't You Want My Love (Vocal Extended Mix)", "energy": 7},
+    {"artist": "Dmitry Sid", "title": "Taki Taki (Original Mix)", "energy": 5},
+    {"artist": "Ghostbusterz", "title": "Tainted (Original Mix)", "energy": 6},
+    {"artist": "Jaegerossa", "title": "Boulevard Life (Original Mix)", "energy": 4}
+  ],
+  "Hard Techno": [
+    {"artist": "Krenon", "title": "Volvernos a Amar (Schranz Edit)", "energy": 10},
+    {"artist": "Fatima Hajji", "title": "Antracita (Original Mix)", "energy": 10},
+    {"artist": "M83", "title": "Outro (Wanton Hardtechno Remix v2)", "energy": 10},
+    {"artist": "Bassjackers", "title": "Beethoven's Aria Für Elise (Extended Mix)", "energy": 9},
+    {"artist": "ASCO", "title": "Palladio", "energy": 9}
+  ],
+  "House": [
+    {"artist": "Sandy Rivera", "title": "I Can't Stop (Joseph Capriati Extended Groove Remix)", "energy": 6},
+    {"artist": "Lock 'N Load", "title": "Blow Ya Mind (DJ Daddy Trance Extended Remix)", "energy": 9},
+    {"artist": "Dancing On Lego", "title": "Sun Is Shining (Original Mix)", "energy": 4},
+    {"artist": "4Moon Music", "title": "Zephyr (Extended Mix)", "energy": 5},
+    {"artist": "Caribou", "title": "Climbing (Solomun Club Edit)", "energy": 6}
+  ],
+  "Melodic:Tech House": [
+    {"artist": "Massano", "title": "Signs Of Saturn (Original Mix)", "energy": 8},
+    {"artist": "Rotceh", "title": "My Side (Extended Mix)", "energy": 8},
+    {"artist": "Blondish, Eran Hersh, Darmon, Madonna", "title": "Sorry (Miss Monique Remix)", "energy": 7},
+    {"artist": "Mau P", "title": "Drugs From Amsterdam (Maddix Extended Remix)", "energy": 8},
+    {"artist": "Hunter Game, Noah Kulaga", "title": "All I Wanted (Original Mix)", "energy": 7}
+  ],
+  "Psytrance": [
+    {"artist": "Vini Vici, TERRA, Sandhog", "title": "Gyoza (Original Mix)", "energy": 10},
+    {"artist": "Astrix", "title": "Intergalactic Agreement (Remix)", "energy": 10},
+    {"artist": "Psy Trance Mafia, Infected Mushroom, Blastoyz", "title": "Boomba (Original Mix)", "energy": 9},
+    {"artist": "Hyde, Technology", "title": "Stardust (Original Mix)", "energy": 10},
+    {"artist": "Mekkanikka, Audiosonic", "title": "Psychedelic Jesus (Original Mix)", "energy": 10}
+  ],
+  "Techno": [
+    {"artist": "Viviana Casanova", "title": "Party Don't Stop (Original Mix)", "energy": 9},
+    {"artist": "Gaga, Mateo!", "title": "Temple (Original Mix)", "energy": 8},
+    {"artist": "Will Be Demon, Wäm Bex", "title": "Lollypop (Original Mix)", "energy": 8},
+    {"artist": "?", "title": "Abracadabra (Techno Remix)", "energy": 9},
+    {"artist": "KÄBALTT", "title": "Crying Injustice (Original Mix)", "energy": 9}
+  ],
+  "Trance": [
+    {"artist": "Micha Mendel", "title": "Future Peace (Solarstone Pure Extended Mix)", "energy": 8},
+    {"artist": "John O'Callaghan", "title": "Music Takes Me Higher (Extended Mix)", "energy": 9},
+    {"artist": "Anna Lee", "title": "Brave Hearts (Extended Mix)", "energy": 9},
+    {"artist": "York, Ben Nicky", "title": "On The Beach (Extended Mix)", "energy": 10},
+    {"artist": "Spacer Woman, Champagne Soul", "title": "Never Forgotten (Original Mix)", "energy": 9}
+  ]
+}
