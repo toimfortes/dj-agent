@@ -131,6 +131,10 @@ def shift_to_key(
 def semitones_between_keys(from_key: str, to_key: str) -> int:
     """Calculate the semitone distance to shift from one key to another.
 
+    Accounts for scale mode: relative major/minor pairs (e.g., C major and
+    A minor) share the same key signature and require 0 semitones shift.
+    Pitch-shifting preserves intervals — it cannot change a track's mode.
+
     Returns the smallest shift (positive or negative, range -6 to +6).
     """
     from_note, from_scale = _parse_key(from_key)
@@ -141,6 +145,17 @@ def semitones_between_keys(from_key: str, to_key: str) -> int:
 
     if from_idx is None or to_idx is None:
         return 0
+
+    # If scales differ, compare using relative key equivalents.
+    # C major's relative minor is A minor (offset -3 semitones).
+    # So to shift from C major to A minor, the actual delta is 0.
+    if from_scale != to_scale:
+        if from_scale == "major":
+            # Convert source to relative minor: root - 3 semitones
+            from_idx = (from_idx - 3) % 12
+        else:
+            # Convert source to relative major: root + 3 semitones
+            from_idx = (from_idx + 3) % 12
 
     # Raw difference (0-11)
     diff = (to_idx - from_idx) % 12

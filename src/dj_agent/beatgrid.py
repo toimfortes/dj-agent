@@ -235,22 +235,24 @@ def _librosa_bpm(path: Path) -> float:
 
 
 def _fix_half_double(bpm: float, genre: str | None) -> float:
-    """Fix half/double BPM using genre-aware ranges."""
+    """Fix half/double BPM using nearest-octave selection.
+
+    Instead of oscillating multiply/divide loops, evaluates all candidates
+    (bpm, bpm*2, bpm/2) and picks whichever is closest to the genre range.
+    """
+    if bpm <= 0:
+        return bpm
+
     if genre:
         genre_lower = genre.lower().strip()
         lo, hi = GENRE_BPM_RANGES.get(genre_lower, DEFAULT_BPM_RANGE)
     else:
         lo, hi = DEFAULT_BPM_RANGE
 
-    # Double if below range (max 10 iterations to prevent infinite loop)
-    for _ in range(10):
-        if bpm >= lo or bpm <= 0:
-            break
-        bpm *= 2
-    # Halve if above range
-    for _ in range(10):
-        if bpm <= hi:
-            break
-        bpm /= 2
+    centroid = (lo + hi) / 2.0
+    candidates = [bpm, bpm * 2, bpm / 2]
 
-    return bpm
+    # Pick the candidate closest to the genre centroid
+    best = min(candidates, key=lambda b: abs(b - centroid) if b > 0 else float("inf"))
+
+    return best

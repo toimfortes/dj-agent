@@ -65,10 +65,10 @@ class TestTraktor:
 
 class TestSerato:
     def test_cue_entry_binary(self):
-        cue = {"name": "Drop", "position_ms": 32000, "colour": "red", "index": 1}
-        data = _build_serato_cue_entry(cue)
+        cue = {"name": "Drop", "position_ms": 32000, "colour": "red"}
+        data = _build_serato_cue_entry(cue, index=1)
         assert len(data) > 10
-        assert data[1] == 1  # index
+        assert data[1] == 1  # index passed as parameter
 
     def test_markers2_payload(self):
         cues = [

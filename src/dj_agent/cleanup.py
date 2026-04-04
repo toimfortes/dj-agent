@@ -209,7 +209,7 @@ def split_artist_from_title(
             if not artist or len(artist) < 3:
                 continue
             if title_lower.startswith(artist.lower() + " "):
-                remaining = title[len(artist) :].strip()
+                remaining = title[len(artist) :].lstrip(" -\u2013").strip()
                 if remaining:
                     return artist, remaining
 

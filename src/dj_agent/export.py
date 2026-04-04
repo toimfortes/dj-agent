@@ -185,8 +185,8 @@ def _build_serato_markers2_payload(cues: list[dict[str, Any]]) -> bytes:
     # Inner payload (before base64)
     inner = bytearray(b"\x01\x01")  # version
 
-    for cue in cues[:8]:
-        entry = _build_serato_cue_entry(cue)
+    for i, cue in enumerate(cues[:8]):
+        entry = _build_serato_cue_entry(cue, index=i)
         inner += b"CUE\x00"
         inner += struct.pack(">I", len(entry))
         inner += entry
@@ -196,12 +196,11 @@ def _build_serato_markers2_payload(cues: list[dict[str, Any]]) -> bytes:
     return b"\x01\x01" + encoded
 
 
-def _build_serato_cue_entry(cue: dict[str, Any]) -> bytes:
+def _build_serato_cue_entry(cue: dict[str, Any], index: int = 0) -> bytes:
     """Build a single CUE entry for Serato Markers2."""
     rgb = _RGB.get(cue.get("colour", "green"), (0, 255, 0))
     name = cue.get("name", "").encode("utf-8") + b"\x00"
     position_ms = int(cue.get("position_ms", 0))
-    index = cue.get("index", 0)
 
     data = bytearray()
     data.append(0x00)  # padding

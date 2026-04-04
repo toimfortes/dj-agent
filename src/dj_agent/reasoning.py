@@ -205,14 +205,18 @@ def cleanup_temp_snippets() -> int:
                 # Extract PID from filename: dj_reason_{PID}_xxxxx.wav
                 parts = Path(f).stem.split("_")
                 if len(parts) >= 3:
-                    pid = int(parts[2])
                     try:
-                        os.kill(pid, 0)  # check if process exists
-                        continue  # process alive — don't delete
-                    except ProcessLookupError:
-                        pass  # process dead — safe to delete
-                    except (PermissionError, ValueError):
-                        continue  # can't check — leave alone
+                        pid = int(parts[2])
+                    except ValueError:
+                        pid = None  # legacy format — no PID
+                    if pid is not None:
+                        try:
+                            os.kill(pid, 0)  # check if process exists
+                            continue  # process alive — don't delete
+                        except ProcessLookupError:
+                            pass  # process dead — safe to delete
+                        except (PermissionError, OSError):
+                            continue  # can't check — leave alone
                 # Old format or can't parse PID — delete if old
                 import time
                 age = time.time() - Path(f).stat().st_mtime
