@@ -3,10 +3,10 @@
 Uses a multimodal LLM to provide high-level musical understanding that
 numerical features alone cannot capture.
 
-Backend priority:
+Backend priority (auto mode):
 1. Audio Flamingo 3 (local GPU, expert audio reasoning) — if CUDA + transformers
-2. Gemini SDK (cloud, cheap, 1M context) — if GOOGLE_API_KEY set
-3. Ollama (local, free) — only if multimodal model available
+2. Ollama (local, free) — only if multimodal model available
+3. Gemini SDK (cloud, cheap, 1M context) — if GOOGLE_API_KEY set
 
 Note: The Gemini CLI is NOT used as a transport. It is an autonomous agent
 that triggers recursive loops and stdout pollution when invoked as a subprocess.
@@ -141,18 +141,24 @@ def get_backend() -> str:
 # Robust JSON extraction from LLM responses
 # ---------------------------------------------------------------------------
 
-def _extract_json(raw: str) -> dict[str, str]:
+def _extract_json(raw: str) -> dict[str, Any]:
     """Extract a JSON object from an LLM response that may contain chatter.
 
     Handles: markdown code blocks, preamble text ("Sure, here is..."),
     trailing explanations, and mixed text/JSON responses.
+    Always returns a dict (wraps arrays/scalars if needed).
     """
     raw = raw.strip()
 
+    def _ensure_dict(obj: Any) -> dict[str, Any]:
+        if isinstance(obj, dict):
+            return obj
+        return {"data": obj}  # wrap non-dict JSON (arrays, scalars)
+
     # 1. Try direct parse first (clean response)
     try:
-        return json.loads(raw)
-    except json.JSONDecodeError:
+        return _ensure_dict(json.loads(raw))
+    except (json.JSONDecodeError, ValueError):
         pass
 
     # 2. Strip markdown code blocks
@@ -160,16 +166,16 @@ def _extract_json(raw: str) -> dict[str, str]:
         match = re.search(r"```(?:json)?\s*\n?(.*?)```", raw, re.DOTALL)
         if match:
             try:
-                return json.loads(match.group(1).strip())
-            except json.JSONDecodeError:
+                return _ensure_dict(json.loads(match.group(1).strip()))
+            except (json.JSONDecodeError, ValueError):
                 pass
 
     # 3. Find first { ... } block in the response
     match = re.search(r"\{[^{}]*\}", raw, re.DOTALL)
     if match:
         try:
-            return json.loads(match.group(0))
-        except json.JSONDecodeError:
+            return _ensure_dict(json.loads(match.group(0)))
+        except (json.JSONDecodeError, ValueError):
             pass
 
     # 4. Give up — return raw as fallback
@@ -180,18 +186,24 @@ def _extract_json(raw: str) -> dict[str, str]:
 # Startup cleanup — remove orphaned temp files from crashed sessions
 # ---------------------------------------------------------------------------
 
-def cleanup_temp_snippets() -> int:
-    """Remove orphaned dj_reason_*.wav and dj_mix_*.wav files from /tmp.
+def cleanup_temp_snippets(max_age_sec: float = 3600) -> int:
+    """Remove OLD orphaned dj_reason_*.wav and dj_mix_*.wav files from /tmp.
 
-    Called at module import and can be called manually. Returns count removed.
+    Only deletes files older than ``max_age_sec`` (default 1 hour) to avoid
+    removing temp files that another active process is still using.
     """
     import glob
+    import time
+
     count = 0
+    now = time.time()
     for pattern in ["/tmp/dj_reason_*", "/tmp/dj_mix_*"]:
         for f in glob.glob(pattern):
             try:
-                Path(f).unlink(missing_ok=True)
-                count += 1
+                age = now - Path(f).stat().st_mtime
+                if age > max_age_sec:
+                    Path(f).unlink(missing_ok=True)
+                    count += 1
             except OSError:
                 pass
     return count
@@ -212,7 +224,7 @@ def _get_duration(path: Path) -> float:
     """Get track duration in seconds without loading the full file.
 
     Uses ffprobe if available, falls back to mutagen, then librosa.
-    Never returns a default — always measures the actual file.
+    Returns 180.0 (3 min) as last resort if all methods fail.
     """
     # Try ffprobe (fastest, no Python decode)
     import subprocess as _sp

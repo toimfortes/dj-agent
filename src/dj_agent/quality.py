@@ -1,6 +1,7 @@
 """Audio quality validation — fake FLAC detection, clipping, silence."""
 
 from __future__ import annotations
+import logging
 
 import subprocess
 import json

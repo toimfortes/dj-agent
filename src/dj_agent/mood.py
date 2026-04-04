@@ -8,6 +8,7 @@ Two tiers:
 """
 
 from __future__ import annotations
+import logging
 
 from pathlib import Path
 from typing import Any
@@ -92,15 +93,15 @@ def _essentia_mood(path: Path) -> MoodResult:
             graphFilename="emomusic-msd-musicnn-2.pb",
         )(embeddings)
         arousal = float(np.clip(np.mean(a_preds), 0, 1))
-    except Exception:
-        pass
+    except Exception as _e:
+        logging.getLogger(__name__).debug("Arousal model unavailable: %s", _e)
     try:
         v_preds = es.TensorflowPredict2D(
             graphFilename="deam-msd-musicnn-2.pb",
         )(embeddings)
         valence = float(np.clip(np.mean(v_preds), 0, 1))
-    except Exception:
-        pass
+    except Exception as _e:
+        logging.getLogger(__name__).debug("Valence model unavailable: %s", _e)
 
     return MoodResult(
         primary_mood=primary,

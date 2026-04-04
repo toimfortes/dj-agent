@@ -1,6 +1,7 @@
 """Shared audio loading and LUFS measurement utilities."""
 
 from __future__ import annotations
+import logging
 
 from pathlib import Path
 
@@ -75,7 +76,7 @@ def measure_loudness(path: str | Path) -> LoudnessResult:
             if np.isfinite(st):
                 st_values.append(st)
         except Exception:
-            pass
+            pass  # individual window may fail — not critical
     short_term_max = max(st_values) if st_values else integrated
 
     # Loudness range (LRA) — approximate as difference between 10th and 95th
