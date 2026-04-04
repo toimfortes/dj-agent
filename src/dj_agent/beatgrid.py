@@ -40,8 +40,15 @@ def verify_bpm(
     path: str | Path,
     rekordbox_bpm: float,
     genre: str | None = None,
+    skip_genre_correction: bool = False,
 ) -> dict[str, Any]:
     """Compare Rekordbox BPM against detected BPM.
+
+    Parameters
+    ----------
+    skip_genre_correction : if True, don't apply half/double genre-range
+        correction. Useful for transition tracks or multi-genre sets where
+        "illegal" BPMs are intentional (e.g., 100 BPM in a Techno set).
 
     Returns a dict with:
     - ``detected_bpm``: BPM from audio analysis
@@ -62,8 +69,9 @@ def verify_bpm(
             "suggested_bpm": rekordbox_bpm,
         }
 
-    # Fix half/double using genre ranges
-    detected = _fix_half_double(detected, genre)
+    # Fix half/double using genre ranges (unless explicitly skipped)
+    if not skip_genre_correction:
+        detected = _fix_half_double(detected, genre)
 
     # Compare
     diff_pct = abs(detected - rekordbox_bpm) / max(rekordbox_bpm, 1.0) * 100

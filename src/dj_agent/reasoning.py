@@ -217,16 +217,12 @@ def cleanup_temp_snippets() -> int:
                             pass  # process dead — safe to delete
                         except (PermissionError, OSError):
                             continue  # can't check — leave alone
-                # Old format or can't parse PID — delete if old
+                # Old format or can't parse PID — only delete if older than 1 hour
                 import time
                 age = time.time() - Path(f).stat().st_mtime
                 if age > 3600:
                     Path(f).unlink(missing_ok=True)
                     count += 1
-                    continue
-
-                Path(f).unlink(missing_ok=True)
-                count += 1
             except OSError:
                 pass
     return count
@@ -566,9 +562,15 @@ def _gemini_sdk_query(
 
     model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
 
-    # Snippets are always small (<5MB) so inline is fine.
-    # If someone passes a large file directly, it will be rejected by the API
-    # with a clear error — better than silently failing.
+    # Guard: reject files larger than 20MB (Gemini inline limit)
+    # All snippets from _extract_snippet are ~1MB; this catches accidental raw file paths
+    file_size_mb = audio_path.stat().st_size / (1024 * 1024)
+    if file_size_mb > 20:
+        raise ValueError(
+            f"Audio file too large for inline Gemini query ({file_size_mb:.0f}MB). "
+            "Use _extract_snippet() first, or pass a shorter clip."
+        )
+
     mime = "audio/wav" if audio_path.suffix.lower() == ".wav" else "audio/mpeg"
     audio_bytes = audio_path.read_bytes()
 

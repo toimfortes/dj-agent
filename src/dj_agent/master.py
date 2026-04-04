@@ -145,6 +145,21 @@ def master_track(
             "Processing it again would destroy dynamic range. Use the original file."
         )
 
+    # Dynamic range check — refuse to master already-compressed audio
+    # (catches professionally mastered tracks that lack our tag)
+    try:
+        from .audio import measure_loudness
+        loud = measure_loudness(input_path)
+        if loud.loudness_range_lu < 3.0 and loud.loudness_range_lu > 0:
+            import warnings
+            warnings.warn(
+                f"Track '{input_path.name}' has very low dynamic range "
+                f"(LRA={loud.loudness_range_lu:.1f} LU). It may already be mastered. "
+                "Re-mastering will further compress dynamics."
+            )
+    except Exception:
+        pass  # measurement failure shouldn't block mastering
+
     # Determine output path — match input format by default
     if output_path is None:
         suffix = input_path.suffix
