@@ -169,8 +169,13 @@ def _find_similar_faiss(
     """FAISS-accelerated similarity search using inner product (cosine)."""
     import faiss  # type: ignore[import-untyped]
 
-    # Build matrix and normalize for cosine similarity via inner product
-    vectors = np.array([library[cid] for cid in ids], dtype=np.float32)
+    # Filter to vectors matching target dimension (reject mixed caches)
+    target_dim = len(target)
+    compatible = [(cid, library[cid]) for cid in ids if len(library[cid]) == target_dim]
+    if not compatible:
+        return []
+    ids = [c[0] for c in compatible]
+    vectors = np.array([c[1] for c in compatible], dtype=np.float32)
     norms = np.linalg.norm(vectors, axis=1, keepdims=True)
     norms[norms == 0] = 1.0
     vectors /= norms
@@ -235,7 +240,7 @@ def build_embedding_cache(
             ids=list(embeddings.keys()),
             vectors=vecs_array,
             dim=vecs_array.shape[1] if vecs_array.ndim == 2 else 0,
-            method="auto",  # records which method was used
+            method=locked_method,  # actual method used (clap or librosa)
         )
 
     return embeddings

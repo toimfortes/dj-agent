@@ -77,10 +77,10 @@ _flamingo_verified: bool | None = None  # cache: True/False/None=untested
 
 
 def _flamingo_available() -> bool:
-    """Check if Audio Flamingo is actually operational — runs a smoke test.
+    """Check if Audio Flamingo dependencies exist locally (no network calls).
 
-    Returns True only if we can instantiate the processor (not just import).
-    Caches the result so we only pay the check cost once per process.
+    Only checks imports and CUDA — does NOT hit HuggingFace.
+    Actual model loading happens lazily on first query, not during detection.
     """
     global _flamingo_verified
     if _flamingo_verified is not None:
@@ -91,15 +91,11 @@ def _flamingo_available() -> bool:
         if not torch.cuda.is_available():
             _flamingo_verified = False
             return False
-
-        # Actually try to load the processor — this verifies model access,
-        # HF auth, and that the class exists in this transformers version
-        config = get_config().reasoning
-        from transformers import AutoProcessor
-        AutoProcessor.from_pretrained(config.model_id, trust_remote_code=True)
+        # Check transformers is importable (no network call)
+        import transformers  # noqa: F401
         _flamingo_verified = True
         return True
-    except Exception:
+    except ImportError:
         _flamingo_verified = False
         return False
 

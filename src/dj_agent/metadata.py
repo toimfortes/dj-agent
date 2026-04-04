@@ -1,7 +1,7 @@
 """Multi-source metadata enrichment.
 
 Adapted from AI-Music-Library-Normalization-Suite metadata_enrichment.py.
-Sources: MusicBrainz, Last.fm, Discogs, Beatport.
+Sources: MusicBrainz, Last.fm, Discogs.
 Spotify Audio Features removed (deprecated Nov 2024).
 AcousticBrainz removed (shut down 2022).
 """
