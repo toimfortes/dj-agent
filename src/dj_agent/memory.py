@@ -64,6 +64,38 @@ def save_memory(data: dict[str, Any], config: MemoryConfig) -> None:
         raise
 
 
+def store_track_analysis(
+    memory: dict[str, Any],
+    path: str | Path,
+    analysis: dict[str, Any],
+) -> str:
+    """Store a full track analysis result in memory.
+
+    Keys by content hash so entries survive file moves/renames.
+    Returns the content hash used as key.
+    """
+    content_hash = hash_file_content(path)
+
+    entry = {
+        "path": str(path),
+        "content_hash": content_hash,
+        "analysed_at": datetime.now().isoformat(),
+    }
+    entry.update(analysis)
+
+    memory["processed_tracks"][content_hash] = entry
+    return content_hash
+
+
+def get_track_analysis(
+    memory: dict[str, Any],
+    path: str | Path,
+) -> dict[str, Any] | None:
+    """Retrieve a stored analysis by content hash. Returns None if not found."""
+    content_hash = hash_file_content(path)
+    return memory["processed_tracks"].get(content_hash)
+
+
 def hash_file_content(path: str | Path, chunk_size: int = 65536) -> str:
     """Stream-hash a file in chunks.  Never loads the whole file."""
     h = hashlib.sha256()
