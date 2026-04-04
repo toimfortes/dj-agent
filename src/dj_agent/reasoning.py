@@ -186,24 +186,43 @@ def _extract_json(raw: str) -> dict[str, Any]:
 # Startup cleanup — remove orphaned temp files from crashed sessions
 # ---------------------------------------------------------------------------
 
-def cleanup_temp_snippets(max_age_sec: float = 3600) -> int:
-    """Remove OLD orphaned dj_reason_*.wav and dj_mix_*.wav files from /tmp.
+_TEMP_PREFIX = f"dj_reason_{os.getpid()}_"
+_TEMP_MIX_PREFIX = f"dj_mix_{os.getpid()}_"
 
-    Only deletes files older than ``max_age_sec`` (default 1 hour) to avoid
-    removing temp files that another active process is still using.
+
+def cleanup_temp_snippets() -> int:
+    """Remove orphaned temp files from dead processes.
+
+    Uses PID-based ownership: only deletes files whose embedded PID
+    no longer corresponds to a running process.
     """
     import glob
-    import time
 
     count = 0
-    now = time.time()
     for pattern in ["/tmp/dj_reason_*", "/tmp/dj_mix_*"]:
         for f in glob.glob(pattern):
             try:
-                age = now - Path(f).stat().st_mtime
-                if age > max_age_sec:
+                # Extract PID from filename: dj_reason_{PID}_xxxxx.wav
+                parts = Path(f).stem.split("_")
+                if len(parts) >= 3:
+                    pid = int(parts[2])
+                    try:
+                        os.kill(pid, 0)  # check if process exists
+                        continue  # process alive — don't delete
+                    except ProcessLookupError:
+                        pass  # process dead — safe to delete
+                    except (PermissionError, ValueError):
+                        continue  # can't check — leave alone
+                # Old format or can't parse PID — delete if old
+                import time
+                age = time.time() - Path(f).stat().st_mtime
+                if age > 3600:
                     Path(f).unlink(missing_ok=True)
                     count += 1
+                    continue
+
+                Path(f).unlink(missing_ok=True)
+                count += 1
             except OSError:
                 pass
     return count
@@ -298,7 +317,7 @@ def _extract_snippet(
 
     snippet = np.concatenate(segments) if len(segments) > 1 else segments[0]
 
-    tmp = Path(tempfile.NamedTemporaryFile(suffix=".wav", prefix="dj_reason_",
+    tmp = Path(tempfile.NamedTemporaryFile(suffix=".wav", prefix=_TEMP_PREFIX,
                                             delete=False).name)
     sf.write(str(tmp), snippet, sr)
     return tmp
@@ -661,7 +680,7 @@ def suggest_transition(
         b_data, _ = sf.read(str(snip_b))
         combined = np.concatenate([a_data, np.zeros(sr), b_data])  # 1s gap
         # Use NamedTemporaryFile (not mktemp) to avoid race condition
-        tmp = tempfile.NamedTemporaryFile(suffix=".wav", prefix="dj_mix_", delete=False)
+        tmp = tempfile.NamedTemporaryFile(suffix=".wav", prefix=_TEMP_MIX_PREFIX, delete=False)
         combined_path = Path(tmp.name)
         tmp.close()
         sf.write(str(combined_path), combined, sr)

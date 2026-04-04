@@ -14,7 +14,10 @@ from .config import RekordboxConfig
 
 
 def is_rekordbox_running() -> bool:
-    """Return *True* if a Rekordbox process is currently running."""
+    """Return *True* if a Rekordbox process is currently running.
+
+    Supports macOS, Linux, and Windows.
+    """
     system = platform.system()
     try:
         if system == "Darwin":
@@ -22,6 +25,13 @@ def is_rekordbox_running() -> bool:
                 ["pgrep", "-x", "rekordbox"],
                 capture_output=True,
             )
+        elif system == "Windows":
+            result = subprocess.run(
+                ["tasklist", "/FI", "IMAGENAME eq rekordbox.exe"],
+                capture_output=True, text=True,
+            )
+            # tasklist always returns 0; check if rekordbox.exe appears in output
+            return "rekordbox.exe" in (result.stdout or "")
         else:  # Linux / WSL
             result = subprocess.run(
                 ["pgrep", "-f", "rekordbox"],
@@ -29,7 +39,6 @@ def is_rekordbox_running() -> bool:
             )
         return result.returncode == 0
     except FileNotFoundError:
-        # pgrep not available (unlikely but handle gracefully)
         return False
 
 

@@ -136,17 +136,21 @@ def detect_cue_points_from_pssi(anlz_path: str | Path) -> list[CuePoint] | None:
                 if key in label:
                     # PSSI entries may have 'beat' (beat index) or 'start'
                     # (time in ms). Try time-based first, fall back to beat.
+                    confidence = 1.0
                     if hasattr(entry, "start") and entry.start is not None:
                         pos_ms = int(entry.start)
                     elif hasattr(entry, "beat") and entry.beat is not None:
-                        # beat is a beat index — this is approximate without BPM
-                        pos_ms = int(entry.beat * 500)  # ~120 BPM default
+                        # beat index without BPM — approximate, mark low confidence
+                        pos_ms = int(entry.beat * 500)  # ~120 BPM assumed
+                        confidence = 0.3
                     else:
                         pos_ms = 0
+                        confidence = 0.1
                     cues.append(CuePoint(
                         position_ms=pos_ms,
                         name=name,
                         colour=colour,
+                        confidence=confidence,
                     ))
                     break
 

@@ -93,14 +93,15 @@ class _GPUContext:
 
 
 def _clear_cuda_cache() -> None:
-    """Clear CUDA memory cache if torch is available."""
+    """Clear CUDA memory cache and force garbage collection."""
+    gc.collect()  # Python GC first to drop references
     try:
         import torch
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
+            torch.cuda.synchronize()  # ensure all ops complete before next model loads
     except ImportError:
         pass
-    gc.collect()
 
 
 # Global singleton

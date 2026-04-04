@@ -152,8 +152,9 @@ def score_transition(
     else:
         harmonic = 0.0
 
-    # BPM compatibility (within 6% = seamless, beyond = risky)
-    bpm_diff_pct = abs(track_a.bpm - track_b.bpm) / max(track_a.bpm, 1.0) * 100
+    # BPM compatibility (symmetric — uses max of both BPMs as denominator)
+    max_bpm = max(track_a.bpm, track_b.bpm, 1.0)
+    bpm_diff_pct = abs(track_a.bpm - track_b.bpm) / max_bpm * 100
     if bpm_diff_pct <= 3:
         bpm_score = 1.0
     elif bpm_diff_pct <= 6:

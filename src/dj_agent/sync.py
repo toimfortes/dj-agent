@@ -115,14 +115,14 @@ def generate_cue_xml(
     stamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
     xml_path = output_dir / f"rekordbox_{stamp}.xml"
 
+    # Filter to tracks that have cues (so Entries count matches actual TRACK elements)
+    tracks_with_cues = [t for t in tracks if t.get("cues")]
+
     root = ET.Element("DJ_PLAYLISTS", Version="1.0.0")
     ET.SubElement(root, "PRODUCT", Name="rekordbox", Version="7.2.8", Company="AlphaTheta")
-    collection = ET.SubElement(root, "COLLECTION", Entries=str(len(tracks)))
+    collection = ET.SubElement(root, "COLLECTION", Entries=str(len(tracks_with_cues)))
 
-    for t in tracks:
-        cues = t.get("cues", [])
-        if not cues:
-            continue
+    for t in tracks_with_cues:
 
         raw_path = t.get("path", "")
         # Strip file://localhost prefix to get absolute path for encoding
@@ -138,7 +138,7 @@ def generate_cue_xml(
             Location=rb_url_encode(raw_path),
         )
 
-        for idx, cue in enumerate(cues[:8]):
+        for idx, cue in enumerate(t.get("cues", [])[:8]):
             rgb = COLOUR_MAP.get(cue.get("colour", "green"), COLOUR_MAP["green"])
             pos_sec = cue.get("position_ms", 0) / 1000.0
             ET.SubElement(

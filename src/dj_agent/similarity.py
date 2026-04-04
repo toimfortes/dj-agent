@@ -103,13 +103,13 @@ def _librosa_features(path: str | Path) -> np.ndarray:
     return np.array(features, dtype=np.float32)
 
 
-def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
+def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float | None:
     """Cosine similarity between two vectors (0 = orthogonal, 1 = identical).
 
-    Returns 0.0 if vectors have different dimensions (CLAP 512 vs librosa 62).
+    Returns None if vectors have different dimensions (incompatible methods).
     """
     if a.shape != b.shape:
-        return 0.0  # dimension mismatch — incompatible embedding methods
+        return None  # incompatible — not comparable, not "dissimilar"
     norm_a = np.linalg.norm(a)
     norm_b = np.linalg.norm(b)
     if norm_a == 0 or norm_b == 0:
@@ -154,7 +154,8 @@ def find_similar(
     scores: list[tuple[str, float]] = []
     for cid in ids:
         sim = cosine_similarity(target_vector, library_vectors[cid])
-        scores.append((cid, sim))
+        if sim is not None:  # skip incompatible dimensions
+            scores.append((cid, sim))
 
     scores.sort(key=lambda x: x[1], reverse=True)
     return scores[:top_k]

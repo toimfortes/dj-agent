@@ -138,10 +138,10 @@ def master_track(
     if tmpl is None:
         raise ValueError(f"Unknown template: {template}. Choose from: {list(TEMPLATES)}")
 
-    # Idempotency guard — refuse to re-master already-mastered files
-    if "_mastered" in input_path.stem:
+    # Idempotency guard — check metadata tag first, filename as fallback
+    if _is_already_mastered(input_path):
         raise ValueError(
-            f"Refusing to re-master '{input_path.name}' — file appears already mastered. "
+            f"Refusing to re-master '{input_path.name}' — file has DJ_AGENT_MASTERED tag. "
             "Processing it again would destroy dynamic range. Use the original file."
         )
 
@@ -180,6 +180,9 @@ def master_track(
 
     # Write output (match input format)
     _write_output(data, sr, input_path, output_path)
+
+    # Tag output as mastered (prevents re-mastering)
+    _tag_as_mastered(output_path, tmpl.name)
 
     return {
         "input_path": str(input_path),
@@ -486,3 +489,52 @@ def _write_output(
     else:
         # Fallback
         sf.write(str(output_path), data, sr)
+
+
+# ---------------------------------------------------------------------------
+# Idempotency via metadata tags
+# ---------------------------------------------------------------------------
+
+def _is_already_mastered(path: Path) -> bool:
+    """Check if a file has the DJ_AGENT_MASTERED metadata tag."""
+    # Check metadata tag (survives renames)
+    try:
+        from mutagen import File as MutagenFile
+        mf = MutagenFile(str(path))
+        if mf and mf.tags:
+            # ID3 (MP3/AIFF)
+            for frame in mf.tags.getall("TXXX") if hasattr(mf.tags, "getall") else []:
+                if hasattr(frame, "desc") and frame.desc == "DJ_AGENT_MASTERED":
+                    return True
+            # Vorbis (FLAC/OGG)
+            if hasattr(mf.tags, "get") and mf.tags.get("DJ_AGENT_MASTERED"):
+                return True
+    except Exception:
+        pass
+
+    # Filename fallback
+    return "_mastered" in path.stem
+
+
+def _tag_as_mastered(path: Path, template_name: str) -> None:
+    """Write DJ_AGENT_MASTERED tag to the output file."""
+    from datetime import datetime
+    tag_value = f"template={template_name};date={datetime.now().isoformat()}"
+
+    try:
+        suffix = path.suffix.lower()
+        if suffix in (".mp3", ".aiff"):
+            from mutagen.id3 import ID3, TXXX
+            try:
+                tags = ID3(str(path))
+            except Exception:
+                tags = ID3()
+            tags.add(TXXX(encoding=3, desc="DJ_AGENT_MASTERED", text=[tag_value]))
+            tags.save(str(path))
+        elif suffix == ".flac":
+            from mutagen.flac import FLAC
+            audio = FLAC(str(path))
+            audio["DJ_AGENT_MASTERED"] = tag_value
+            audio.save()
+    except Exception:
+        pass  # tag writing is best-effort — mastering still succeeds

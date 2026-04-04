@@ -84,7 +84,7 @@ def find_fuzzy_duplicates(
             for b in block[i + 1 :]:
                 b_label = f"{b.artist} - {b.title}".lower()
                 ratio = fuzz.ratio(a_label, b_label)
-                if ratio >= threshold and ratio < 100:
+                if ratio >= threshold:
                     if abs(a.duration - b.duration) < dur_tol:
                         results.append((a, b, ratio))
     return results

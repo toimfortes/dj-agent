@@ -41,17 +41,36 @@ def detect_fake_lossless(path: str | Path) -> tuple[bool, float]:
     try:
         import librosa
         y, sr = librosa.load(str(path), sr=None, mono=True)
-        rolloff = librosa.feature.spectral_rolloff(y=y, sr=sr, roll_percent=0.99)
-        max_freq = float(np.median(rolloff))
         nyquist = sr / 2.0
+        if nyquist <= 20000:
+            return False, 0.0  # low sample rate — can't assess
 
-        # Known cutoffs for lossy codecs
-        # MP3 128k: ~16kHz, 192k: ~18.5kHz, 256k: ~20kHz, 320k: ~20.5kHz
-        # Genuine lossless from CD: ~22kHz (at 44.1kHz SR)
-        if max_freq < 17000 and nyquist > 20000:
-            return True, 0.9  # Very likely transcoded from low-bitrate
-        elif max_freq < 20000 and nyquist > 20000:
-            return True, 0.5  # Possibly transcoded from mid-bitrate
+        # Look for a "brick wall" frequency cutoff (sharp dropoff)
+        # characteristic of lossy encoding, not just low average energy.
+        S = np.abs(librosa.stft(y))
+        freqs = librosa.fft_frequencies(sr=sr)
+
+        # Average spectrum energy per frequency bin
+        mean_spectrum = np.mean(S, axis=1)
+        if mean_spectrum.max() == 0:
+            return False, 0.0
+
+        # Normalize
+        mean_spectrum = mean_spectrum / mean_spectrum.max()
+
+        # Find the frequency where energy drops below 1% of peak
+        # (brick wall = sharp cutoff, not gradual rolloff)
+        above_threshold = freqs[mean_spectrum > 0.01]
+        if len(above_threshold) == 0:
+            return False, 0.0
+
+        cutoff_freq = float(above_threshold[-1])
+
+        # Known lossy cutoffs (brick wall style)
+        if cutoff_freq < 16500:
+            return True, 0.85  # likely 128kbps transcode
+        elif cutoff_freq < 19000:
+            return True, 0.5   # possibly 192-256kbps transcode
         else:
             return False, 0.1
 
