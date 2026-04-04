@@ -1,11 +1,16 @@
 """AI-powered musical reasoning — vibe analysis, transition advice, nuance tagging.
 
-Uses a multimodal LLM (local Ollama or cloud Gemini) to provide high-level
-musical understanding that numerical features alone cannot capture.
+Uses a multimodal LLM to provide high-level musical understanding that
+numerical features alone cannot capture.
 
 Backend priority:
-1. Ollama (local, free, private) — if running at localhost:11434
-2. Gemini Flash (cloud, cheap, 1M context) — if GOOGLE_API_KEY is set
+1. Audio Flamingo 3 (local GPU, expert audio reasoning) — if CUDA + transformers
+2. Gemini SDK (cloud, cheap, 1M context) — if GOOGLE_API_KEY set
+3. Ollama (local, free) — only if multimodal model available
+
+Note: The Gemini CLI is NOT used as a transport. It is an autonomous agent
+that triggers recursive loops and stdout pollution when invoked as a subprocess.
+Only the google-genai SDK is used for Gemini queries.
 """
 
 from __future__ import annotations
@@ -100,16 +105,23 @@ def _flamingo_available() -> bool:
 
 
 def _gemini_available() -> bool:
-    """Check if any Gemini auth method is available.
+    """Check if Gemini SDK can be used (API key or .env file).
 
-    Checks (in order): API key, OAuth creds from Gemini CLI, gcloud ADC.
+    Note: Gemini CLI OAuth is NOT checked here — the CLI is an autonomous
+    agent that causes recursive loops when called as a subprocess.
+    Only the SDK with an API key is a reliable audio transport.
     """
     if os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY"):
         return True
-    if (Path.home() / ".gemini" / "oauth_creds.json").exists():
-        return True
-    if (Path.home() / ".config" / "gcloud" / "application_default_credentials.json").exists():
-        return True
+    # Check .env files for API key
+    for env_path in [Path.cwd() / ".env", Path.home() / ".env"]:
+        if env_path.exists():
+            try:
+                for line in env_path.read_text().splitlines():
+                    if line.startswith("GOOGLE_API_KEY=") and line.split("=", 1)[1].strip():
+                        return True
+            except Exception:
+                pass
     return False
 
 
@@ -364,84 +376,18 @@ def _gemini_query(
     prompt: str,
     model_tier: str = "flash",
 ) -> str:
-    """Send audio + prompt to Gemini.
+    """Send audio + prompt to Gemini via the SDK (direct API, no subprocess).
 
-    SDK-first: the SDK sends audio bytes directly via the API — reliable,
-    no subprocess, no agent recursion risk.
-
-    CLI fallback: only used when no API key is available and the user has
-    authenticated via `gemini auth`. The CLI is an autonomous agent that
-    can trigger recursive loops, so it's a last resort.
+    The Gemini CLI is NOT used — it is an autonomous agent that can trigger
+    recursive loops, stdout pollution, and unpredictable tool execution.
+    The SDK sends audio bytes directly via the API, which is reliable and
+    deterministic.
 
     Parameters
     ----------
     model_tier : "lite", "flash", "pro"
     """
-    # 1. Try SDK first (reliable, direct audio bytes, no subprocess)
-    try:
-        return _gemini_sdk_query(audio_path, prompt, model_tier)
-    except (ImportError, RuntimeError):
-        pass
-
-    # 2. CLI fallback only if SDK unavailable (no API key, no google-genai)
-    import logging
-    logging.getLogger(__name__).info(
-        "Gemini SDK unavailable, falling back to CLI (slower, may trigger agent recursion)"
-    )
-    return _gemini_cli_query(audio_path, prompt, model_tier)
-
-
-def _gemini_cli_query(
-    audio_path: Path,
-    prompt: str,
-    model_tier: str,
-) -> str:
-    """Query via Gemini CLI subprocess using existing OAuth session.
-
-    The CLI uses its own OAuth credentials (~/.gemini/oauth_creds.json)
-    and handles multimodal files automatically via the @path syntax.
-    """
-    import shutil
-    import subprocess
-    import json
-
-    gemini_exe = shutil.which("gemini")
-    if not gemini_exe:
-        raise RuntimeError("Gemini CLI ('gemini') not found in PATH. Run 'npm install -g @google/gemini-cli'.")
-
-    model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
-
-    # The magic: @path tells the CLI to treat this as a multimodal input part
-    # We use .resolve() to ensure the CLI can find the file from any CWD
-    full_prompt = f"{prompt} @{audio_path.resolve()}"
-
-    # Clean env to avoid nested CLI detection issues
-    env = os.environ.copy()
-    for key in ("CLAUDECODE", "CLAUDE_CODE", "CODEX_SANDBOX"):
-        env.pop(key, None)
-
-    cmd = [
-        gemini_exe,
-        "-p", full_prompt,
-        "-m", model,
-        "--yolo",  # Auto-approve the file reading tool
-    ]
-
-    result = subprocess.run(
-        cmd,
-        capture_output=True,
-        text=True,
-        timeout=180,
-        env=env,
-    )
-
-    if result.returncode != 0:
-        # If it fails, maybe it's an auth issue
-        if "login" in result.stderr.lower() or "auth" in result.stderr.lower() or "unauthenticated" in result.stderr.lower():
-            raise RuntimeError("Gemini CLI requires authentication. Run 'gemini auth' first.")
-        raise RuntimeError(f"Gemini CLI failed: {result.stderr.strip()}")
-
-    return result.stdout.strip()
+    return _gemini_sdk_query(audio_path, prompt, model_tier)
 
 
 def _gemini_sdk_query(
