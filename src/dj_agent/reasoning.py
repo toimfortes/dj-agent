@@ -623,6 +623,14 @@ def _query(
         model_tier = backend.split("-", 1)[1]  # "gemini-pro" → "pro"
         backend = "gemini"
 
+    # Universal size guard — applies to ALL backends (not just Gemini)
+    file_size_mb = audio_path.stat().st_size / (1024 * 1024)
+    if file_size_mb > 20:
+        raise ValueError(
+            f"Audio file too large ({file_size_mb:.0f}MB). "
+            "Use _extract_snippet() first, or pass a shorter clip."
+        )
+
     # Try the selected backend; on failure, demote and retry with next best
     try:
         if backend == "flamingo":

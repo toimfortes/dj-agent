@@ -113,8 +113,10 @@ def write_traktor_nml(
 
 
 def _traktor_split_path(path: str) -> tuple[str, str]:
-    """Split path into Traktor's DIR + FILE format."""
-    parts = path.rsplit("/", 1)
+    """Split path into Traktor's DIR + FILE format (cross-platform)."""
+    # Normalize backslashes to forward slashes for consistent parsing
+    normalized = path.replace("\\", "/")
+    parts = normalized.rsplit("/", 1)
     if len(parts) == 2:
         dir_path = parts[0].replace("/", "/:") + "/:"
         return dir_path, parts[1]
@@ -162,7 +164,12 @@ def write_serato_markers(tracks: list[dict[str, Any]]) -> int:
         try:
             payload = _build_serato_markers2_payload(cues)
 
-            tags = ID3(raw_path)
+            try:
+                tags = ID3(raw_path)
+            except Exception:
+                # Pristine file with no ID3 header — create one
+                tags = ID3()
+                tags.save(raw_path)
             # Remove existing Serato Markers2
             for key in list(tags.keys()):
                 frame = tags[key]

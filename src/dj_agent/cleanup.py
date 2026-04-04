@@ -216,11 +216,23 @@ def split_artist_from_title(
     return None, title
 
 
+_KNOWN_GROUPS: set[str] = {
+    "above & beyond", "chase & status", "aly & fila", "simon & garfunkel",
+    "hall & oates", "brooks & dunn", "flogging molly", "bob & weave",
+    "gorgon city", "disclosure",  # not duos but often confused
+}
+
+
 def extract_featured_artists(artist: str) -> tuple[str, list[str]]:
     """Split "Main Artist feat. Guest" into (main, [guests]).
 
     Handles: feat., ft., vs., b2b, &, x (as collaboration separator).
+    Protects known duo/group names from being incorrectly split.
     """
+    # Protect known duos/groups
+    if artist.lower().strip() in _KNOWN_GROUPS:
+        return artist, []
+
     # Patterns that denote a featured / collaborating artist
     feat_patterns = [
         r"\s+feat\.?\s+",

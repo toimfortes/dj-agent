@@ -30,8 +30,8 @@ def is_rekordbox_running() -> bool:
                 ["tasklist", "/FI", "IMAGENAME eq rekordbox.exe"],
                 capture_output=True, text=True,
             )
-            # tasklist always returns 0; check if rekordbox.exe appears in output
-            return "rekordbox.exe" in (result.stdout or "")
+            # tasklist always returns 0; case-insensitive check for mixed-case exe names
+            return "rekordbox.exe" in (result.stdout or "").lower()
         else:  # Linux / WSL
             result = subprocess.run(
                 ["pgrep", "-f", "rekordbox"],
