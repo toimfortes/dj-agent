@@ -72,10 +72,10 @@ _flamingo_verified: bool | None = None  # cache: True/False/None=untested
 
 
 def _flamingo_available() -> bool:
-    """Check if Audio Flamingo is actually operational (not just importable).
+    """Check if Audio Flamingo is actually operational — runs a smoke test.
 
-    Tests imports, CUDA, and model class existence. Caches the result
-    so we only pay the check cost once per process.
+    Returns True only if we can instantiate the processor (not just import).
+    Caches the result so we only pay the check cost once per process.
     """
     global _flamingo_verified
     if _flamingo_verified is not None:
@@ -87,12 +87,14 @@ def _flamingo_available() -> bool:
             _flamingo_verified = False
             return False
 
-        from transformers import AutoProcessor  # light check
-        # Verify the model class exists in this transformers version
-        from transformers import AutoModelForCausalLM  # generic fallback
+        # Actually try to load the processor — this verifies model access,
+        # HF auth, and that the class exists in this transformers version
+        config = get_config().reasoning
+        from transformers import AutoProcessor
+        AutoProcessor.from_pretrained(config.model_id, trust_remote_code=True)
         _flamingo_verified = True
         return True
-    except (ImportError, AttributeError):
+    except Exception:
         _flamingo_verified = False
         return False
 
@@ -349,15 +351,16 @@ def _gemini_query(
     """Send audio + prompt to Gemini.
 
     Auth priority:
-    1. API key (GOOGLE_API_KEY env var) — simplest
-    2. OAuth via google-genai SDK (auto-discovers ~/.gemini/oauth_creds.json or gcloud ADC)
-    3. Gemini CLI subprocess (headless, uses existing OAuth session)
+    1. API key → SDK with inline base64 audio (fastest)
+    2. OAuth → Gemini CLI subprocess with --yolo (reads file via tools)
 
     Parameters
     ----------
     model_tier : "lite" (cheapest), "flash" (default), "pro" (best reasoning)
     """
-    # SDK only — the CLI fallback can't send inline audio data
+    # Gemini CLI cannot send audio via its tool system (read_file returns
+    # audio/wav which the API rejects in function_response.parts).
+    # Audio analysis requires the SDK with an API key or ADC.
     return _gemini_sdk_query(audio_path, prompt, model_tier)
 
 
@@ -379,11 +382,29 @@ def _gemini_sdk_query(
         )
 
     api_key = os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY")
+
+    # Try to load from .env file if not in environment
+    if not api_key:
+        for env_path in [
+            Path.cwd() / ".env",
+            Path.home() / ".env",
+        ]:
+            if env_path.exists():
+                for line in env_path.read_text().splitlines():
+                    if line.startswith("GOOGLE_API_KEY="):
+                        api_key = line.split("=", 1)[1].strip().split("#")[0].strip()
+                        break
+            if api_key:
+                break
+
     if api_key:
         client = genai.Client(api_key=api_key)
     else:
-        # Auto-discovers OAuth/ADC credentials
-        client = genai.Client()
+        raise RuntimeError(
+            "Gemini API key required for audio analysis.\n"
+            "Set GOOGLE_API_KEY in environment or .env file.\n"
+            "Get a free key at https://aistudio.google.com/apikey"
+        )
 
     model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
     audio_bytes = audio_path.read_bytes()
@@ -412,10 +433,13 @@ def _gemini_cli_query(
     prompt: str,
     model_tier: str,
 ) -> str:
-    """Query via Gemini CLI subprocess (headless, uses existing OAuth session).
+    """Query via Gemini CLI subprocess using existing OAuth session.
 
-    Pattern from auto_coder_multi_agents_v2: asyncio subprocess with
-    JSON output mode, clean env, process group isolation.
+    The CLI uses its own OAuth credentials (~/.gemini/oauth_creds.json)
+    and can read local files via its built-in tools when --yolo is set.
+
+    Pattern from auto_coder_multi_agents_v2: subprocess with JSON output,
+    clean env to avoid nested CLI detection.
     """
     import shutil
 
@@ -424,17 +448,17 @@ def _gemini_cli_query(
         raise RuntimeError(
             "No Gemini authentication found. Options:\n"
             "  1. Set GOOGLE_API_KEY (get free key at https://aistudio.google.com/apikey)\n"
-            "  2. Install Gemini CLI and run 'gemini auth'\n"
+            "  2. Install Gemini CLI ('npm install -g @anthropic-ai/gemini-cli') and run 'gemini auth'\n"
             "  3. Run 'gcloud auth application-default login'"
         )
 
     model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
 
-    # Gemini CLI doesn't support inline audio in non-interactive mode,
-    # so we describe what we need and reference the file
+    # Use @path syntax for multimodal file input (supports mp3, wav, flac).
+    # The CLI reads the file via its read_file/read_many_files tool.
+    # --yolo auto-approves the file reading tool invocation.
     full_prompt = (
-        f"{prompt}\n\n"
-        f"[The audio file is at: {audio_path.resolve()}]"
+        f"{prompt} @{audio_path.resolve()}"
     )
 
     # Clean env to avoid nested CLI detection (auto_coder pattern)
@@ -447,14 +471,15 @@ def _gemini_cli_query(
         "-p", full_prompt,
         "-m", model,
         "--output-format", "json",
+        "--yolo",  # auto-approve tool use (file reading)
     ]
 
     result = subprocess.run(
         cmd,
         capture_output=True,
         text=True,
-        timeout=120,
-        cwd=str(audio_path.parent),
+        timeout=180,
+        cwd=str(audio_path.parent),  # CWD = directory containing the audio file
         env=env,
     )
 
