@@ -149,6 +149,52 @@ def _prewarm_essentia() -> None:
         pass
 
 
+# Cached Essentia objects (loaded once, reused across tracks)
+_tf_predictors: dict[str, Any] = {}
+_es_loaders: dict[str, Any] = {}
+
+
+def _get_tf_predictor(name: str) -> Any:
+    """Get or create a cached Essentia TF predictor."""
+    if name in _tf_predictors:
+        return _tf_predictors[name]
+
+    import os
+    import essentia.standard as es
+    _models_dir = os.path.expanduser("~/.essentia/models")
+
+    if name == "embeddings":
+        pred = es.TensorflowPredictMusiCNN(
+            graphFilename=os.path.join(_models_dir, "msd-musicnn-1.pb"),
+            output="model/dense/BiasAdd",
+        )
+    elif name == "vocal":
+        pred = es.TensorflowPredict2D(
+            graphFilename=os.path.join(_models_dir, "voice_instrumental-msd-musicnn-1.pb"),
+            output="model/Softmax",
+        )
+    else:
+        # Mood model
+        pred = es.TensorflowPredict2D(
+            graphFilename=os.path.join(_models_dir, f"mood_{name}-msd-musicnn-1.pb"),
+            output="model/Softmax",
+        )
+
+    _tf_predictors[name] = pred
+    return pred
+
+
+def _load_audio_essentia(path: str, sr: int) -> Any:
+    """Load audio with a cached MonoLoader (reconfigured per file)."""
+    import essentia.standard as es
+    key = str(sr)
+    if key not in _es_loaders:
+        _es_loaders[key] = es.MonoLoader(filename=path, sampleRate=sr)
+    else:
+        _es_loaders[key].configure(filename=path, sampleRate=sr)
+    return _es_loaders[key]()
+
+
 def analyse_essentia_batch(
     path: str | Path,
 ) -> dict[str, Any]:
@@ -156,6 +202,7 @@ def analyse_essentia_batch(
 
     Returns dict with key, mood, vocal results — avoiding 3 separate
     file loads that the individual modules would do.
+    TF predictors and MonoLoaders are cached so model/loader init is once only.
     """
     result: dict[str, Any] = {}
 
@@ -163,7 +210,7 @@ def analyse_essentia_batch(
         import essentia.standard as es
 
         # Single load at 44100Hz (Essentia's native rate)
-        audio = es.MonoLoader(filename=str(path), sampleRate=44100)()
+        audio = _load_audio_essentia(str(path), 44100)
 
         # Key detection (EDMA profile for electronic music)
         if hasattr(es, "KeyExtractor"):
@@ -175,30 +222,19 @@ def analyse_essentia_batch(
 
         # Mood + Vocals via TF models (if available)
         if hasattr(es, "TensorflowPredictMusiCNN"):
-            # Load audio at 16kHz for TF models
-            audio_16k = es.MonoLoader(filename=str(path), sampleRate=16000)()
+            audio_16k = _load_audio_essentia(str(path), 16000)
 
-            # Shared embeddings (computed once, used for mood + vocals)
             try:
-                embeddings = es.TensorflowPredictMusiCNN(
-                    graphFilename="msd-musicnn-1.pb",
-                )(audio_16k)
-
-                # Mood classifiers
-                mood_models = {
-                    "aggressive": "mood_aggressive-msd-musicnn-1.pb",
-                    "happy": "mood_happy-msd-musicnn-1.pb",
-                    "party": "mood_party-msd-musicnn-1.pb",
-                    "relaxed": "mood_relaxed-msd-musicnn-1.pb",
-                    "sad": "mood_sad-msd-musicnn-1.pb",
-                }
                 import numpy as np
+
+                # Shared embeddings (cached predictor)
+                embeddings = _get_tf_predictor("embeddings")(audio_16k)
+
+                # Mood classifiers (cached predictors)
                 scores = {}
-                for mood_name, model_file in mood_models.items():
+                for mood_name in ("aggressive", "happy", "party", "relaxed", "sad"):
                     try:
-                        preds = es.TensorflowPredict2D(
-                            graphFilename=model_file
-                        )(embeddings)
+                        preds = _get_tf_predictor(mood_name)(embeddings)
                         scores[mood_name] = float(np.mean(preds[:, 1]))
                     except Exception:
                         pass
@@ -208,11 +244,9 @@ def analyse_essentia_batch(
                     result["mood_scores"] = scores
                     result["mood_method"] = "essentia"
 
-                # Vocal/Instrumental
+                # Vocal/Instrumental (cached predictor)
                 try:
-                    vocal_preds = es.TensorflowPredict2D(
-                        graphFilename="voice_instrumental-msd-musicnn-1.pb",
-                    )(embeddings)
+                    vocal_preds = _get_tf_predictor("vocal")(embeddings)
                     mean_preds = np.mean(vocal_preds, axis=0)
                     vocal_prob = float(mean_preds[1]) if len(mean_preds) > 1 else 0.5
                     result["vocal_probability"] = vocal_prob

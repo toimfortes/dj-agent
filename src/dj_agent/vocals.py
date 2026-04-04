@@ -44,13 +44,18 @@ def _essentia_voice_instrumental(path: Path) -> VocalResult:
 
     audio = es.MonoLoader(filename=str(path), sampleRate=16000)()
 
+    import os
+    _models_dir = os.path.expanduser("~/.essentia/models")
+
     # Get embeddings (shared with mood classifiers)
     embeddings = es.TensorflowPredictMusiCNN(
-        graphFilename="msd-musicnn-1.pb",
+        graphFilename=os.path.join(_models_dir, "msd-musicnn-1.pb"),
+        output="model/dense/BiasAdd",
     )(audio)
 
     predictions = es.TensorflowPredict2D(
-        graphFilename="voice_instrumental-msd-musicnn-1.pb",
+        graphFilename=os.path.join(_models_dir, "voice_instrumental-msd-musicnn-1.pb"),
+        output="model/Softmax",
     )(embeddings)
 
     # predictions shape: (n_patches, 2) → [instrumental, vocal]
