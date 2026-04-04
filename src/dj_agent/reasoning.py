@@ -24,6 +24,8 @@ import threading
 from pathlib import Path
 from typing import Any, Optional
 
+import re
+
 import numpy as np
 
 from .config import get_config
@@ -136,8 +138,110 @@ def get_backend() -> str:
 
 
 # ---------------------------------------------------------------------------
+# Robust JSON extraction from LLM responses
+# ---------------------------------------------------------------------------
+
+def _extract_json(raw: str) -> dict[str, str]:
+    """Extract a JSON object from an LLM response that may contain chatter.
+
+    Handles: markdown code blocks, preamble text ("Sure, here is..."),
+    trailing explanations, and mixed text/JSON responses.
+    """
+    raw = raw.strip()
+
+    # 1. Try direct parse first (clean response)
+    try:
+        return json.loads(raw)
+    except json.JSONDecodeError:
+        pass
+
+    # 2. Strip markdown code blocks
+    if "```" in raw:
+        match = re.search(r"```(?:json)?\s*\n?(.*?)```", raw, re.DOTALL)
+        if match:
+            try:
+                return json.loads(match.group(1).strip())
+            except json.JSONDecodeError:
+                pass
+
+    # 3. Find first { ... } block in the response
+    match = re.search(r"\{[^{}]*\}", raw, re.DOTALL)
+    if match:
+        try:
+            return json.loads(match.group(0))
+        except json.JSONDecodeError:
+            pass
+
+    # 4. Give up — return raw as fallback
+    return {"raw_response": raw}
+
+
+# ---------------------------------------------------------------------------
+# Startup cleanup — remove orphaned temp files from crashed sessions
+# ---------------------------------------------------------------------------
+
+def cleanup_temp_snippets() -> int:
+    """Remove orphaned dj_reason_*.wav and dj_mix_*.wav files from /tmp.
+
+    Called at module import and can be called manually. Returns count removed.
+    """
+    import glob
+    count = 0
+    for pattern in ["/tmp/dj_reason_*", "/tmp/dj_mix_*"]:
+        for f in glob.glob(pattern):
+            try:
+                Path(f).unlink(missing_ok=True)
+                count += 1
+            except OSError:
+                pass
+    return count
+
+
+# Clean up on import (handles zombies from SIGKILL/power loss)
+try:
+    cleanup_temp_snippets()
+except Exception:
+    pass
+
+
+# ---------------------------------------------------------------------------
 # Audio preprocessing
 # ---------------------------------------------------------------------------
+
+def _get_duration(path: Path) -> float:
+    """Get track duration in seconds without loading the full file.
+
+    Uses ffprobe if available, falls back to mutagen, then librosa.
+    Never returns a default — always measures the actual file.
+    """
+    # Try ffprobe (fastest, no Python decode)
+    import subprocess as _sp
+    try:
+        probe = _sp.run(
+            ["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+             "-of", "csv=p=0", str(path)],
+            capture_output=True, text=True, timeout=10,
+        )
+        if probe.returncode == 0 and probe.stdout.strip():
+            return float(probe.stdout.strip())
+    except Exception:
+        pass
+
+    # Try mutagen (fast, no audio decode)
+    try:
+        from mutagen import File as MutagenFile
+        mf = MutagenFile(str(path))
+        if mf and mf.info and mf.info.length:
+            return float(mf.info.length)
+    except Exception:
+        pass
+
+    # Last resort: librosa (loads audio — slow but always works)
+    try:
+        import librosa
+        return float(librosa.get_duration(path=str(path)))
+    except Exception:
+        return 180.0  # conservative 3-minute default
 
 def _extract_snippet(
     path: str | Path,
@@ -159,17 +263,8 @@ def _extract_snippet(
         duration_sec = get_config().reasoning.snippet_duration_sec
 
     path = Path(path)
-    # Get duration without loading full file
-    import subprocess as _sp
-    try:
-        probe = _sp.run(
-            ["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
-             "-of", "csv=p=0", str(path)],
-            capture_output=True, text=True, timeout=10,
-        )
-        total = float(probe.stdout.strip()) if probe.returncode == 0 else 300.0
-    except Exception:
-        total = 300.0
+    # Get actual duration without loading full file
+    total = _get_duration(path)
 
     # If caller specified an explicit offset (e.g. suggest_transition uses
     # 0.75 for end-of-track and 0.0 for start), honour it as a single clip.
@@ -590,13 +685,8 @@ def classify_nuance(path: str | Path, backend: str = "auto") -> dict[str, str]:
             "Respond with ONLY the JSON, no explanation."
         ), backend)
 
-        # Parse JSON from response (handle markdown code blocks)
-        raw = raw.strip()
-        if raw.startswith("```"):
-            raw = raw.split("\n", 1)[1].rsplit("```", 1)[0]
-        try:
-            return json.loads(raw)
-        except json.JSONDecodeError:
-            return {"raw_response": raw}
+        # Robust JSON extraction — handles markdown blocks, preamble chatter,
+        # and mixed text/JSON responses from different backends
+        return _extract_json(raw)
     finally:
         snippet.unlink(missing_ok=True)
