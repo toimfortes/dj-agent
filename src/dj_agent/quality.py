@@ -229,8 +229,12 @@ def check_audio_quality(path: str | Path) -> QualityReport:
     except Exception:
         pass
 
-    # Silence
-    silence_regions = detect_silence(path)
+    # Silence (pydub dependency — guard against import/decoder failures)
+    silence_regions: list[SilenceRegion] = []
+    try:
+        silence_regions = detect_silence(path)
+    except Exception:
+        warnings.append("Silence detection unavailable (pydub/ffmpeg missing)")
     duration_ms = int(info.get("duration", 0) * 1000)
     leading, trailing = get_leading_trailing_silence(silence_regions, duration_ms)
 

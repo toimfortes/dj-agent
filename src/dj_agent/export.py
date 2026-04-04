@@ -128,7 +128,9 @@ def _traktor_split_path(path: str) -> tuple[str, str]:
 def write_serato_markers(tracks: list[dict[str, Any]]) -> int:
     """Write Serato Markers2 cue points directly into audio files.
 
-    Requires the tracks to be MP3, FLAC, or AIFF files.
+    Supports MP3 and AIFF (ID3 GEOB frames).
+    FLAC is NOT supported — Serato uses a different Vorbis comment format
+    for FLAC that is not implemented here.
     Returns the number of tracks successfully written.
     """
     from mutagen.id3 import ID3, GEOB
@@ -143,6 +145,12 @@ def write_serato_markers(tracks: list[dict[str, Any]]) -> int:
         raw_path = _strip_file_uri(t.get("path", ""))
         if not Path(raw_path).exists():
             errors.append(f"File not found: {raw_path}")
+            continue
+
+        # Only MP3 and AIFF support ID3 GEOB frames; skip FLAC/WAV/OGG
+        suffix = Path(raw_path).suffix.lower()
+        if suffix not in (".mp3", ".aiff", ".aif"):
+            errors.append(f"Serato markers not supported for {suffix} files: {raw_path}")
             continue
 
         # Validate cue data types before building binary payload
