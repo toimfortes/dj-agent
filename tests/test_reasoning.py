@@ -14,7 +14,7 @@ from dj_agent.reasoning import (
 
 def test_get_backend_returns_string():
     result = get_backend()
-    assert result in ("ollama", "gemini", "none")
+    assert result in ("flamingo", "ollama", "gemini", "none")
 
 
 def test_gemini_available_with_api_key(monkeypatch):

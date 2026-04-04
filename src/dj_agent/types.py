@@ -34,6 +34,8 @@ class EnergyResult:
     dynamic_range: float
     raw_score: float
     calibrated_score: int  # 1-10
+    vibe_description: Optional[str] = None
+    texture_tags: dict[str, str] = field(default_factory=dict)
 
 
 @dataclass

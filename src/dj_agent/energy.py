@@ -14,7 +14,7 @@ import numpy as np
 
 from .audio import load_audio, measure_loudness
 from .calibration import apply_calibration
-from .config import EnergyConfig
+from .config import Config, EnergyConfig
 from .types import EnergyResult, LoudnessResult
 
 
@@ -22,16 +22,16 @@ def analyse_track(
     file_path: str | Path,
     rekordbox_bpm: float,
     genre: str | None = None,
-    config: EnergyConfig | None = None,
+    config: Config | None = None,
     calibration: dict | None = None,
 ) -> EnergyResult:
     """Analyse a single track and return an :class:`EnergyResult`.
 
     BPM and key are always read from Rekordbox — never recalculated.
     """
-    if config is None:
-        from .config import get_config
-        config = get_config().energy
+    from .config import get_config
+    full_config = config or get_config()
+    energy_config = full_config.energy
 
     file_path = Path(file_path)
 
@@ -54,12 +54,24 @@ def analyse_track(
         bpm=rekordbox_bpm,
         genre=genre,
         loudness_lufs=loudness.integrated_lufs,
-        config=config,
+        config=energy_config,
     )
 
     calibrated = raw.calibrated_score  # already 1-10 from calculate_energy
     if calibration:
         calibrated = apply_calibration(raw.calibrated_score, genre or "", calibration)
+
+    # AI Reasoning (Vibe/Texture) — only in "full" processing tier
+    vibe_description = None
+    texture_tags = {}
+
+    if full_config.processing_tier == "full":
+        from .reasoning import analyze_vibe, classify_nuance
+        try:
+            vibe_description = analyze_vibe(file_path)
+            texture_tags = classify_nuance(file_path)
+        except Exception:
+            pass  # fail gracefully if LLM is unavailable
 
     return EnergyResult(
         integrated_lufs=loudness.integrated_lufs,
@@ -70,6 +82,8 @@ def analyse_track(
         dynamic_range=raw.dynamic_range,
         raw_score=raw.raw_score,
         calibrated_score=calibrated,
+        vibe_description=vibe_description,
+        texture_tags=texture_tags,
     )
 
 

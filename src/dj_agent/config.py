@@ -97,11 +97,25 @@ class NormalizeConfig:
 
 
 @dataclass
+class ReasoningConfig:
+    """Settings for AI musical reasoning."""
+
+    backend: str = "auto"  # auto, flamingo, ollama, gemini
+    model_id: str = "nvidia/audio-flamingo-3-hf"
+    ollama_model: str = "qwen3.5:27b"
+    gemini_tier: str = "flash"
+    quantization: str = "4bit"  # 4bit, 8bit, none
+    max_new_tokens: int = 150
+    snippet_duration_sec: float = 30.0
+
+
+@dataclass
 class Config:
     """Main configuration."""
 
     energy: EnergyConfig = field(default_factory=EnergyConfig)
     cues: CueConfig = field(default_factory=CueConfig)
+    reasoning: ReasoningConfig = field(default_factory=ReasoningConfig)
     memory: MemoryConfig = field(default_factory=MemoryConfig)
     rekordbox: RekordboxConfig = field(default_factory=RekordboxConfig)
     duplicates: DuplicateConfig = field(default_factory=DuplicateConfig)
@@ -118,9 +132,12 @@ class Config:
                        if k in EnergyConfig.__dataclass_fields__}
         cues_data = {k: v for k, v in data.get("cues", {}).items()
                      if k in CueConfig.__dataclass_fields__}
+        reasoning_data = {k: v for k, v in data.get("reasoning", {}).items()
+                          if k in ReasoningConfig.__dataclass_fields__}
         return cls(
             energy=EnergyConfig(**energy_data),
             cues=CueConfig(**cues_data),
+            reasoning=ReasoningConfig(**reasoning_data),
             memory=MemoryConfig(**data.get("memory", {})),
             rekordbox=RekordboxConfig(**data.get("rekordbox", {})),
             duplicates=DuplicateConfig(**data.get("duplicates", {})),
@@ -139,6 +156,7 @@ class Config:
             "energy": {k: v for k, v in self.energy.__dict__.items()
                        if k != "genre_bpm_ranges"},
             "cues": self.cues.__dict__,
+            "reasoning": self.reasoning.__dict__,
             "memory": self.memory.__dict__,
             "rekordbox": self.rekordbox.__dict__,
             "duplicates": self.duplicates.__dict__,

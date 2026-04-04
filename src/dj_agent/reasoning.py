@@ -15,10 +15,13 @@ import json
 import os
 import subprocess
 import tempfile
+import threading
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 import numpy as np
+
+from .config import get_config
 
 
 # ---------------------------------------------------------------------------
@@ -32,6 +35,16 @@ def _ollama_available() -> bool:
         r = requests.get("http://localhost:11434/api/tags", timeout=2)
         return r.status_code == 200
     except Exception:
+        return False
+
+
+def _flamingo_available() -> bool:
+    """Check if Audio Flamingo dependencies are available."""
+    try:
+        import torch
+        import transformers
+        return True
+    except ImportError:
         return False
 
 
@@ -50,7 +63,12 @@ def _gemini_available() -> bool:
 
 
 def get_backend() -> str:
-    """Return the best available backend: 'ollama', 'gemini', or 'none'."""
+    """Return the best available backend: 'flamingo', 'ollama', 'gemini', or 'none'."""
+    if _flamingo_available():
+        # Only suggest flamingo if CUDA is available, otherwise it's too slow
+        import torch
+        if torch.cuda.is_available():
+            return "flamingo"
     if _ollama_available():
         return "ollama"
     if _gemini_available():
@@ -64,7 +82,7 @@ def get_backend() -> str:
 
 def _extract_snippet(
     path: str | Path,
-    duration_sec: float = 30.0,
+    duration_sec: float | None = None,
     offset_pct: float = 0.25,
     sr: int = 16000,
 ) -> Path:
@@ -75,6 +93,9 @@ def _extract_snippet(
     """
     import soundfile as sf
     import librosa
+
+    if duration_sec is None:
+        duration_sec = get_config().reasoning.snippet_duration_sec
 
     path = Path(path)
     # Get duration without loading full file
@@ -107,6 +128,90 @@ def _audio_to_base64(path: Path) -> str:
 
 
 # ---------------------------------------------------------------------------
+# Audio Flamingo backend (Local transformers)
+# ---------------------------------------------------------------------------
+
+_FLAMINGO_MODEL = None
+_FLAMINGO_PROCESSOR = None
+_FLAMINGO_LOCK = threading.Lock()
+
+
+def _load_flamingo() -> tuple[Any, Any]:
+    """Lazy-load Audio Flamingo model and processor."""
+    global _FLAMINGO_MODEL, _FLAMINGO_PROCESSOR
+    if _FLAMINGO_MODEL is not None:
+        return _FLAMINGO_MODEL, _FLAMINGO_PROCESSOR
+
+    with _FLAMINGO_LOCK:
+        if _FLAMINGO_MODEL is not None:
+            return _FLAMINGO_MODEL, _FLAMINGO_PROCESSOR
+
+        import torch
+        from transformers import (
+            AutoProcessor,
+            AudioFlamingo3ForConditionalGeneration,
+            BitsAndBytesConfig,
+        )
+
+        config = get_config().reasoning
+        model_id = config.model_id
+
+        # Quantization settings
+        bnb_config = None
+        if config.quantization == "4bit":
+            bnb_config = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_compute_dtype=torch.float16,
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_quant_type="nf4",
+            )
+        elif config.quantization == "8bit":
+            bnb_config = BitsAndBytesConfig(load_in_8bit=True)
+
+        _FLAMINGO_PROCESSOR = AutoProcessor.from_pretrained(
+            model_id, trust_remote_code=True
+        )
+        _FLAMINGO_MODEL = AudioFlamingo3ForConditionalGeneration.from_pretrained(
+            model_id,
+            quantization_config=bnb_config,
+            device_map="auto",
+            trust_remote_code=True,
+            torch_dtype=torch.float16 if bnb_config else torch.float32,
+        )
+        return _FLAMINGO_MODEL, _FLAMINGO_PROCESSOR
+
+
+def _flamingo_query(audio_path: Path, prompt: str) -> str:
+    """Send audio + prompt to local Audio Flamingo."""
+    model, processor = _load_flamingo()
+
+    conversation = [
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": prompt},
+                {"type": "audio", "path": str(audio_path)},
+            ],
+        }
+    ]
+
+    inputs = processor.apply_chat_template(
+        conversation,
+        tokenize=True,
+        add_generation_prompt=True,
+        return_dict=True,
+    ).to(model.device)
+
+    config = get_config().reasoning
+    outputs = model.generate(**inputs, max_new_tokens=config.max_new_tokens)
+
+    # Decode only the generated part
+    generated_ids = outputs[:, inputs.input_ids.shape[1]:]
+    decoded = processor.batch_decode(generated_ids, skip_special_tokens=True)
+    return decoded[0].strip()
+
+
+# ---------------------------------------------------------------------------
 # Ollama backend
 # ---------------------------------------------------------------------------
 
@@ -117,7 +222,8 @@ def _ollama_query(audio_path: Path, prompt: str) -> str:
     """Send audio + prompt to local Ollama."""
     import requests
 
-    model = os.environ.get("OLLAMA_MODEL", _OLLAMA_MODEL)
+    config = get_config().reasoning
+    model = os.environ.get("OLLAMA_MODEL", config.ollama_model)
     audio_b64 = _audio_to_base64(audio_path)
 
     response = requests.post(
@@ -304,25 +410,28 @@ def _query(
 
     Parameters
     ----------
-    backend : "auto", "ollama", "gemini", "gemini-lite", "gemini-pro"
+    backend : "auto", "flamingo", "ollama", "gemini", "gemini-lite", "gemini-pro"
     model_tier : "lite", "flash", "pro" (Gemini only)
     """
+    if backend == "auto":
+        config_backend = get_config().reasoning.backend
+        backend = config_backend if config_backend != "auto" else get_backend()
+
     # Parse backend shortcuts
     if backend.startswith("gemini-"):
         model_tier = backend.split("-", 1)[1]  # "gemini-pro" → "pro"
         backend = "gemini"
-    elif backend == "auto":
-        backend = get_backend()
 
-    if backend == "ollama":
+    if backend == "flamingo":
+        return _flamingo_query(audio_path, prompt)
+    elif backend == "ollama":
         return _ollama_query(audio_path, prompt)
     elif backend == "gemini":
         return _gemini_query(audio_path, prompt, model_tier=model_tier)
     else:
         raise RuntimeError(
             "No reasoning backend available. "
-            "Start Ollama (ollama serve) or set GOOGLE_API_KEY for Gemini. "
-            "Get a free key at https://aistudio.google.com/apikey"
+            "Install transformers for Flamingo, start Ollama, or set GOOGLE_API_KEY."
         )
 
 
