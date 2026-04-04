@@ -158,14 +158,23 @@ def _detect_bpm(path: Path) -> float:
 
     Priority: Beat This! (Transformer) → madmom (RNN) → librosa (onset).
     """
+    import logging
+    _log = logging.getLogger(__name__)
+
     try:
         return _beat_this_bpm(path)
-    except (ImportError, RuntimeError, OSError, Exception):
-        pass
+    except ImportError:
+        pass  # not installed — expected
+    except Exception as e:
+        _log.warning("Beat This! failed, falling back to madmom: %s", e)
+
     try:
         return _madmom_bpm(path)
-    except (ImportError, RuntimeError, OSError, Exception):
+    except ImportError:
         pass
+    except Exception as e:
+        _log.warning("madmom failed, falling back to librosa: %s", e)
+
     return _librosa_bpm(path)
 
 

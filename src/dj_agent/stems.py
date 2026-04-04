@@ -51,6 +51,25 @@ _roformer_cache: dict[str, Any] = {}
 _roformer_lock = __import__("threading").Lock()
 
 
+def _unload_roformer() -> None:
+    """Unload all Roformer models from memory."""
+    _roformer_cache.clear()
+
+
+def _unload_demucs() -> None:
+    """Unload all Demucs models from memory."""
+    _demucs_cache.clear()
+
+
+# Register with GPU manager
+try:
+    from .gpu import gpu_manager as _gpu_stems
+    _gpu_stems.register_unloader("roformer", _unload_roformer)
+    _gpu_stems.register_unloader("demucs", _unload_demucs)
+except Exception:
+    pass
+
+
 def _get_roformer_separator(model_filename: str):
     """Cached Roformer separator (model loaded once per model name)."""
     if model_filename in _roformer_cache:

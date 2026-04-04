@@ -29,8 +29,11 @@ def compute_feature_vector(path: str | Path, method: str = "auto") -> np.ndarray
     if method == "auto":
         try:
             return _clap_embedding(path)
-        except (ImportError, RuntimeError, OSError, Exception):
+        except ImportError:
             pass
+        except Exception as e:
+            import logging
+            logging.getLogger(__name__).warning("CLAP failed, using librosa: %s", e)
         return _librosa_features(path)
     elif method == "clap":
         return _clap_embedding(path)
@@ -217,8 +220,18 @@ def build_embedding_cache(
     return embeddings
 
 
-def load_embedding_cache(cache_path: str | Path) -> dict[str, np.ndarray]:
-    """Load pre-computed embeddings from a .npz file."""
+def load_embedding_cache(
+    cache_path: str | Path,
+    expected_dim: int | None = None,
+) -> dict[str, np.ndarray]:
+    """Load pre-computed embeddings from a .npz file.
+
+    Parameters
+    ----------
+    expected_dim : if provided, validates that cached vectors match this
+        dimension. Raises ValueError on mismatch (e.g., 512-dim CLAP cache
+        queried with 62-dim librosa vector).
+    """
     data = np.load(str(cache_path), allow_pickle=True)
     ids = data["ids"]
     vectors = data["vectors"]
@@ -226,4 +239,14 @@ def load_embedding_cache(cache_path: str | Path) -> dict[str, np.ndarray]:
         raise ValueError(
             f"Embedding cache corrupted: {len(ids)} ids but {len(vectors)} vectors"
         )
+
+    # Validate dimension compatibility
+    cached_dim = int(data["dim"]) if "dim" in data else (vectors.shape[1] if vectors.ndim == 2 else 0)
+    if expected_dim and cached_dim and expected_dim != cached_dim:
+        raise ValueError(
+            f"Embedding dimension mismatch: cache has {cached_dim}-dim vectors "
+            f"but query expects {expected_dim}-dim. Rebuild cache with same method. "
+            f"Cache method: {data.get('method', 'unknown')}"
+        )
+
     return {str(cid): vec for cid, vec in zip(ids, vectors)}

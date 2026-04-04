@@ -26,15 +26,22 @@ def detect_phrases(
     """
     path = Path(path)
 
+    import logging
+    _log = logging.getLogger(__name__)
+
     try:
         return _allin1_phrases(path)
-    except (ImportError, RuntimeError, OSError, Exception):
+    except ImportError:
         pass
+    except Exception as e:
+        _log.warning("All-In-One failed, falling back to madmom: %s", e)
 
     try:
         return _madmom_phrases(path, expected_bars_per_phrase)
-    except (ImportError, RuntimeError, OSError, Exception):
+    except ImportError:
         pass
+    except Exception as e:
+        _log.warning("madmom failed, falling back to librosa: %s", e)
 
     return _librosa_phrases(path, bpm, expected_bars_per_phrase)
 

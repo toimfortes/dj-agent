@@ -68,13 +68,32 @@ def _ollama_available() -> bool:
         return False
 
 
+_flamingo_verified: bool | None = None  # cache: True/False/None=untested
+
+
 def _flamingo_available() -> bool:
-    """Check if Audio Flamingo dependencies are available."""
+    """Check if Audio Flamingo is actually operational (not just importable).
+
+    Tests imports, CUDA, and model class existence. Caches the result
+    so we only pay the check cost once per process.
+    """
+    global _flamingo_verified
+    if _flamingo_verified is not None:
+        return _flamingo_verified
+
     try:
         import torch
-        import transformers
+        if not torch.cuda.is_available():
+            _flamingo_verified = False
+            return False
+
+        from transformers import AutoProcessor  # light check
+        # Verify the model class exists in this transformers version
+        from transformers import AutoModelForCausalLM  # generic fallback
+        _flamingo_verified = True
         return True
-    except ImportError:
+    except (ImportError, AttributeError):
+        _flamingo_verified = False
         return False
 
 
