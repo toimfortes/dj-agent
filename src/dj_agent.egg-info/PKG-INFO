@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: dj-agent
+Version: 0.2.0
+Summary: AI-powered Rekordbox library enrichment tool
+License: MIT
+Requires-Python: >=3.10
+Requires-Dist: pyrekordbox>=0.4.0
+Requires-Dist: mutagen>=1.47.0
+Requires-Dist: librosa>=0.10.0
+Requires-Dist: numpy>=1.24.0
+Requires-Dist: pyloudnorm>=0.1.0
+Requires-Dist: soundfile>=0.12.0
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: jsonschema>=4.0
+Requires-Dist: pydub>=0.25.1
+Requires-Dist: fuzzywuzzy>=0.18.0
+Requires-Dist: python-Levenshtein>=0.25.0
+Provides-Extra: fingerprint
+Requires-Dist: pyacoustid>=1.3.0; extra == "fingerprint"
+Provides-Extra: mood
+Requires-Dist: essentia-tensorflow>=2.1b6; extra == "mood"
+Requires-Dist: laion-clap>=1.1.4; extra == "mood"
+Provides-Extra: stems
+Requires-Dist: demucs>=4.0; extra == "stems"
+Provides-Extra: normalize
+Requires-Dist: ffmpeg-normalize>=1.28.0; extra == "normalize"
+Provides-Extra: metadata
+Requires-Dist: musicbrainzngs>=0.7.1; extra == "metadata"
+Requires-Dist: pylast>=5.0; extra == "metadata"
+Requires-Dist: discogs-client>=2.3; extra == "metadata"
+Provides-Extra: quality
+Requires-Dist: flac-detective; extra == "quality"
+Provides-Extra: phrases
+Requires-Dist: madmom; extra == "phrases"
+Provides-Extra: all
+Requires-Dist: dj-agent[fingerprint,metadata,mood,normalize,phrases,quality,stems]; extra == "all"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.4; extra == "dev"
+Requires-Dist: pytest-cov>=4.1; extra == "dev"

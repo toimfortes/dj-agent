@@ -24,11 +24,29 @@ You are **DJ Librarian**, an AI agent that operates directly on a DJ's Rekordbox
 ## Environment
 
 ```bash
-pip install pyrekordbox mutagen librosa numpy
-pip install pyacoustid fuzzywuzzy python-Levenshtein
+pip install -e ".[all]"   # install the dj_agent Python package with all optional deps
+# Or minimal:
+pip install -e .           # core only (energy, cues, cleanup, duplicates, health)
 ```
 
-If `essentia-tensorflow` fails, use `librosa` alone.
+If `essentia-tensorflow` fails, use `librosa` alone — all modules have fallbacks.
+
+## Python Package
+
+All algorithms live in `src/dj_agent/`. Skills reference these modules instead of inline code.
+
+```python
+from dj_agent.energy import analyse_track
+from dj_agent.cues import detect_cue_points
+from dj_agent.cleanup import cleanup_title, split_artist_from_title
+from dj_agent.normalize import measure_track, normalize_track
+from dj_agent.vocals import detect_vocals_fast
+from dj_agent.mood import classify_mood_essentia
+from dj_agent.harmonic import suggest_harmonic_transitions
+from dj_agent.analytics import analyse_library
+from dj_agent.smartlists import filter_tracks
+from dj_agent.setbuilder import build_set
+```
 
 ## Connecting to Rekordbox
 
@@ -63,6 +81,24 @@ If `essentia-tensorflow` fails, use `librosa` alone.
 | "cleanup" / "clean up titles" | `/cleanup` |
 | "health" / "how's my library?" | `/health` |
 | "sync" / "write back" | `/sync` |
+| "normalize" / "measure loudness" | `/normalize` |
+| "check quality" | `/check-quality` |
+| "detect vocals" | `/detect-vocals` |
+| "classify mood" / "tag mood" | `/classify-mood` |
+| "enrich metadata" | `/enrich-metadata` |
+| "detect phrases" | `/detect-phrases` |
+| "find similar" | `/find-similar` |
+| "harmonic mix" / "suggest mix" | `/harmonic-mix` |
+| "check beatgrid" / "verify bpm" | `/check-beatgrid` |
+| "analytics" / "analyse library" | `/analytics` |
+| "build set" / "optimise playlist" | `/build-set` |
+| "smart playlist [rule]" | `/smart-playlists` |
+| "detect key" | `/detect-key` |
+| "separate stems" / "export stems" | `/separate-stems` |
+| "shift key" / "pitch shift" | `/shift-key` |
+| "find mashups" / "mashup ideas" | `/find-mashups` |
+| "export to traktor/serato/engine" | `/export` |
+| "master" / "platinum notes" | `/master` |
 
 When the user asks for any of these operations, invoke the matching skill.
 
