@@ -36,8 +36,17 @@ def _ollama_available() -> bool:
 
 
 def _gemini_available() -> bool:
-    """Check if Gemini API key is configured."""
-    return bool(os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY"))
+    """Check if any Gemini auth method is available.
+
+    Checks (in order): API key, OAuth creds from Gemini CLI, gcloud ADC.
+    """
+    if os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY"):
+        return True
+    if (Path.home() / ".gemini" / "oauth_creds.json").exists():
+        return True
+    if (Path.home() / ".config" / "gcloud" / "application_default_credentials.json").exists():
+        return True
+    return False
 
 
 def get_backend() -> str:
@@ -146,25 +155,50 @@ def _gemini_query(
     prompt: str,
     model_tier: str = "flash",
 ) -> str:
-    """Send audio + prompt to Gemini API.
+    """Send audio + prompt to Gemini.
+
+    Auth priority:
+    1. API key (GOOGLE_API_KEY env var) — simplest
+    2. OAuth via google-genai SDK (auto-discovers ~/.gemini/oauth_creds.json or gcloud ADC)
+    3. Gemini CLI subprocess (headless, uses existing OAuth session)
 
     Parameters
     ----------
     model_tier : "lite" (cheapest), "flash" (default), "pro" (best reasoning)
     """
+    # Try SDK first (handles both API key and OAuth/ADC)
+    try:
+        return _gemini_sdk_query(audio_path, prompt, model_tier)
+    except (ImportError, RuntimeError):
+        pass
+
+    # Fallback: Gemini CLI subprocess (uses existing OAuth from `gemini auth`)
+    return _gemini_cli_query(audio_path, prompt, model_tier)
+
+
+def _gemini_sdk_query(
+    audio_path: Path,
+    prompt: str,
+    model_tier: str,
+) -> str:
+    """Query via google-genai SDK (API key or OAuth/ADC auto-discovery)."""
     try:
         from google import genai  # type: ignore[import-untyped]
     except ImportError:
-        raise ImportError("pip install google-genai")
+        raise ImportError(
+            "pip install google-genai\n"
+            "Then authenticate via one of:\n"
+            "  1. Set GOOGLE_API_KEY (get free key at https://aistudio.google.com/apikey)\n"
+            "  2. Run 'gemini auth' for Google account OAuth login\n"
+            "  3. Run 'gcloud auth application-default login' for ADC"
+        )
 
     api_key = os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        raise RuntimeError(
-            "No Gemini API key found. Set GOOGLE_API_KEY environment variable "
-            "or call reasoning.setup_gemini('your-key'). "
-            "Get a free key at https://aistudio.google.com/apikey"
-        )
-    client = genai.Client(api_key=api_key)
+    if api_key:
+        client = genai.Client(api_key=api_key)
+    else:
+        # Auto-discovers OAuth/ADC credentials
+        client = genai.Client()
 
     model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
     audio_bytes = audio_path.read_bytes()
@@ -186,6 +220,68 @@ def _gemini_query(
         ],
     )
     return response.text
+
+
+def _gemini_cli_query(
+    audio_path: Path,
+    prompt: str,
+    model_tier: str,
+) -> str:
+    """Query via Gemini CLI subprocess (headless, uses existing OAuth session).
+
+    Pattern from auto_coder_multi_agents_v2: asyncio subprocess with
+    JSON output mode, clean env, process group isolation.
+    """
+    import shutil
+
+    gemini_exe = shutil.which("gemini")
+    if not gemini_exe:
+        raise RuntimeError(
+            "No Gemini authentication found. Options:\n"
+            "  1. Set GOOGLE_API_KEY (get free key at https://aistudio.google.com/apikey)\n"
+            "  2. Install Gemini CLI and run 'gemini auth'\n"
+            "  3. Run 'gcloud auth application-default login'"
+        )
+
+    model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
+
+    # Gemini CLI doesn't support inline audio in non-interactive mode,
+    # so we describe what we need and reference the file
+    full_prompt = (
+        f"{prompt}\n\n"
+        f"[The audio file is at: {audio_path.resolve()}]"
+    )
+
+    # Clean env to avoid nested CLI detection (auto_coder pattern)
+    env = os.environ.copy()
+    for key in ("CLAUDECODE", "CLAUDE_CODE", "CODEX_SANDBOX"):
+        env.pop(key, None)
+
+    cmd = [
+        gemini_exe,
+        "-p", full_prompt,
+        "-m", model,
+        "--output-format", "json",
+    ]
+
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        timeout=120,
+        cwd=str(audio_path.parent),
+        env=env,
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(f"Gemini CLI failed: {result.stderr[:300]}")
+
+    # Parse JSON output
+    try:
+        data = json.loads(result.stdout)
+        return data.get("response", data.get("text", result.stdout))
+    except json.JSONDecodeError:
+        return result.stdout.strip()
 
 
 # ---------------------------------------------------------------------------
