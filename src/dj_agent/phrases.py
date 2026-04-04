@@ -28,12 +28,12 @@ def detect_phrases(
 
     try:
         return _allin1_phrases(path)
-    except ImportError:
+    except (ImportError, RuntimeError, OSError, Exception):
         pass
 
     try:
         return _madmom_phrases(path, expected_bars_per_phrase)
-    except ImportError:
+    except (ImportError, RuntimeError, OSError, Exception):
         pass
 
     return _librosa_phrases(path, bpm, expected_bars_per_phrase)

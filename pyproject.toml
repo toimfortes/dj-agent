@@ -35,8 +35,9 @@ quality = ["flac-detective"]
 phrases = ["allin1>=1.0"]  # All-In-One Transformer structure analysis
 phrases-legacy = ["madmom"]  # Legacy madmom-only phrases
 beats = ["beat-this @ https://github.com/CPJKU/beat_this/archive/main.zip"]
+reasoning = ["google-genai>=1.0", "requests>=2.28"]
 all = [
-    "dj-agent[fingerprint,similarity,mood,stems,normalize,master,metadata,quality,phrases]",
+    "dj-agent[fingerprint,similarity,mood,stems,normalize,master,gui,metadata,quality,phrases,beats,reasoning]",
 ]
 dev = ["pytest>=7.4", "pytest-cov>=4.1"]
 

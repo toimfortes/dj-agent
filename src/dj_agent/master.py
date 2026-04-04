@@ -138,6 +138,13 @@ def master_track(
     if tmpl is None:
         raise ValueError(f"Unknown template: {template}. Choose from: {list(TEMPLATES)}")
 
+    # Idempotency guard — refuse to re-master already-mastered files
+    if "_mastered" in input_path.stem:
+        raise ValueError(
+            f"Refusing to re-master '{input_path.name}' — file appears already mastered. "
+            "Processing it again would destroy dynamic range. Use the original file."
+        )
+
     # Determine output path — match input format by default
     if output_path is None:
         suffix = input_path.suffix

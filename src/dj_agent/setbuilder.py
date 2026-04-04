@@ -52,11 +52,15 @@ def build_set(
 
     # Build distance matrix (lower = better transition)
     n = len(tracks)
+    energies = energies or {}
     dist = [[0.0] * n for _ in range(n)]
     for i in range(n):
+        e_i = energies.get(tracks[i].db_content_id, 0)
         for j in range(n):
             if i != j:
-                score = harmonic_score(tracks[i], tracks[j])
+                e_j = energies.get(tracks[j].db_content_id, 0)
+                score = harmonic_score(tracks[i], tracks[j],
+                                       energy_a=e_i, energy_b=e_j)
                 dist[i][j] = 1.0 - score  # invert: lower distance = better
 
     # Greedy nearest-neighbor starting from the track with lowest energy

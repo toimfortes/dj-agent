@@ -47,31 +47,54 @@ ROFORMER_VOCAL_MODEL = "model_mel_band_roformer_ep_3005_sdr_11.4360.ckpt"
 ROFORMER_INSTRUM_MODEL = "model_bs_roformer_ep_317_sdr_12.9755.ckpt"
 
 
+_roformer_cache: dict[str, Any] = {}
+_roformer_lock = __import__("threading").Lock()
+
+
+def _get_roformer_separator(model_filename: str):
+    """Cached Roformer separator (model loaded once per model name)."""
+    if model_filename in _roformer_cache:
+        return _roformer_cache[model_filename]
+    with _roformer_lock:
+        if model_filename in _roformer_cache:
+            return _roformer_cache[model_filename]
+        from audio_separator.separator import Separator  # type: ignore[import-untyped]
+        sep = Separator()
+        sep.load_model(model_filename=model_filename)
+        _roformer_cache[model_filename] = sep
+        return sep
+
+
 def _separate_roformer(
     path: Path,
     model_filename: str = ROFORMER_VOCAL_MODEL,
 ) -> dict[str, np.ndarray]:
     """Separate using audio-separator with a Roformer model."""
-    from audio_separator.separator import Separator  # type: ignore[import-untyped]
-
-    separator = Separator()
-    separator.load_model(model_filename=model_filename)
+    separator = _get_roformer_separator(model_filename)
     output_files = separator.separate(str(path))
 
-    # audio-separator returns list of output file paths
+    # audio-separator returns list of output file paths — read then clean up
     stems: dict[str, np.ndarray] = {}
-    for fpath in output_files:
-        p = Path(fpath)
-        name = p.stem.split("_")[-1].lower()  # e.g., "track_(Vocals)" → "vocals"
-        # Normalise stem names
-        if "vocal" in name or "voice" in name:
-            name = "vocals"
-        elif "instrument" in name or "no_vocal" in name:
-            name = "other"
-        data, sr = sf.read(str(p))
-        if data.ndim == 1:
-            data = data[:, np.newaxis]
-        stems[name] = data
+    try:
+        for fpath in output_files:
+            p = Path(fpath)
+            name = p.stem.split("_")[-1].lower()  # e.g., "track_(Vocals)" → "vocals"
+            # Normalise stem names
+            if "vocal" in name or "voice" in name:
+                name = "vocals"
+            elif "instrument" in name or "no_vocal" in name:
+                name = "other"
+            data, sr = sf.read(str(p))
+            if data.ndim == 1:
+                data = data[:, np.newaxis]
+            stems[name] = data
+    finally:
+        # Clean up temp files written by audio-separator
+        for fpath in output_files:
+            try:
+                Path(fpath).unlink(missing_ok=True)
+            except OSError:
+                pass
 
     return stems
 
@@ -121,14 +144,19 @@ def separate_stems(
 
     if model == "auto":
         if _has_audio_separator():
-            return _separate_roformer(path)
-        elif _has_demucs():
-            return _separate_demucs(path)
-        else:
-            raise ImportError(
-                "No stem separation engine found. Install: "
-                "pip install audio-separator[cpu]  OR  pip install demucs"
-            )
+            try:
+                return _separate_roformer(path)
+            except Exception:
+                pass  # Fall through to Demucs
+        if _has_demucs():
+            try:
+                return _separate_demucs(path)
+            except Exception:
+                pass
+        raise ImportError(
+            "No stem separation engine found or all engines failed. Install: "
+            "pip install audio-separator[cpu]  OR  pip install demucs"
+        )
 
     if model == "roformer":
         return _separate_roformer(path, ROFORMER_VOCAL_MODEL)
@@ -185,7 +213,9 @@ def create_instrumental(
     # BS-Roformer is the instrumental specialist
     if model == "auto" and _has_audio_separator():
         stems = _separate_roformer(path, ROFORMER_INSTRUM_MODEL)
-        instrumental = stems.get("other") or stems.get("instrumental")
+        instrumental = stems.get("other")
+        if instrumental is None:
+            instrumental = stems.get("instrumental")
         if instrumental is not None:
             peak = np.max(np.abs(instrumental))
             if peak > 0.99:
@@ -224,7 +254,9 @@ def create_acapella(
     output_path = Path(output_path)
 
     stems = separate_stems(path, model=model)
-    vocals = stems.get("vocals") or stems.get("voice")
+    vocals = stems.get("vocals")
+    if vocals is None:
+        vocals = stems.get("voice")
     if vocals is None:
         raise ValueError("No vocal stem found")
 

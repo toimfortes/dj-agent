@@ -134,6 +134,7 @@ def write_serato_markers(tracks: list[dict[str, Any]]) -> int:
     from mutagen.id3 import ID3, GEOB
 
     count = 0
+    errors: list[str] = []
     for t in tracks:
         cues = t.get("cues", [])
         if not cues:
@@ -141,7 +142,14 @@ def write_serato_markers(tracks: list[dict[str, Any]]) -> int:
 
         raw_path = _strip_file_uri(t.get("path", ""))
         if not Path(raw_path).exists():
+            errors.append(f"File not found: {raw_path}")
             continue
+
+        # Validate cue data types before building binary payload
+        for i, cue in enumerate(cues):
+            if not isinstance(cue.get("position_ms", 0), (int, float)):
+                errors.append(f"Invalid position_ms type in cue {i} for {raw_path}")
+                continue
 
         try:
             payload = _build_serato_markers2_payload(cues)
@@ -162,8 +170,12 @@ def write_serato_markers(tracks: list[dict[str, Any]]) -> int:
             tags.save()
             count += 1
 
-        except Exception:
-            continue
+        except Exception as e:
+            errors.append(f"Failed to write Serato markers to {raw_path}: {e}")
+
+    if errors:
+        import warnings
+        warnings.warn(f"Serato export: {len(errors)} errors: {errors[:3]}")
 
     return count
 

@@ -160,13 +160,30 @@ def _detect_bpm(path: Path) -> float:
     """
     try:
         return _beat_this_bpm(path)
-    except ImportError:
+    except (ImportError, RuntimeError, OSError, Exception):
         pass
     try:
         return _madmom_bpm(path)
-    except ImportError:
+    except (ImportError, RuntimeError, OSError, Exception):
         pass
     return _librosa_bpm(path)
+
+
+_beat_this_model = None
+_beat_this_lock = __import__("threading").Lock()
+
+
+def _get_beat_this():
+    """Cached Beat This! model (loaded once, thread-safe)."""
+    global _beat_this_model
+    if _beat_this_model is not None:
+        return _beat_this_model
+    with _beat_this_lock:
+        if _beat_this_model is not None:
+            return _beat_this_model
+        from beat_this.inference import File2Beats  # type: ignore[import-untyped]
+        _beat_this_model = File2Beats(checkpoint_path="final0", device="cpu")
+        return _beat_this_model
 
 
 def _beat_this_bpm(path: Path) -> float:
@@ -174,9 +191,7 @@ def _beat_this_bpm(path: Path) -> float:
 
     Requires: pip install https://github.com/CPJKU/beat_this/archive/main.zip
     """
-    from beat_this.inference import File2Beats  # type: ignore[import-untyped]
-
-    file2beats = File2Beats(checkpoint_path="final0", device="cpu")
+    file2beats = _get_beat_this()
     beats, downbeats = file2beats(str(path))
 
     if len(beats) < 4:

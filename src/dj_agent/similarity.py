@@ -29,7 +29,7 @@ def compute_feature_vector(path: str | Path, method: str = "auto") -> np.ndarray
     if method == "auto":
         try:
             return _clap_embedding(path)
-        except ImportError:
+        except (ImportError, RuntimeError, OSError, Exception):
             pass
         return _librosa_features(path)
     elif method == "clap":
@@ -38,17 +38,31 @@ def compute_feature_vector(path: str | Path, method: str = "auto") -> np.ndarray
         return _librosa_features(path)
 
 
+_clap_model_sim = None
+_clap_lock_sim = __import__("threading").Lock()
+
+
+def _get_clap_model_sim():
+    """Cached CLAP model for similarity (thread-safe, loaded once)."""
+    global _clap_model_sim
+    if _clap_model_sim is not None:
+        return _clap_model_sim
+    with _clap_lock_sim:
+        if _clap_model_sim is not None:
+            return _clap_model_sim
+        import laion_clap  # type: ignore[import-untyped]
+        _clap_model_sim = laion_clap.CLAP_Module(enable_fusion=False, amodel="HTSAT-base")
+        _clap_model_sim.load_ckpt(ckpt="music_audioset_epoch_15_esc_90.14.pt")
+        return _clap_model_sim
+
+
 def _clap_embedding(path: str | Path) -> np.ndarray:
     """Compute a 512-dim CLAP semantic embedding for similarity.
 
     Captures "vibe" — mood, genre, energy, cultural context — not just timbre.
     Requires: pip install laion-clap
     """
-    import laion_clap  # type: ignore[import-untyped]
-
-    model = laion_clap.CLAP_Module(enable_fusion=False, amodel="HTSAT-base")
-    model.load_ckpt(ckpt="music_audioset_epoch_15_esc_90.14.pt")
-
+    model = _get_clap_model_sim()
     embed = model.get_audio_embedding_from_filelist(
         x=[str(path)], use_tensor=False,
     )
@@ -191,10 +205,13 @@ def build_embedding_cache(
     if cache_path:
         cache_path = Path(cache_path)
         cache_path.parent.mkdir(parents=True, exist_ok=True)
+        vecs_array = np.array(list(embeddings.values()))
         np.savez_compressed(
             str(cache_path),
             ids=list(embeddings.keys()),
-            vectors=np.array(list(embeddings.values())),
+            vectors=vecs_array,
+            dim=vecs_array.shape[1] if vecs_array.ndim == 2 else 0,
+            method="auto",  # records which method was used
         )
 
     return embeddings

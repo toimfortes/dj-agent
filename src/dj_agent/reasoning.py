@@ -77,14 +77,26 @@ def _extract_snippet(
     import librosa
 
     path = Path(path)
-    y, orig_sr = librosa.load(str(path), sr=sr, mono=True)
-    total = len(y) / sr
+    # Get duration without loading full file
+    import subprocess as _sp
+    try:
+        probe = _sp.run(
+            ["ffprobe", "-v", "quiet", "-show_entries", "format=duration",
+             "-of", "csv=p=0", str(path)],
+            capture_output=True, text=True, timeout=10,
+        )
+        total = float(probe.stdout.strip()) if probe.returncode == 0 else 300.0
+    except Exception:
+        total = 300.0
 
-    start = int(total * offset_pct * sr)
-    end = start + int(duration_sec * sr)
-    snippet = y[start:min(end, len(y))]
+    # Only load the needed portion using librosa offset/duration
+    offset_sec = total * offset_pct
+    y, _ = librosa.load(str(path), sr=sr, mono=True,
+                         offset=offset_sec, duration=duration_sec)
+    snippet = y
 
-    tmp = Path(tempfile.mktemp(suffix=".wav", prefix="dj_reason_"))
+    tmp = Path(tempfile.NamedTemporaryFile(suffix=".wav", prefix="dj_reason_",
+                                            delete=False).name)
     sf.write(str(tmp), snippet, sr)
     return tmp
 
@@ -135,16 +147,16 @@ GEMINI_MODELS = {
 
 
 def setup_gemini(api_key: str) -> bool:
-    """Store Gemini API key for this session.
+    """Store Gemini API key for this session (only if verification succeeds).
 
     Users can get a free key at https://aistudio.google.com/apikey
     """
-    os.environ["GOOGLE_API_KEY"] = api_key
-    # Verify it works
+    # Verify BEFORE storing — don't poison env with bad keys
     try:
         from google import genai  # type: ignore[import-untyped]
         client = genai.Client(api_key=api_key)
         client.models.list()
+        os.environ["GOOGLE_API_KEY"] = api_key
         return True
     except Exception:
         return False
@@ -166,14 +178,8 @@ def _gemini_query(
     ----------
     model_tier : "lite" (cheapest), "flash" (default), "pro" (best reasoning)
     """
-    # Try SDK first (handles both API key and OAuth/ADC)
-    try:
-        return _gemini_sdk_query(audio_path, prompt, model_tier)
-    except (ImportError, RuntimeError):
-        pass
-
-    # Fallback: Gemini CLI subprocess (uses existing OAuth from `gemini auth`)
-    return _gemini_cli_query(audio_path, prompt, model_tier)
+    # SDK only — the CLI fallback can't send inline audio data
+    return _gemini_sdk_query(audio_path, prompt, model_tier)
 
 
 def _gemini_sdk_query(
