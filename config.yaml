@@ -34,8 +34,8 @@ duplicates:
   duration_tolerance_sec: 10.0
 
 normalize:
-  # -8 LUFS for club/CDJ use, -14 for streaming
-  target_lufs: -8.0
+  # -10 LUFS (user preference), -8 for loud club, -14 for streaming
+  target_lufs: -10.0
   true_peak_db: -1.0
   output_format: flac
   output_bitrate: 320k
