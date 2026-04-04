@@ -89,8 +89,14 @@ def safe_db_session(config: RekordboxConfig) -> Generator:
     from pyrekordbox import Rekordbox6Database  # type: ignore[import-untyped]
 
     db = Rekordbox6Database()
+
+    # Attach a heartbeat checker so callers can verify mid-session
+    db._dj_agent_check_lock = lambda: _check_lock_heartbeat(config)
+
     try:
         yield db
+        # Re-check before commit — user may have opened Rekordbox during processing
+        _check_lock_heartbeat(config)
         try:
             db.commit()
         except Exception:
@@ -99,3 +105,16 @@ def safe_db_session(config: RekordboxConfig) -> Generator:
     except BaseException:
         db.session.rollback()
         raise
+
+
+def _check_lock_heartbeat(config: RekordboxConfig) -> None:
+    """Re-check that Rekordbox hasn't started since the session opened.
+
+    Call this before committing or between batch operations.
+    """
+    if config.check_process and is_rekordbox_running():
+        raise RuntimeError(
+            "Rekordbox was opened during the session! "
+            "Rolling back to prevent database corruption. "
+            "Close Rekordbox and try again."
+        )

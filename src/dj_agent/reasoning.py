@@ -29,11 +29,41 @@ from .config import get_config
 # ---------------------------------------------------------------------------
 
 def _ollama_available() -> bool:
-    """Check if Ollama is running locally."""
+    """Check if Ollama is running with a multimodal model.
+
+    Just having Ollama running is not enough — the configured model must
+    support audio/image input. Text-only models will 500 on audio.
+    """
     try:
         import requests
+
         r = requests.get("http://localhost:11434/api/tags", timeout=2)
-        return r.status_code == 200
+        if r.status_code != 200:
+            return False
+
+        # Check if any model in the list is known-multimodal
+        models = r.json().get("models", [])
+        model_names = [m.get("name", "") for m in models]
+
+        config = get_config().reasoning
+        target = os.environ.get("OLLAMA_MODEL", config.ollama_model)
+
+        # Verify the target model exists locally
+        if not any(target in name for name in model_names):
+            return False
+
+        # Known multimodal model families that accept audio/images
+        _MULTIMODAL_PATTERNS = (
+            "llava", "bakllava", "moondream", "qwen2-audio", "qwen2.5-omni",
+            "gemma3", "llama3.2-vision", "minicpm-v",
+        )
+        # qwen3.5 is text-only — do NOT send audio to it
+        if any(pat in target.lower() for pat in _MULTIMODAL_PATTERNS):
+            return True
+
+        # If unsure, don't risk a 500 — prefer Flamingo or Gemini
+        return False
+
     except Exception:
         return False
 
@@ -88,8 +118,9 @@ def _extract_snippet(
 ) -> Path:
     """Extract a representative snippet from a track.
 
-    Takes a 30-second clip starting at 25% of the track (avoids intros).
-    Downsamples to 16kHz mono WAV (standard for audio LLMs).
+    Samples from TWO points (25% and 50%) and concatenates them to avoid
+    the "snippet bias" problem where progressive tracks are judged by
+    their intro only.  Downsamples to 16kHz mono WAV.
     """
     import soundfile as sf
     import librosa
@@ -110,11 +141,17 @@ def _extract_snippet(
     except Exception:
         total = 300.0
 
-    # Only load the needed portion using librosa offset/duration
-    offset_sec = total * offset_pct
-    y, _ = librosa.load(str(path), sr=sr, mono=True,
-                         offset=offset_sec, duration=duration_sec)
-    snippet = y
+    half_dur = duration_sec / 2.0
+
+    # Sample from two points to capture both intro-section and peak-section
+    offsets = [total * 0.25, total * 0.50]
+    segments = []
+    for off in offsets:
+        y, _ = librosa.load(str(path), sr=sr, mono=True,
+                             offset=off, duration=half_dur)
+        segments.append(y)
+
+    snippet = np.concatenate(segments) if len(segments) > 1 else segments[0]
 
     tmp = Path(tempfile.NamedTemporaryFile(suffix=".wav", prefix="dj_reason_",
                                             delete=False).name)
@@ -181,8 +218,25 @@ def _load_flamingo() -> tuple[Any, Any]:
         return _FLAMINGO_MODEL, _FLAMINGO_PROCESSOR
 
 
+def _unload_flamingo() -> None:
+    """Unload Flamingo from GPU to free VRAM."""
+    global _FLAMINGO_MODEL, _FLAMINGO_PROCESSOR
+    _FLAMINGO_MODEL = None
+    _FLAMINGO_PROCESSOR = None
+
+
+# Register with GPU manager
+try:
+    from .gpu import gpu_manager as _gpu
+    _gpu.register_unloader("flamingo", _unload_flamingo)
+except Exception:
+    pass
+
+
 def _flamingo_query(audio_path: Path, prompt: str) -> str:
     """Send audio + prompt to local Audio Flamingo."""
+    from .gpu import gpu_manager
+    gpu_manager._ensure_owner("flamingo")
     model, processor = _load_flamingo()
 
     conversation = [

@@ -70,6 +70,11 @@ def _separate_roformer(
     model_filename: str = ROFORMER_VOCAL_MODEL,
 ) -> dict[str, np.ndarray]:
     """Separate using audio-separator with a Roformer model."""
+    try:
+        from .gpu import gpu_manager
+        gpu_manager._ensure_owner("roformer")
+    except Exception:
+        pass
     separator = _get_roformer_separator(model_filename)
     output_files = separator.separate(str(path))
 
@@ -103,14 +108,29 @@ def _separate_roformer(
 # Demucs separation (fallback / multi-stem)
 # ---------------------------------------------------------------------------
 
+_demucs_cache: dict[str, Any] = {}
+_demucs_lock = __import__("threading").Lock()
+
+
+def _get_demucs_separator(model: str):
+    """Cached Demucs separator (loaded once per model name)."""
+    if model in _demucs_cache:
+        return _demucs_cache[model]
+    with _demucs_lock:
+        if model in _demucs_cache:
+            return _demucs_cache[model]
+        import demucs.api  # type: ignore[import-untyped]
+        sep = demucs.api.Separator(model=model)
+        _demucs_cache[model] = sep
+        return sep
+
+
 def _separate_demucs(
     path: Path,
     model: str = "htdemucs",
 ) -> dict[str, np.ndarray]:
     """Separate using Demucs (4 or 6 stems)."""
-    import demucs.api  # type: ignore[import-untyped]
-
-    separator = demucs.api.Separator(model=model)
+    separator = _get_demucs_separator(model)
     origin, separated = separator.separate_audio_file(str(path))
 
     stems: dict[str, np.ndarray] = {}
