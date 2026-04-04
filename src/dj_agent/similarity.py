@@ -193,19 +193,35 @@ def _find_similar_faiss(
 def build_embedding_cache(
     tracks: list[TrackInfo],
     cache_path: str | Path | None = None,
+    method: str = "auto",
 ) -> dict[str, np.ndarray]:
     """Compute feature vectors for all tracks in a library.
 
-    Optionally saves to disk as a .npz file for fast reloading.
+    IMPORTANT: All vectors in a single cache must have the same dimension.
+    The ``method`` parameter is locked after the first successful track to
+    prevent mixed CLAP/librosa vectors in the same cache.
     """
     embeddings: dict[str, np.ndarray] = {}
+    locked_dim: int | None = None
+    locked_method: str = method
 
     for t in tracks:
         p = Path(t.path)
         if not p.exists():
             continue
         try:
-            vec = compute_feature_vector(p)
+            vec = compute_feature_vector(p, method=locked_method)
+
+            # Lock dimension after first success
+            if locked_dim is None:
+                locked_dim = len(vec)
+                # If auto resolved to CLAP (512) or librosa (62), lock it
+                if method == "auto":
+                    locked_method = "clap" if locked_dim > 100 else "librosa"
+            elif len(vec) != locked_dim:
+                # Dimension changed mid-batch (shouldn't happen with locked method)
+                continue
+
             embeddings[t.db_content_id] = vec
         except Exception:
             continue

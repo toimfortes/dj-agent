@@ -364,24 +364,31 @@ def _gemini_query(
     prompt: str,
     model_tier: str = "flash",
 ) -> str:
-    """Send audio + prompt to Gemini via the 'gemini' CLI.
+    """Send audio + prompt to Gemini.
 
-    This leverages the CLI's native ability to 'hear' files using the @path syntax.
-    It's the leanest way to perform multimodal analysis without extra SDK logic.
+    SDK-first: the SDK sends audio bytes directly via the API — reliable,
+    no subprocess, no agent recursion risk.
+
+    CLI fallback: only used when no API key is available and the user has
+    authenticated via `gemini auth`. The CLI is an autonomous agent that
+    can trigger recursive loops, so it's a last resort.
 
     Parameters
     ----------
     model_tier : "lite", "flash", "pro"
     """
+    # 1. Try SDK first (reliable, direct audio bytes, no subprocess)
     try:
-        # 1. Try the CLI first (most direct, handles Files API internally)
-        return _gemini_cli_query(audio_path, prompt, model_tier)
-    except Exception as e:
-        # 2. Fallback to SDK if CLI isn't installed or fails
-        try:
-            return _gemini_sdk_query(audio_path, prompt, model_tier)
-        except Exception as sdk_e:
-            raise RuntimeError(f"Gemini CLI failed: {e}\nGemini SDK fallback failed: {sdk_e}")
+        return _gemini_sdk_query(audio_path, prompt, model_tier)
+    except (ImportError, RuntimeError):
+        pass
+
+    # 2. CLI fallback only if SDK unavailable (no API key, no google-genai)
+    import logging
+    logging.getLogger(__name__).info(
+        "Gemini SDK unavailable, falling back to CLI (slower, may trigger agent recursion)"
+    )
+    return _gemini_cli_query(audio_path, prompt, model_tier)
 
 
 def _gemini_cli_query(
@@ -598,27 +605,30 @@ def suggest_transition(
     """Suggest the best transition technique between two tracks."""
     snip_a = _extract_snippet(path_a, offset_pct=0.75)  # end of track A
     snip_b = _extract_snippet(path_b, offset_pct=0.0)   # start of track B
+    combined_path: Path | None = None
     try:
-        # Combine into one file for models that take single audio
         import soundfile as sf
         a_data, sr = sf.read(str(snip_a))
         b_data, _ = sf.read(str(snip_b))
         combined = np.concatenate([a_data, np.zeros(sr), b_data])  # 1s gap
-        combined_path = Path(tempfile.mktemp(suffix=".wav", prefix="dj_mix_"))
+        # Use NamedTemporaryFile (not mktemp) to avoid race condition
+        tmp = tempfile.NamedTemporaryFile(suffix=".wav", prefix="dj_mix_", delete=False)
+        combined_path = Path(tmp.name)
+        tmp.close()
         sf.write(str(combined_path), combined, sr)
 
-        result = _query(combined_path, DJ_PERSONA + (
+        return _query(combined_path, DJ_PERSONA + (
             "This clip contains the end of Track A, a brief silence, then the "
             "start of Track B. Suggest the best DJ transition technique "
             "(e.g., 'smooth EQ blend over 16 bars', 'hard cut on the 1', "
             "'filter sweep into drop'). Explain why in 2 sentences."
         ), backend)
-
-        combined_path.unlink(missing_ok=True)
-        return result
     finally:
+        # Clean up ALL temp files — even on exception
         snip_a.unlink(missing_ok=True)
         snip_b.unlink(missing_ok=True)
+        if combined_path:
+            combined_path.unlink(missing_ok=True)
 
 
 def classify_nuance(path: str | Path, backend: str = "auto") -> dict[str, str]:
