@@ -117,20 +117,60 @@ def _ollama_query(audio_path: Path, prompt: str) -> str:
 # Gemini backend
 # ---------------------------------------------------------------------------
 
-def _gemini_query(audio_path: Path, prompt: str) -> str:
-    """Send audio + prompt to Gemini API."""
+# Model tiers for different use cases
+GEMINI_MODELS = {
+    "lite": "gemini-3.1-flash-lite-preview",   # $0.25/M — batch tagging
+    "flash": "gemini-3-flash-preview",          # $0.50/M — default analysis
+    "pro": "gemini-3.1-pro-preview",            # $2.00/M — deep reasoning
+}
+
+
+def setup_gemini(api_key: str) -> bool:
+    """Store Gemini API key for this session.
+
+    Users can get a free key at https://aistudio.google.com/apikey
+    """
+    os.environ["GOOGLE_API_KEY"] = api_key
+    # Verify it works
+    try:
+        from google import genai  # type: ignore[import-untyped]
+        client = genai.Client(api_key=api_key)
+        client.models.list()
+        return True
+    except Exception:
+        return False
+
+
+def _gemini_query(
+    audio_path: Path,
+    prompt: str,
+    model_tier: str = "flash",
+) -> str:
+    """Send audio + prompt to Gemini API.
+
+    Parameters
+    ----------
+    model_tier : "lite" (cheapest), "flash" (default), "pro" (best reasoning)
+    """
     try:
         from google import genai  # type: ignore[import-untyped]
     except ImportError:
         raise ImportError("pip install google-genai")
 
     api_key = os.environ.get("GOOGLE_API_KEY") or os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "No Gemini API key found. Set GOOGLE_API_KEY environment variable "
+            "or call reasoning.setup_gemini('your-key'). "
+            "Get a free key at https://aistudio.google.com/apikey"
+        )
     client = genai.Client(api_key=api_key)
 
+    model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
     audio_bytes = audio_path.read_bytes()
 
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model=model,
         contents=[
             {
                 "parts": [
@@ -152,19 +192,35 @@ def _gemini_query(audio_path: Path, prompt: str) -> str:
 # Unified query
 # ---------------------------------------------------------------------------
 
-def _query(audio_path: Path, prompt: str, backend: str = "auto") -> str:
-    """Send audio + prompt to the best available backend."""
-    if backend == "auto":
+def _query(
+    audio_path: Path,
+    prompt: str,
+    backend: str = "auto",
+    model_tier: str = "flash",
+) -> str:
+    """Send audio + prompt to the best available backend.
+
+    Parameters
+    ----------
+    backend : "auto", "ollama", "gemini", "gemini-lite", "gemini-pro"
+    model_tier : "lite", "flash", "pro" (Gemini only)
+    """
+    # Parse backend shortcuts
+    if backend.startswith("gemini-"):
+        model_tier = backend.split("-", 1)[1]  # "gemini-pro" → "pro"
+        backend = "gemini"
+    elif backend == "auto":
         backend = get_backend()
 
     if backend == "ollama":
         return _ollama_query(audio_path, prompt)
     elif backend == "gemini":
-        return _gemini_query(audio_path, prompt)
+        return _gemini_query(audio_path, prompt, model_tier=model_tier)
     else:
         raise RuntimeError(
             "No reasoning backend available. "
-            "Start Ollama (ollama serve) or set GOOGLE_API_KEY for Gemini."
+            "Start Ollama (ollama serve) or set GOOGLE_API_KEY for Gemini. "
+            "Get a free key at https://aistudio.google.com/apikey"
         )
 
 

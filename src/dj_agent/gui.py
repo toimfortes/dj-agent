@@ -354,12 +354,43 @@ def create_app() -> gr.Blocks:
             # Tab 7: AI Reasoning (Vibe Analysis)
             # ---------------------------------------------------------------
             with gr.Tab("AI Reasoning"):
-                gr.Markdown("### Deep Vibe Analysis — powered by local Ollama or Gemini")
+                gr.Markdown(
+                    "### Deep Vibe Analysis\n"
+                    "Powered by local **Ollama** (free, private) or cloud **Gemini** (fast, cheap).\n\n"
+                    "Get a free Gemini API key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey)"
+                )
+
+                # API key setup
+                with gr.Accordion("Gemini API Setup", open=False):
+                    api_key_input = gr.Textbox(
+                        label="Gemini API Key",
+                        placeholder="Paste your key here (or set GOOGLE_API_KEY env var)",
+                        type="password",
+                    )
+                    api_key_btn = gr.Button("Save Key")
+                    api_key_status = gr.Textbox(label="Status", interactive=False, lines=1)
+
+                    def _save_api_key(key):
+                        if not key:
+                            return "No key provided."
+                        try:
+                            from .reasoning import setup_gemini
+                            if setup_gemini(key.strip()):
+                                return "Gemini API key saved and verified."
+                            return "Key saved but verification failed. Check the key."
+                        except Exception as e:
+                            return f"Error: {e}"
+
+                    api_key_btn.click(fn=_save_api_key, inputs=[api_key_input], outputs=[api_key_status])
+
+                # Analysis
                 reason_input = gr.Audio(label="Upload Track", type="filepath")
                 with gr.Row():
                     reason_backend = gr.Dropdown(
-                        choices=["auto", "ollama", "gemini"],
-                        value="auto", label="Backend",
+                        choices=["auto", "ollama", "gemini-lite", "gemini-flash", "gemini-pro"],
+                        value="auto",
+                        label="Backend",
+                        info="auto=best available | ollama=local | gemini-lite=cheapest | flash=balanced | pro=best",
                     )
                     reason_action = gr.Dropdown(
                         choices=["Vibe Analysis", "Energy Arc", "Nuance Tags"],
@@ -373,13 +404,22 @@ def create_app() -> gr.Blocks:
                         return "No file selected."
                     try:
                         from .reasoning import analyze_vibe, get_energy_arc, classify_nuance
+
+                        # Map dropdown values to backend strings
+                        backend_map = {
+                            "gemini-lite": "gemini-lite",
+                            "gemini-flash": "gemini",  # default flash tier
+                            "gemini-pro": "gemini-pro",
+                        }
+                        be = backend_map.get(backend, backend)
+
                         if action == "Vibe Analysis":
-                            return analyze_vibe(audio_path, backend=backend)
+                            return analyze_vibe(audio_path, backend=be)
                         elif action == "Energy Arc":
-                            return get_energy_arc(audio_path, backend=backend)
+                            return get_energy_arc(audio_path, backend=be)
                         elif action == "Nuance Tags":
                             import json
-                            tags = classify_nuance(audio_path, backend=backend)
+                            tags = classify_nuance(audio_path, backend=be)
                             return json.dumps(tags, indent=2)
                         return "Unknown action."
                     except Exception as e:
