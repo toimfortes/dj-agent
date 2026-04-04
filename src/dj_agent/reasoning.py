@@ -139,9 +139,10 @@ def _extract_snippet(
 ) -> Path:
     """Extract a representative snippet from a track.
 
-    Samples from TWO points (25% and 50%) and concatenates them to avoid
-    the "snippet bias" problem where progressive tracks are judged by
-    their intro only.  Downsamples to 16kHz mono WAV.
+    When ``offset_pct`` is explicitly set (e.g. 0.75 for end-of-track),
+    extracts a single clip at that position.  Otherwise samples from TWO
+    points (25% and 50%) to avoid the "snippet bias" problem.
+    Downsamples to 16kHz mono WAV.
     """
     import soundfile as sf
     import librosa
@@ -162,10 +163,18 @@ def _extract_snippet(
     except Exception:
         total = 300.0
 
-    half_dur = duration_sec / 2.0
+    # If caller specified an explicit offset (e.g. suggest_transition uses
+    # 0.75 for end-of-track and 0.0 for start), honour it as a single clip.
+    # Otherwise use dual-point sampling for vibe analysis.
+    if offset_pct not in (0.25, None):
+        # Explicit offset — single clip
+        offsets = [total * offset_pct]
+        half_dur = duration_sec
+    else:
+        # Default: dual-point sampling
+        offsets = [total * 0.25, total * 0.50]
+        half_dur = duration_sec / 2.0
 
-    # Sample from two points to capture both intro-section and peak-section
-    offsets = [total * 0.25, total * 0.50]
     segments = []
     for off in offsets:
         y, _ = librosa.load(str(path), sr=sr, mono=True,

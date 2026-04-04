@@ -104,7 +104,12 @@ def _librosa_features(path: str | Path) -> np.ndarray:
 
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
-    """Cosine similarity between two vectors (0 = orthogonal, 1 = identical)."""
+    """Cosine similarity between two vectors (0 = orthogonal, 1 = identical).
+
+    Returns 0.0 if vectors have different dimensions (CLAP 512 vs librosa 62).
+    """
+    if a.shape != b.shape:
+        return 0.0  # dimension mismatch — incompatible embedding methods
     norm_a = np.linalg.norm(a)
     norm_b = np.linalg.norm(b)
     if norm_a == 0 or norm_b == 0:
