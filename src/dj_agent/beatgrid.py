@@ -154,12 +154,37 @@ def detect_tempo_drift(path: str | Path, window_sec: float = 10.0) -> list[dict]
 # ---------------------------------------------------------------------------
 
 def _detect_bpm(path: Path) -> float:
-    """Detect BPM using madmom or librosa."""
+    """Detect BPM using best available engine.
+
+    Priority: Beat This! (Transformer) → madmom (RNN) → librosa (onset).
+    """
+    try:
+        return _beat_this_bpm(path)
+    except ImportError:
+        pass
     try:
         return _madmom_bpm(path)
     except ImportError:
         pass
     return _librosa_bpm(path)
+
+
+def _beat_this_bpm(path: Path) -> float:
+    """Beat tracking using Beat This! (ISMIR 2024 Transformer, SOTA).
+
+    Requires: pip install https://github.com/CPJKU/beat_this/archive/main.zip
+    """
+    from beat_this.inference import File2Beats  # type: ignore[import-untyped]
+
+    file2beats = File2Beats(checkpoint_path="final0", device="cpu")
+    beats, downbeats = file2beats(str(path))
+
+    if len(beats) < 4:
+        return 0.0
+
+    intervals = np.diff(beats)
+    median_interval = float(np.median(intervals))
+    return 60.0 / median_interval if median_interval > 0 else 0.0
 
 
 def _madmom_bpm(path: Path) -> float:

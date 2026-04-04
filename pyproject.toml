@@ -25,13 +25,16 @@ dependencies = [
 fingerprint = ["pyacoustid>=1.3.0"]
 similarity = ["faiss-cpu>=1.7.0"]
 mood = ["essentia-tensorflow>=2.1b6", "laion-clap>=1.1.4"]
-stems = ["demucs>=4.0"]
+stems = ["audio-separator>=0.20"]  # Roformer models (SOTA); Demucs as fallback
+stems-demucs = ["demucs>=4.0"]  # Legacy Demucs-only stems
 normalize = ["ffmpeg-normalize>=1.28.0"]
 master = ["pedalboard>=0.9.0"]
 gui = ["gradio>=4.0"]
 metadata = ["musicbrainzngs>=0.7.1", "pylast>=5.0", "discogs-client>=2.3"]
 quality = ["flac-detective"]
-phrases = ["madmom"]
+phrases = ["allin1>=1.0"]  # All-In-One Transformer structure analysis
+phrases-legacy = ["madmom"]  # Legacy madmom-only phrases
+beats = ["beat-this @ https://github.com/CPJKU/beat_this/archive/main.zip"]
 all = [
     "dj-agent[fingerprint,similarity,mood,stems,normalize,master,metadata,quality,phrases]",
 ]

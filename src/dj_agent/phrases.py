@@ -21,10 +21,15 @@ def detect_phrases(
 ) -> list[Phrase]:
     """Detect musical phrases in a track.
 
-    Tries madmom first (state-of-the-art neural downbeat tracking),
-    falls back to librosa beat tracking.
+    Priority: All-In-One (Transformer structure analysis) → madmom (RNN
+    downbeat tracking) → librosa (beat tracking fallback).
     """
     path = Path(path)
+
+    try:
+        return _allin1_phrases(path)
+    except ImportError:
+        pass
 
     try:
         return _madmom_phrases(path, expected_bars_per_phrase)
@@ -32,6 +37,47 @@ def detect_phrases(
         pass
 
     return _librosa_phrases(path, bpm, expected_bars_per_phrase)
+
+
+# ---------------------------------------------------------------------------
+# All-In-One (preferred — Transformer-based functional structure analysis)
+# ---------------------------------------------------------------------------
+
+def _allin1_phrases(path: Path) -> list[Phrase]:
+    """Use All-In-One model for functional structure analysis.
+
+    Returns phrases with semantic labels (intro, verse, chorus, bridge, outro).
+    Requires: pip install allin1
+    """
+    import allin1  # type: ignore[import-untyped]
+
+    result = allin1.analyze(str(path))
+
+    # Map allin1 segment labels to our Phrase labels
+    label_map = {
+        "intro": "intro",
+        "verse": "build",
+        "chorus": "drop",
+        "drop": "drop",
+        "bridge": "breakdown",
+        "breakdown": "breakdown",
+        "outro": "outro",
+        "inst": "build",
+        "solo": "build",
+    }
+
+    phrases: list[Phrase] = []
+    for segment in result.segments:
+        label = label_map.get(segment.label.lower(), "build")
+        phrases.append(Phrase(
+            start_ms=int(segment.start * 1000),
+            end_ms=int(segment.end * 1000),
+            bar_count=0,  # allin1 doesn't report bar counts
+            label=label,
+            energy=0.0,  # filled by caller if needed
+        ))
+
+    return phrases
 
 
 # ---------------------------------------------------------------------------

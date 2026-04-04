@@ -15,10 +15,49 @@ import numpy as np
 from .types import TrackInfo
 
 
-def compute_feature_vector(path: str | Path) -> np.ndarray:
-    """Compute a feature vector for a track using librosa.
+def compute_feature_vector(path: str | Path, method: str = "auto") -> np.ndarray:
+    """Compute a feature vector for a track.
+
+    Parameters
+    ----------
+    method : "auto" (CLAP if available, else librosa), "clap", or "librosa"
 
     Returns a 1-D numpy array suitable for cosine similarity.
+    CLAP produces a 512-dim semantic embedding (captures "vibe").
+    librosa produces a 62-dim timbral feature vector (MFCC/chroma/spectral).
+    """
+    if method == "auto":
+        try:
+            return _clap_embedding(path)
+        except ImportError:
+            pass
+        return _librosa_features(path)
+    elif method == "clap":
+        return _clap_embedding(path)
+    else:
+        return _librosa_features(path)
+
+
+def _clap_embedding(path: str | Path) -> np.ndarray:
+    """Compute a 512-dim CLAP semantic embedding for similarity.
+
+    Captures "vibe" — mood, genre, energy, cultural context — not just timbre.
+    Requires: pip install laion-clap
+    """
+    import laion_clap  # type: ignore[import-untyped]
+
+    model = laion_clap.CLAP_Module(enable_fusion=False, amodel="HTSAT-base")
+    model.load_ckpt(ckpt="music_audioset_epoch_15_esc_90.14.pt")
+
+    embed = model.get_audio_embedding_from_filelist(
+        x=[str(path)], use_tensor=False,
+    )
+    return embed[0].astype(np.float32)
+
+
+def _librosa_features(path: str | Path) -> np.ndarray:
+    """Compute a 62-dim timbral feature vector using librosa.
+
     Features: MFCCs (mean+std), chroma (mean), spectral contrast (mean),
     spectral centroid (mean), spectral rolloff (mean), zero crossing rate.
     """

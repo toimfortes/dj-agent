@@ -60,6 +60,18 @@ def detect_key(path: str | Path) -> KeyResult:
     return _librosa_detect(path)
 
 
+def detect_tuning(path: str | Path, sr: int = 22050) -> float:
+    """Detect tuning offset from A=440Hz.
+
+    Returns deviation in fractions of a semitone.
+    A track tuned to 432Hz returns approximately -0.318.
+    A standard 440Hz track returns approximately 0.0.
+    """
+    path = Path(path)
+    y, actual_sr = librosa.load(str(path), sr=sr, mono=True)
+    return float(librosa.estimate_tuning(y=y, sr=actual_sr))
+
+
 # ---------------------------------------------------------------------------
 # Essentia (preferred — EDMA profile for electronic music)
 # ---------------------------------------------------------------------------
