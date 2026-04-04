@@ -351,7 +351,48 @@ def create_app() -> gr.Blocks:
                 )
 
             # ---------------------------------------------------------------
-            # Tab 7: Template info
+            # Tab 7: AI Reasoning (Vibe Analysis)
+            # ---------------------------------------------------------------
+            with gr.Tab("AI Reasoning"):
+                gr.Markdown("### Deep Vibe Analysis — powered by local Ollama or Gemini")
+                reason_input = gr.Audio(label="Upload Track", type="filepath")
+                with gr.Row():
+                    reason_backend = gr.Dropdown(
+                        choices=["auto", "ollama", "gemini"],
+                        value="auto", label="Backend",
+                    )
+                    reason_action = gr.Dropdown(
+                        choices=["Vibe Analysis", "Energy Arc", "Nuance Tags"],
+                        value="Vibe Analysis", label="Analysis Type",
+                    )
+                reason_btn = gr.Button("Analyze", variant="primary")
+                reason_output = gr.Textbox(label="AI Analysis", interactive=False, lines=8)
+
+                def _reason_handler(audio_path, backend, action):
+                    if not audio_path:
+                        return "No file selected."
+                    try:
+                        from .reasoning import analyze_vibe, get_energy_arc, classify_nuance
+                        if action == "Vibe Analysis":
+                            return analyze_vibe(audio_path, backend=backend)
+                        elif action == "Energy Arc":
+                            return get_energy_arc(audio_path, backend=backend)
+                        elif action == "Nuance Tags":
+                            import json
+                            tags = classify_nuance(audio_path, backend=backend)
+                            return json.dumps(tags, indent=2)
+                        return "Unknown action."
+                    except Exception as e:
+                        return f"Error: {e}"
+
+                reason_btn.click(
+                    fn=_reason_handler,
+                    inputs=[reason_input, reason_backend, reason_action],
+                    outputs=[reason_output],
+                )
+
+            # ---------------------------------------------------------------
+            # Tab 8: Template info
             # ---------------------------------------------------------------
             with gr.Tab("Templates"):
                 gr.Markdown(_template_info_markdown())

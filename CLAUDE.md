@@ -99,6 +99,7 @@ from dj_agent.setbuilder import build_set
 | "find mashups" / "mashup ideas" | `/find-mashups` |
 | "export to traktor/serato/engine" | `/export` |
 | "master" / "platinum notes" | `/master` |
+| "analyze vibe" / "deep analysis" | `/reasoning` — AI vibe analysis via Ollama/Gemini |
 
 When the user asks for any of these operations, invoke the matching skill.
 
