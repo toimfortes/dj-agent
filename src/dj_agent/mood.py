@@ -122,7 +122,8 @@ def _librosa_mood_fallback(path: Path) -> MoodResult:
 
     # Tempo
     tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
-    tempo = float(tempo)
+    # librosa may return array in newer versions
+    tempo = float(np.asarray(tempo).item()) if not isinstance(tempo, (int, float)) else float(tempo)
 
     # RMS energy
     rms = float(np.mean(librosa.feature.rms(y=y)))

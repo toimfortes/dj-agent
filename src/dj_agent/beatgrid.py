@@ -229,6 +229,8 @@ def _madmom_bpm(path: Path) -> float:
 def _librosa_bpm(path: Path) -> float:
     y, sr = librosa.load(str(path), sr=22050, mono=True)
     tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
+    if hasattr(tempo, "__len__"):
+        return float(np.mean(tempo))
     return float(tempo)
 
 

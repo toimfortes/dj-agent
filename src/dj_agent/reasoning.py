@@ -275,7 +275,14 @@ def _flamingo_query(audio_path: Path, prompt: str) -> str:
         tokenize=True,
         add_generation_prompt=True,
         return_dict=True,
-    ).to(model.device)
+    )
+    
+    # Cast float32 inputs to model's dtype (e.g. float16) to avoid mismatch
+    import torch
+    for k, v in inputs.items():
+        if isinstance(v, torch.Tensor) and v.dtype == torch.float32:
+            inputs[k] = v.to(model.dtype)
+        inputs[k] = inputs[k].to(model.device)
 
     config = get_config().reasoning
     outputs = model.generate(**inputs, max_new_tokens=config.max_new_tokens)
@@ -348,20 +355,77 @@ def _gemini_query(
     prompt: str,
     model_tier: str = "flash",
 ) -> str:
-    """Send audio + prompt to Gemini.
+    """Send audio + prompt to Gemini via the 'gemini' CLI.
 
-    Auth priority:
-    1. API key → SDK with inline base64 audio (fastest)
-    2. OAuth → Gemini CLI subprocess with --yolo (reads file via tools)
+    This leverages the CLI's native ability to 'hear' files using the @path syntax.
+    It's the leanest way to perform multimodal analysis without extra SDK logic.
 
     Parameters
     ----------
-    model_tier : "lite" (cheapest), "flash" (default), "pro" (best reasoning)
+    model_tier : "lite", "flash", "pro"
     """
-    # Gemini CLI cannot send audio via its tool system (read_file returns
-    # audio/wav which the API rejects in function_response.parts).
-    # Audio analysis requires the SDK with an API key or ADC.
-    return _gemini_sdk_query(audio_path, prompt, model_tier)
+    try:
+        # 1. Try the CLI first (most direct, handles Files API internally)
+        return _gemini_cli_query(audio_path, prompt, model_tier)
+    except Exception as e:
+        # 2. Fallback to SDK if CLI isn't installed or fails
+        try:
+            return _gemini_sdk_query(audio_path, prompt, model_tier)
+        except Exception as sdk_e:
+            raise RuntimeError(f"Gemini CLI failed: {e}\nGemini SDK fallback failed: {sdk_e}")
+
+
+def _gemini_cli_query(
+    audio_path: Path,
+    prompt: str,
+    model_tier: str,
+) -> str:
+    """Query via Gemini CLI subprocess using existing OAuth session.
+
+    The CLI uses its own OAuth credentials (~/.gemini/oauth_creds.json)
+    and handles multimodal files automatically via the @path syntax.
+    """
+    import shutil
+    import subprocess
+    import json
+
+    gemini_exe = shutil.which("gemini")
+    if not gemini_exe:
+        raise RuntimeError("Gemini CLI ('gemini') not found in PATH. Run 'npm install -g @google/gemini-cli'.")
+
+    model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
+
+    # The magic: @path tells the CLI to treat this as a multimodal input part
+    # We use .resolve() to ensure the CLI can find the file from any CWD
+    full_prompt = f"{prompt} @{audio_path.resolve()}"
+
+    # Clean env to avoid nested CLI detection issues
+    env = os.environ.copy()
+    for key in ("CLAUDECODE", "CLAUDE_CODE", "CODEX_SANDBOX"):
+        env.pop(key, None)
+
+    cmd = [
+        gemini_exe,
+        "-p", full_prompt,
+        "-m", model,
+        "--yolo",  # Auto-approve the file reading tool
+    ]
+
+    result = subprocess.run(
+        cmd,
+        capture_output=True,
+        text=True,
+        timeout=180,
+        env=env,
+    )
+
+    if result.returncode != 0:
+        # If it fails, maybe it's an auth issue
+        if "login" in result.stderr.lower() or "auth" in result.stderr.lower() or "unauthenticated" in result.stderr.lower():
+            raise RuntimeError("Gemini CLI requires authentication. Run 'gemini auth' first.")
+        raise RuntimeError(f"Gemini CLI failed: {result.stderr.strip()}")
+
+    return result.stdout.strip()
 
 
 def _gemini_sdk_query(
@@ -372,6 +436,7 @@ def _gemini_sdk_query(
     """Query via google-genai SDK (API key or OAuth/ADC auto-discovery)."""
     try:
         from google import genai  # type: ignore[import-untyped]
+        from google.genai import types
     except ImportError:
         raise ImportError(
             "pip install google-genai\n"
@@ -388,6 +453,7 @@ def _gemini_sdk_query(
         for env_path in [
             Path.cwd() / ".env",
             Path.home() / ".env",
+            Path.home() / ".dj-agent" / ".env",
         ]:
             if env_path.exists():
                 for line in env_path.read_text().splitlines():
@@ -400,98 +466,36 @@ def _gemini_sdk_query(
     if api_key:
         client = genai.Client(api_key=api_key)
     else:
-        raise RuntimeError(
-            "Gemini API key required for audio analysis.\n"
-            "Set GOOGLE_API_KEY in environment or .env file.\n"
-            "Get a free key at https://aistudio.google.com/apikey"
-        )
+        # Check if we can use ADC
+        try:
+            client = genai.Client()
+        except Exception:
+            raise RuntimeError(
+                "Gemini API key required for audio analysis fallback.\n"
+                "Set GOOGLE_API_KEY in environment or .env file.\n"
+                "Get a free key at https://aistudio.google.com/apikey"
+            )
 
     model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
+
+    # Snippets are always small (<5MB) so inline is fine.
+    # If someone passes a large file directly, it will be rejected by the API
+    # with a clear error — better than silently failing.
+    mime = "audio/wav" if audio_path.suffix.lower() == ".wav" else "audio/mpeg"
     audio_bytes = audio_path.read_bytes()
 
     response = client.models.generate_content(
         model=model,
         contents=[
-            {
-                "parts": [
-                    {"text": prompt},
-                    {
-                        "inline_data": {
-                            "mime_type": "audio/wav",
-                            "data": base64.b64encode(audio_bytes).decode("utf-8"),
-                        }
-                    },
+            types.Content(
+                parts=[
+                    types.Part.from_text(text=prompt),
+                    types.Part.from_bytes(data=audio_bytes, mime_type=mime),
                 ]
-            }
+            )
         ],
     )
     return response.text
-
-
-def _gemini_cli_query(
-    audio_path: Path,
-    prompt: str,
-    model_tier: str,
-) -> str:
-    """Query via Gemini CLI subprocess using existing OAuth session.
-
-    The CLI uses its own OAuth credentials (~/.gemini/oauth_creds.json)
-    and can read local files via its built-in tools when --yolo is set.
-
-    Pattern from auto_coder_multi_agents_v2: subprocess with JSON output,
-    clean env to avoid nested CLI detection.
-    """
-    import shutil
-
-    gemini_exe = shutil.which("gemini")
-    if not gemini_exe:
-        raise RuntimeError(
-            "No Gemini authentication found. Options:\n"
-            "  1. Set GOOGLE_API_KEY (get free key at https://aistudio.google.com/apikey)\n"
-            "  2. Install Gemini CLI ('npm install -g @anthropic-ai/gemini-cli') and run 'gemini auth'\n"
-            "  3. Run 'gcloud auth application-default login'"
-        )
-
-    model = GEMINI_MODELS.get(model_tier, GEMINI_MODELS["flash"])
-
-    # Use @path syntax for multimodal file input (supports mp3, wav, flac).
-    # The CLI reads the file via its read_file/read_many_files tool.
-    # --yolo auto-approves the file reading tool invocation.
-    full_prompt = (
-        f"{prompt} @{audio_path.resolve()}"
-    )
-
-    # Clean env to avoid nested CLI detection (auto_coder pattern)
-    env = os.environ.copy()
-    for key in ("CLAUDECODE", "CLAUDE_CODE", "CODEX_SANDBOX"):
-        env.pop(key, None)
-
-    cmd = [
-        gemini_exe,
-        "-p", full_prompt,
-        "-m", model,
-        "--output-format", "json",
-        "--yolo",  # auto-approve tool use (file reading)
-    ]
-
-    result = subprocess.run(
-        cmd,
-        capture_output=True,
-        text=True,
-        timeout=180,
-        cwd=str(audio_path.parent),  # CWD = directory containing the audio file
-        env=env,
-    )
-
-    if result.returncode != 0:
-        raise RuntimeError(f"Gemini CLI failed: {result.stderr[:300]}")
-
-    # Parse JSON output
-    try:
-        data = json.loads(result.stdout)
-        return data.get("response", data.get("text", result.stdout))
-    except json.JSONDecodeError:
-        return result.stdout.strip()
 
 
 # ---------------------------------------------------------------------------
