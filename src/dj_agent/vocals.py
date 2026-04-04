@@ -31,8 +31,8 @@ def detect_vocals_fast(path: str | Path) -> VocalResult:
 
     try:
         return _essentia_voice_instrumental(path)
-    except ImportError:
-        pass
+    except (ImportError, AttributeError, Exception):
+        pass  # Essentia without TF models, or model files missing
 
     # Fallback: harmonic-to-percussive ratio heuristic
     return _librosa_heuristic(path)

@@ -50,8 +50,8 @@ def classify_mood_essentia(path: str | Path) -> MoodResult:
 
     try:
         return _essentia_mood(path)
-    except ImportError:
-        pass
+    except (ImportError, AttributeError, Exception):
+        pass  # Essentia without TF models, or model files missing
 
     return _librosa_mood_fallback(path)
 
