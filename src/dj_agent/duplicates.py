@@ -91,6 +91,63 @@ def find_fuzzy_duplicates(
 
 
 # ---------------------------------------------------------------------------
+# Pass 2: Acoustic fingerprint (catches transcodes, alternate masters)
+# ---------------------------------------------------------------------------
+
+def find_fingerprint_duplicates(
+    tracks: list[TrackInfo],
+    threshold: float = 0.8,
+) -> list[tuple[TrackInfo, TrackInfo, float]]:
+    """Find near-duplicates using acoustic fingerprinting.
+
+    Catches the duplicates DJs actually care about: transcodes (MP3→FLAC),
+    alternate masters, edits with near-identical audio, and same-audio
+    different-metadata files.
+
+    Requires: pip install pyacoustid (+ fpcalc binary)
+    Returns list of (track_a, track_b, fingerprint_similarity) tuples.
+    """
+    try:
+        import acoustid  # type: ignore[import-untyped]
+    except ImportError:
+        return []  # pyacoustid not installed — skip fingerprint pass
+
+    import logging
+    _log = logging.getLogger(__name__)
+
+    # Generate fingerprints
+    fps: list[tuple[TrackInfo, str]] = []
+    for t in tracks:
+        p = Path(t.path)
+        if not p.exists():
+            continue
+        try:
+            duration, fingerprint = acoustid.fingerprint_file(str(p))
+            if fingerprint:
+                fps.append((t, fingerprint))
+        except Exception:
+            continue
+
+    if len(fps) < 2:
+        return []
+
+    _log.info("Fingerprinted %d/%d tracks for duplicate detection", len(fps), len(tracks))
+
+    # Compare fingerprints (O(n²) but fingerprint comparison is fast)
+    results: list[tuple[TrackInfo, TrackInfo, float]] = []
+    for i in range(len(fps)):
+        for j in range(i + 1, len(fps)):
+            try:
+                score = acoustid.compare_fingerprints(fps[i][1], fps[j][1])
+                if score and score >= threshold:
+                    results.append((fps[i][0], fps[j][0], float(score)))
+            except Exception:
+                continue
+
+    return results
+
+
+# ---------------------------------------------------------------------------
 # Combined
 # ---------------------------------------------------------------------------
 
@@ -98,12 +155,18 @@ def find_all_duplicates(
     tracks: list[TrackInfo],
     config: DuplicateConfig | None = None,
 ) -> dict[str, Any]:
-    """Run all duplicate detection passes and return grouped results."""
+    """Run all duplicate detection passes and return grouped results.
+
+    Pass 1: Exact file hash (byte-identical)
+    Pass 2: Acoustic fingerprint (transcodes, alternate masters)
+    Pass 3: Fuzzy metadata (similar artist+title)
+    """
     if config is None:
         from .config import get_config
         config = get_config().duplicates
 
     return {
         "exact": find_exact_duplicates(tracks, config),
+        "fingerprint": find_fingerprint_duplicates(tracks),
         "fuzzy": find_fuzzy_duplicates(tracks, config),
     }

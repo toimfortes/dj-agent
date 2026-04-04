@@ -118,8 +118,10 @@ class Phrase:
     start_ms: int
     end_ms: int
     bar_count: int
-    label: str  # "intro", "build", "drop", "breakdown", "outro"
+    label: str  # DJ label: "intro", "build", "drop", "breakdown", "outro"
     energy: float = 0.0
+    confidence: float = 1.0  # how confident are we in the label
+    source_label: str = ""   # original model label (e.g., "chorus", "verse")
 
 
 @dataclass

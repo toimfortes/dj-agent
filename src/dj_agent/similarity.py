@@ -210,10 +210,13 @@ def build_embedding_cache(
     embeddings: dict[str, np.ndarray] = {}
     locked_dim: int | None = None
     locked_method: str = method
+    skipped: int = 0
+    failed: list[str] = []
 
     for t in tracks:
         p = Path(t.path)
         if not p.exists():
+            skipped += 1
             continue
         try:
             vec = compute_feature_vector(p, method=locked_method)
@@ -221,16 +224,28 @@ def build_embedding_cache(
             # Lock dimension after first success
             if locked_dim is None:
                 locked_dim = len(vec)
-                # If auto resolved to CLAP (512) or librosa (62), lock it
                 if method == "auto":
                     locked_method = "clap" if locked_dim > 100 else "librosa"
             elif len(vec) != locked_dim:
-                # Dimension changed mid-batch (shouldn't happen with locked method)
+                skipped += 1
                 continue
 
             embeddings[t.db_content_id] = vec
-        except Exception:
+        except Exception as e:
+            failed.append(f"{t.title}: {e}")
             continue
+
+    # Log diagnostics so cache incompleteness is visible
+    import logging
+    _log = logging.getLogger(__name__)
+    total = len(tracks)
+    embedded = len(embeddings)
+    _log.info(
+        "Embedding cache: %d/%d embedded, %d skipped, %d failed (method=%s, dim=%s)",
+        embedded, total, skipped, len(failed), locked_method, locked_dim,
+    )
+    if failed:
+        _log.warning("Failed tracks: %s", failed[:5])
 
     if cache_path:
         cache_path = Path(cache_path)

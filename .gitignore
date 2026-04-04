@@ -14,3 +14,4 @@ __pycache__/
 src/dj_agent/temp_audio/
 *.mp3
 !tests/
+.env

@@ -60,28 +60,32 @@ def _allin1_phrases(path: Path) -> list[Phrase]:
 
     result = allin1.analyze(str(path))
 
-    # Map allin1 segment labels to our Phrase labels
-    label_map = {
-        "intro": "intro",
-        "verse": "build",
-        "chorus": "drop",
-        "drop": "drop",
-        "bridge": "breakdown",
-        "breakdown": "breakdown",
-        "outro": "outro",
-        "inst": "build",
-        "solo": "build",
+    # Map allin1 segment labels to DJ labels with confidence scores.
+    # These are heuristic mappings — source labels are preserved separately.
+    label_map: dict[str, tuple[str, float]] = {
+        "intro": ("intro", 0.95),        # intro→intro is reliable
+        "verse": ("build", 0.5),          # verse→build is a guess
+        "chorus": ("drop", 0.7),          # chorus=drop in EDM, less so in other genres
+        "drop": ("drop", 0.95),           # drop→drop is reliable
+        "bridge": ("breakdown", 0.6),     # bridge→breakdown is approximate
+        "breakdown": ("breakdown", 0.9),  # breakdown→breakdown is reliable
+        "outro": ("outro", 0.95),         # outro→outro is reliable
+        "inst": ("build", 0.4),           # instrumental section — weak mapping
+        "solo": ("build", 0.3),           # solo→build is a guess
     }
 
     phrases: list[Phrase] = []
     for segment in result.segments:
-        label = label_map.get(segment.label.lower(), "build")
+        src_label = segment.label.lower()
+        dj_label, conf = label_map.get(src_label, ("build", 0.3))
         phrases.append(Phrase(
             start_ms=int(segment.start * 1000),
             end_ms=int(segment.end * 1000),
             bar_count=0,  # allin1 doesn't report bar counts
-            label=label,
+            label=dj_label,
             energy=0.0,  # filled by caller if needed
+            confidence=conf,
+            source_label=src_label,  # preserve original model label
         ))
 
     return phrases

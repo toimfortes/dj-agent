@@ -123,16 +123,25 @@ def _gemini_available() -> bool:
     return False
 
 
+_demoted_backends: set[str] = set()  # backends that failed at runtime this session
+
+
+def demote_backend(name: str, reason: str) -> None:
+    """Mark a backend as failed for this session. It won't be auto-selected again."""
+    _demoted_backends.add(name)
+    import logging
+    logging.getLogger(__name__).warning("Backend '%s' demoted: %s", name, reason)
+
+
 def get_backend() -> str:
-    """Return the best available backend: 'flamingo', 'ollama', 'gemini', or 'none'."""
-    if _flamingo_available():
-        # Only suggest flamingo if CUDA is available, otherwise it's too slow
+    """Return the best available backend, skipping any that failed this session."""
+    if "flamingo" not in _demoted_backends and _flamingo_available():
         import torch
         if torch.cuda.is_available():
             return "flamingo"
-    if _ollama_available():
+    if "ollama" not in _demoted_backends and _ollama_available():
         return "ollama"
-    if _gemini_available():
+    if "gemini" not in _demoted_backends and _gemini_available():
         return "gemini"
     return "none"
 
@@ -614,14 +623,22 @@ def _query(
         model_tier = backend.split("-", 1)[1]  # "gemini-pro" → "pro"
         backend = "gemini"
 
-    if backend == "flamingo":
-        return _flamingo_query(audio_path, prompt)
-    elif backend == "ollama":
-        return _ollama_query(audio_path, prompt)
-    elif backend == "gemini":
-        return _gemini_query(audio_path, prompt, model_tier=model_tier)
-    else:
-        raise RuntimeError(
+    # Try the selected backend; on failure, demote and retry with next best
+    try:
+        if backend == "flamingo":
+            return _flamingo_query(audio_path, prompt)
+        elif backend == "ollama":
+            return _ollama_query(audio_path, prompt)
+        elif backend == "gemini":
+            return _gemini_query(audio_path, prompt, model_tier=model_tier)
+    except Exception as e:
+        demote_backend(backend, str(e)[:100])
+        # Retry with next best backend
+        next_backend = get_backend()
+        if next_backend != "none" and next_backend != backend:
+            return _query(audio_path, prompt, backend=next_backend, model_tier=model_tier)
+
+    raise RuntimeError(
             "No reasoning backend available. "
             "Install transformers for Flamingo, start Ollama, or set GOOGLE_API_KEY."
         )
