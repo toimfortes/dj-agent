@@ -62,13 +62,21 @@ def backup_file(path: Path, tag: str) -> Path:
 
 
 def default_db_path() -> Path | None:
-    """Best-effort default location of Rekordbox's master.db."""
+    """Best-effort default location of Rekordbox's master.db.
+
+    Mirrors ``Rekordbox6Database.__init__`` which tries ``rekordbox7``
+    first and falls back to ``rekordbox6``. On Rekordbox 7 installs the
+    ``rekordbox6`` section is empty, so the v6-only lookup returns None
+    and no backup is made. Check v7 first.
+    """
     try:
         from pyrekordbox.config import get_config as rb_get_config  # type: ignore[import-untyped]
-        rb_cfg = rb_get_config("rekordbox6")
-        db_path = rb_cfg.get("db_path") if isinstance(rb_cfg, dict) else None
-        if db_path:
-            return Path(db_path)
+        for section in ("rekordbox7", "rekordbox6"):
+            rb_cfg = rb_get_config(section)
+            if isinstance(rb_cfg, dict):
+                db_path = rb_cfg.get("db_path")
+                if db_path:
+                    return Path(db_path)
     except Exception:
         pass
     return None
