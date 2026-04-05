@@ -152,6 +152,56 @@ def test_generate_cue_xml_explicit_output_path(tmp_path: Path):
     assert nested.exists()
 
 
+def test_generate_cue_xml_emits_playlist_node(tmp_path: Path):
+    """The XML must contain a PLAYLISTS section with at least one
+    playlist node listing all exported tracks. Without this, Rekordbox's
+    sidebar shows no reliable right-click target for 'Import to
+    Collection' and imports may silently no-op on repeated attempts.
+    """
+    import xml.etree.ElementTree as ET
+    from dj_agent.config import RekordboxConfig
+
+    config = RekordboxConfig(xml_output_dir=str(tmp_path))
+    tracks = [
+        {
+            "path": "/music/a.flac",
+            "title": "A",
+            "artist": "X",
+            "db_content_id": "111",
+            "cues": [{"position_ms": 0, "name": "Intro", "colour": "green"}],
+        },
+        {
+            "path": "/music/b.flac",
+            "title": "B",
+            "artist": "Y",
+            "db_content_id": "222",
+            "cues": [{"position_ms": 0, "name": "Intro", "colour": "green"}],
+        },
+    ]
+    xml_path = generate_cue_xml(tracks, config)
+    tree = ET.parse(str(xml_path))
+    root = tree.getroot()
+
+    # PLAYLISTS must exist with a ROOT folder containing a playlist
+    playlists = root.find("PLAYLISTS")
+    assert playlists is not None, "PLAYLISTS section missing"
+    playlist_root = playlists.find("NODE")
+    assert playlist_root is not None
+    assert playlist_root.get("Type") == "0"          # folder
+    assert playlist_root.get("Name") == "ROOT"
+
+    playlist = playlist_root.find("NODE")
+    assert playlist is not None
+    assert playlist.get("Type") == "1"               # playlist
+    assert playlist.get("KeyType") == "0"            # referenced by TrackID
+    assert playlist.get("Entries") == "2"
+    assert playlist.get("Name")                      # has a human-readable name
+
+    # Every synced track must be referenced by TrackID inside the playlist
+    track_keys = [t.get("Key") for t in playlist.findall("TRACK")]
+    assert track_keys == ["111", "222"]
+
+
 def test_generate_cue_xml_skips_trackless(tmp_path: Path):
     from dj_agent.config import RekordboxConfig
 

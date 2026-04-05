@@ -230,6 +230,24 @@ def generate_cue_xml(
                 **rgb,
             )
 
+    # PLAYLISTS section — required for reliable "Import to Collection".
+    # Without at least one playlist node, the left sidebar under
+    # "rekordbox xml" shows only a flat "All Tracks" view which has no
+    # consistent right-click import action across Rekordbox versions.
+    # Wrap the synced tracks in a single playlist the user can target.
+    playlists = ET.SubElement(root, "PLAYLISTS")
+    playlist_root = ET.SubElement(playlists, "NODE", Type="0", Name="ROOT", Count="1")
+    playlist = ET.SubElement(
+        playlist_root,
+        "NODE",
+        Name="dj-agent sync",
+        Type="1",                    # 1 = playlist (0 = folder)
+        KeyType="0",                 # 0 = reference tracks by TrackID
+        Entries=str(len(tracks_with_cues)),
+    )
+    for t in tracks_with_cues:
+        ET.SubElement(playlist, "TRACK", Key=str(t.get("db_content_id", "0")))
+
     tree = ET.ElementTree(root)
     ET.indent(tree, space="  ")
     tree.write(str(xml_path), encoding="utf-8", xml_declaration=True)
