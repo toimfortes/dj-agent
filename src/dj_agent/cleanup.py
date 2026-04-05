@@ -150,6 +150,15 @@ def cleanup_title(title: str, artist: str = "") -> tuple[str, list[str]]:
         changes.append("removed Free DL")
         title = cleaned
 
+    # Remove trailing "_pn" (Platinum Notes-mastered copies are duplicates
+    # of the non-_pn original — the suffix is a filename marker, not part
+    # of the title). Must be an underscore-delimited suffix, not e.g.
+    # "Sharpness" or "Happening".
+    cleaned = re.sub(r"_pn\s*$", "", title).strip()
+    if cleaned != title:
+        changes.append("removed _pn suffix")
+        title = cleaned
+
     # 12. Final trim
     title = title.strip(" -\u2013")
 

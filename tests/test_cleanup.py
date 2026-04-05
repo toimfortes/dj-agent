@@ -52,6 +52,20 @@ class TestCleanupTitle:
         title, _ = cleanup_title("Grandmaster Flash")
         assert title == "Grandmaster Flash"
 
+    def test_pn_suffix_removed(self):
+        # _pn marks Platinum Notes-mastered copies (duplicates of the
+        # non-_pn original); the suffix is a filename marker, not part
+        # of the title.
+        title, changes = cleanup_title("Somebody to Love_pn")
+        assert title == "Somebody to Love"
+        assert any("_pn" in c for c in changes)
+
+    def test_pn_not_stripped_from_word_mid_title(self):
+        # Only trailing "_pn" should be removed. Words that happen to
+        # contain "pn" mid-string must be preserved.
+        title, _ = cleanup_title("Sharpness Expanded")
+        assert title == "Sharpness Expanded"
+
 
 class TestArtistSplit:
     def test_basic_split(self):
