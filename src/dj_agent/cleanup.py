@@ -81,6 +81,15 @@ def cleanup_title(title: str, artist: str = "") -> tuple[str, list[str]]:
     # 3. Collapse double spaces
     title = re.sub(r"  +", " ", title)
 
+    # 3b. Remove trailing "_pn" (Platinum Notes-mastered duplicate marker).
+    # Must run BEFORE the underscore-conversion rule below, otherwise
+    # "_MST_V4_pn" gets converted to " MST V4 pn" and the trailing "pn"
+    # is no longer an underscore-delimited suffix we can safely strip.
+    cleaned = re.sub(r"_pn\s*$", "", title).strip()
+    if cleaned != title:
+        changes.append("removed _pn suffix")
+        title = cleaned
+
     # 4. Remove website watermarks
     watermark_patterns = [
         r"\s*-?\s*www\.\S+",
@@ -148,15 +157,6 @@ def cleanup_title(title: str, artist: str = "") -> tuple[str, list[str]]:
     cleaned = re.sub(r"\s+Free\s+DL\s*$", "", title, flags=re.IGNORECASE).strip()
     if cleaned != title:
         changes.append("removed Free DL")
-        title = cleaned
-
-    # Remove trailing "_pn" (Platinum Notes-mastered copies are duplicates
-    # of the non-_pn original — the suffix is a filename marker, not part
-    # of the title). Must be an underscore-delimited suffix, not e.g.
-    # "Sharpness" or "Happening".
-    cleaned = re.sub(r"_pn\s*$", "", title).strip()
-    if cleaned != title:
-        changes.append("removed _pn suffix")
         title = cleaned
 
     # 12. Final trim

@@ -66,6 +66,18 @@ class TestCleanupTitle:
         title, _ = cleanup_title("Sharpness Expanded")
         assert title == "Sharpness Expanded"
 
+    def test_pn_stripped_before_underscore_conversion(self):
+        # Titles like "Foo - Bar_MST_V4_pn" previously broke: the
+        # 3+-underscore rule converted all underscores to spaces first,
+        # leaving a trailing bare "pn" token that the _pn rule couldn't
+        # match. Now _pn strips early and the rest is left intact.
+        title, changes = cleanup_title(
+            "Hugel - I adore you (Braynod & Tekzee edit)_MST_V4_pn"
+        )
+        assert not title.endswith("pn")           # no stray trailing pn
+        assert not title.endswith("_pn")          # suffix fully removed
+        assert any("_pn" in c for c in changes)
+
 
 class TestArtistSplit:
     def test_basic_split(self):
