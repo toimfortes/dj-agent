@@ -87,6 +87,50 @@ def test_generate_cue_xml(tmp_path: Path):
     assert "Drop" in content
 
 
+def test_generate_cue_xml_writes_hot_and_memory_cues(tmp_path: Path):
+    """Each cue must be written twice: Num=0..7 (hot cue slot) AND Num=-1
+    (memory cue). Rekordbox silently drops the rest if only the slot
+    entry is present — only Hot Cue A survives.
+    """
+    import xml.etree.ElementTree as ET
+    from dj_agent.config import RekordboxConfig
+
+    config = RekordboxConfig(xml_output_dir=str(tmp_path))
+    tracks = [
+        {
+            "path": "/music/test.flac",
+            "title": "Test",
+            "artist": "A",
+            "db_content_id": "1",
+            "cues": [
+                {"position_ms": 0, "name": "Intro", "colour": "green"},
+                {"position_ms": 32000, "name": "Drop", "colour": "red"},
+                {"position_ms": 64000, "name": "Outro", "colour": "blue"},
+            ],
+        }
+    ]
+    xml_path = generate_cue_xml(tracks, config)
+    tree = ET.parse(str(xml_path))
+    track = tree.getroot().find("COLLECTION/TRACK")
+    assert track is not None
+    marks = track.findall("POSITION_MARK")
+
+    # 3 cues × 2 entries each = 6 POSITION_MARK elements
+    assert len(marks) == 6
+
+    # First 3 are hot-cue slots with Num 0, 1, 2
+    slots = [m for m in marks if m.get("Num") != "-1"]
+    mems = [m for m in marks if m.get("Num") == "-1"]
+    assert len(slots) == 3
+    assert len(mems) == 3
+    assert [m.get("Num") for m in slots] == ["0", "1", "2"]
+
+    # Slot and memory entries must share Name + Start
+    for s, m in zip(slots, mems):
+        assert s.get("Name") == m.get("Name")
+        assert s.get("Start") == m.get("Start")
+
+
 def test_generate_cue_xml_skips_trackless(tmp_path: Path):
     from dj_agent.config import RekordboxConfig
 
