@@ -202,6 +202,16 @@ def test_generate_cue_xml_emits_playlist_node(tmp_path: Path):
     assert track_keys == ["111", "222"]
 
 
+def test_format_cue_name_with_segment_energy():
+    from dj_agent.sync import _format_cue_name
+
+    assert _format_cue_name({"name": "Drop", "segment_energy": 8}) == "Drop E:8"
+    assert _format_cue_name({"name": "Intro", "segment_energy": 3}) == "Intro E:3"
+    # Without segment_energy, name is returned as-is
+    assert _format_cue_name({"name": "Breakdown"}) == "Breakdown"
+    assert _format_cue_name({}) == "Cue"
+
+
 def test_generate_cue_xml_skips_trackless(tmp_path: Path):
     from dj_agent.config import RekordboxConfig
 

@@ -20,7 +20,7 @@ from pathlib import Path
 from pyrekordbox import Rekordbox6Database
 
 from dj_agent.config import get_config
-from dj_agent.sync import generate_cue_xml, is_builtin_rekordbox_path
+from dj_agent.sync import generate_cue_xml, match_memory_to_db
 
 if sys.stdout.encoding.lower() != "utf-8":
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
@@ -57,16 +57,18 @@ def main() -> None:
             mem_by_fn[fn] = entry
 
     db = Rekordbox6Database()
+    all_content = list(db.get_content())
+    matched = match_memory_to_db(mem_by_fn, all_content)
+
     xml_tracks: list[dict] = []
-    skipped_builtin = 0
-    for c in db.get_content():
-        if is_builtin_rekordbox_path(c.FolderPath or ""):
-            skipped_builtin += 1
+    for c, mem in matched:
+        if not mem.get("cues"):
             continue
-        fn = basename(c.FolderPath or "")
-        mem = mem_by_fn.get(fn)
-        if mem is None or not mem.get("cues"):
-            continue
+        bpm = (c.BPM or 0) / 100.0 if c.BPM else None
+        key_obj = c.Key
+        tonality = key_obj.ScaleName if key_obj else None
+        total_time = c.Length  # seconds
+
         xml_tracks.append(
             {
                 "db_content_id": str(c.ID),
@@ -74,10 +76,13 @@ def main() -> None:
                 "artist": c.ArtistName or "",
                 "path": (c.FolderPath or "").replace("\\", "/"),
                 "cues": mem["cues"],
+                "total_time": total_time,
+                "bpm": bpm,
+                "tonality": tonality,
             }
         )
 
-    print(f"XML tracks: {len(xml_tracks)}  (skipped {skipped_builtin} built-in)")
+    print(f"XML tracks: {len(xml_tracks)}  (from {len(matched)} matched, built-in skipped)")
 
     if args.xml_out and args.xml_out.exists():
         stamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")

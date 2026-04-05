@@ -29,6 +29,63 @@ BUILTIN_PATH_MARKERS: tuple[str, ...] = (
 )
 
 
+def match_memory_to_db(
+    mem_by_fn: dict[str, dict],
+    db_contents: list,
+) -> list[tuple]:
+    """Match memory entries to DB tracks by filename, with a prefix
+    fallback for truncated filenames.
+
+    The Linux analysis pipeline sometimes truncates long filenames
+    (Beatport store IDs, remix parentheses). A prefix match recovers
+    these without false positives as long as the shared prefix is ≥15
+    characters.
+
+    Returns a list of ``(content, memory_entry)`` tuples for matched
+    tracks. Built-in Rekordbox tracks (Sampler/Demo) are skipped.
+    """
+    def _basename(p: str) -> str:
+        return (p or "").replace("\\", "/").rsplit("/", 1)[-1]
+
+    def _stem(fn: str) -> str:
+        return fn.rsplit(".", 1)[0] if "." in fn else fn
+
+    # Build a stem→filename index for prefix matching
+    mem_by_stem: dict[str, list[str]] = {}
+    for fn in mem_by_fn:
+        s = _stem(fn)
+        mem_by_stem.setdefault(s, []).append(fn)
+
+    matches: list[tuple] = []
+    for c in db_contents:
+        if is_builtin_rekordbox_path(c.FolderPath or ""):
+            continue
+        fn = _basename(c.FolderPath or "")
+
+        # Exact match (fast path)
+        mem = mem_by_fn.get(fn)
+        if mem is not None:
+            matches.append((c, mem))
+            continue
+
+        # Prefix fallback for truncated filenames
+        db_stem = _stem(fn)
+        best_fn = None
+        best_len = 0
+        for mem_s, mem_fns in mem_by_stem.items():
+            if len(mem_s) < 15:
+                continue
+            if db_stem.startswith(mem_s) or mem_s.startswith(db_stem):
+                shared = min(len(db_stem), len(mem_s))
+                if shared > best_len:
+                    best_len = shared
+                    best_fn = mem_fns[0]
+        if best_fn is not None:
+            matches.append((c, mem_by_fn[best_fn]))
+
+    return matches
+
+
 def is_builtin_rekordbox_path(folder_path: str) -> bool:
     """Return True if the given FolderPath is a Rekordbox built-in track.
 
@@ -91,6 +148,52 @@ def update_genre(content: Any, genre: str) -> None:
 # ---------------------------------------------------------------------------
 # XML export (hot cues only)
 # ---------------------------------------------------------------------------
+#
+# Rekordbox XML import for cues requires a CLEAN-SLATE workflow:
+#
+#   1. Delete existing DjmdCue + ContentCue rows for each track
+#      (Rekordbox 7 refuses to overwrite existing cues via XML import —
+#      "Import to Collection" silently no-ops on tracks that already
+#      have any cue data, even when the XML file contains new cues).
+#
+#   2. Generate XML with these requirements (learned from comparing
+#      Rekordbox's own XML export against our broken output):
+#      - TRACK elements MUST include TotalTime (seconds) — without it,
+#        Rekordbox may skip the track entirely on import.
+#      - Hot cue POSITION_MARK (Num="0".."7") includes RGB color attrs.
+#      - Memory cue POSITION_MARK (Num="-1") must NOT include RGB —
+#        Rekordbox's own export omits Red/Green/Blue from memory cues.
+#      - A PLAYLISTS section with at least one playlist node is needed
+#        for the sidebar right-click → "Import to Collection" target.
+#
+#   3. User imports via: Preferences → Advanced → Database → rekordbox
+#      xml → Browse to the XML → OK → sidebar → expand rekordbox xml →
+#      right-click the playlist → Import to Collection.
+#
+#   4. Cache defeat: if Rekordbox doesn't pick up the new XML, point
+#      the Imported Library to a DIFFERENT xml file first, OK, then
+#      point back to the real one to force a re-read.
+#
+# Rekordbox 7 architecture note: DjmdCue rows are a secondary index
+# that Rekordbox rebuilds from ContentCue.Cues (a JSON blob) on
+# startup. Direct DjmdCue writes without matching ContentCue updates
+# get silently reverted. The XML import path handles both tables
+# correctly, which is why it's the recommended approach.
+# ---------------------------------------------------------------------------
+
+def _format_cue_name(cue: dict) -> str:
+    """Format a cue name, appending per-segment energy if available.
+
+    ``"Drop"`` with ``segment_energy=8`` becomes ``"Drop E:8"``.
+    Without ``segment_energy`` the name is returned as-is, so existing
+    cues that pre-date segment energy analysis still work.
+    """
+    name = cue.get("name") or "Cue"
+    seg_e = cue.get("segment_energy")
+    if seg_e is not None:
+        return f"{name} E:{seg_e}"
+    return name
+
 
 COLOUR_MAP = {
     "green": {"Red": "40", "Green": "226", "Blue": "20"},
@@ -172,14 +275,23 @@ def generate_cue_xml(
         if raw_path.startswith("file://localhost"):
             raw_path = raw_path[len("file://localhost"):]
 
-        track_el = ET.SubElement(
-            collection,
-            "TRACK",
-            TrackID=str(t.get("db_content_id", "0")),
-            Name=t.get("title", ""),
-            Artist=t.get("artist", ""),
-            Location=rb_url_encode(raw_path),
-        )
+        # Populate TRACK with the same attributes Rekordbox's own XML
+        # export includes. TotalTime is critical — without it, Rekordbox
+        # may skip the track entirely on "Import to Collection".
+        track_attrs = {
+            "TrackID": str(t.get("db_content_id", "0")),
+            "Name": t.get("title", ""),
+            "Artist": t.get("artist", ""),
+            "Location": rb_url_encode(raw_path),
+        }
+        if t.get("total_time"):
+            track_attrs["TotalTime"] = str(int(t["total_time"]))
+        if t.get("bpm"):
+            track_attrs["AverageBpm"] = f"{float(t['bpm']):.2f}"
+        if t.get("tonality"):
+            track_attrs["Tonality"] = str(t["tonality"])
+
+        track_el = ET.SubElement(collection, "TRACK", **track_attrs)
 
         # Rekordbox's XML format requires every hot cue to appear TWICE:
         # once in a hot-cue slot (Num="0".."7", i.e. Hot Cue A..H) and once
@@ -190,44 +302,43 @@ def generate_cue_xml(
         hot_cues = [c for c in all_cues if not c.get("memory_only")][:8]
         memory_only_cues = [c for c in all_cues if c.get("memory_only")]
 
-        # Hot cue slots (Num 0..7 = A..H)
+        # Hot cue slots (Num 0..7 = A..H) — with RGB colour attributes
         for idx, cue in enumerate(hot_cues):
             rgb = COLOUR_MAP.get(cue.get("colour", "green"), COLOUR_MAP["green"])
             pos_sec = cue.get("position_ms", 0) / 1000.0
             ET.SubElement(
                 track_el,
                 "POSITION_MARK",
-                Name=cue.get("name", "Cue"),
+                Name=_format_cue_name(cue),
                 Type="0",
                 Start=f"{pos_sec:.3f}",
                 Num=str(idx),
                 **rgb,
             )
-        # Memory cue counterparts for hot cues (required for Rekordbox import)
+        # Memory cue counterparts for hot cues — NO RGB attributes.
+        # Rekordbox's own XML export omits Red/Green/Blue from memory
+        # cue entries (Num="-1"); including them may cause import to
+        # silently skip the track.
         for cue in hot_cues:
-            rgb = COLOUR_MAP.get(cue.get("colour", "green"), COLOUR_MAP["green"])
             pos_sec = cue.get("position_ms", 0) / 1000.0
             ET.SubElement(
                 track_el,
                 "POSITION_MARK",
-                Name=cue.get("name", "Cue"),
+                Name=_format_cue_name(cue),
                 Type="0",
                 Start=f"{pos_sec:.3f}",
                 Num="-1",
-                **rgb,
             )
-        # Memory-only cues (overflow structural markers beyond the 8 hot-cue limit)
+        # Memory-only cues (overflow beyond the 8 hot-cue limit) — no RGB
         for cue in memory_only_cues:
-            rgb = COLOUR_MAP.get(cue.get("colour", "green"), COLOUR_MAP["green"])
             pos_sec = cue.get("position_ms", 0) / 1000.0
             ET.SubElement(
                 track_el,
                 "POSITION_MARK",
-                Name=cue.get("name", "Cue"),
+                Name=_format_cue_name(cue),
                 Type="0",
                 Start=f"{pos_sec:.3f}",
                 Num="-1",
-                **rgb,
             )
 
     # PLAYLISTS section — required for reliable "Import to Collection".
