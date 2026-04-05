@@ -108,6 +108,16 @@ def analyse_track_full(
         result["bpm"] = 0
         y, sr, duration, tempo = None, 22050, 0, 0
 
+    # ── GPU features (V3 — nnAudio acceleration) ───────────────────
+    result["feature_method"] = "cpu"  # default, overwritten if GPU succeeds
+    try:
+        from .audio_gpu import extract_features_gpu, is_gpu_audio_available
+        if y is not None and is_gpu_audio_available():
+            gpu_feats = extract_features_gpu(y, sr)
+            result["feature_method"] = gpu_feats.get("method", "cpu")
+    except Exception as e:
+        _log.warning("GPU features failed for %s: %s", path.name, e)
+
     # ── Energy ────────────────────────────────────────────────────
     if y is not None:
         try:
@@ -126,15 +136,39 @@ def analyse_track_full(
         except Exception as e:
             _log.warning("Energy failed for %s: %s", path.name, e)
 
-    # ── Key detection ─────────────────────────────────────────────
+    # ── Batched Essentia (key + mood + vocals in ONE audio load) ──
+    _essentia_done = False
     try:
-        key = detect_key(path)
-        result["key"] = key.key
-        result["camelot"] = key.camelot
-        result["key_confidence"] = round(key.confidence, 2)
-        result["key_method"] = key.method
+        from .batch import analyse_essentia_batch
+        eb = analyse_essentia_batch(path)
+        if eb.get("key"):
+            from .harmonic import to_camelot
+            result["key"] = eb["key"]
+            result["camelot"] = to_camelot(eb["key"]) or ""
+            result["key_confidence"] = round(eb.get("key_confidence", 0), 2)
+            result["key_method"] = eb.get("key_method", "essentia")
+        if eb.get("mood"):
+            result["mood"] = eb["mood"]
+            result["mood_scores"] = {k: round(v, 2) for k, v in eb.get("mood_scores", {}).items()}
+            result["mood_method"] = "essentia"
+        if eb.get("vocal_classification"):
+            result["vocal_classification"] = eb["vocal_classification"]
+            result["vocal_probability"] = round(eb.get("vocal_probability", 0), 2)
+            result["vocal_method"] = "essentia"
+        _essentia_done = True
     except Exception as e:
-        _log.warning("Key failed for %s: %s", path.name, e)
+        _log.debug("Batched Essentia unavailable, using individual modules: %s", e)
+
+    # ── Key detection fallback ────────────────────────────────────
+    if "key" not in result:
+        try:
+            key = detect_key(path)
+            result["key"] = key.key
+            result["camelot"] = key.camelot
+            result["key_confidence"] = round(key.confidence, 2)
+            result["key_method"] = key.method
+        except Exception as e:
+            _log.warning("Key failed for %s: %s", path.name, e)
 
     # ── Tuning ────────────────────────────────────────────────────
     try:
@@ -212,8 +246,8 @@ def analyse_track_full(
     except Exception as e:
         _log.warning("Quality failed for %s: %s", path.name, e)
 
-    # ── Vocal detection ───────────────────────────────────────────
-    if include_vocals:
+    # ── Vocal detection (skip if batched Essentia already did it) ──
+    if include_vocals and "vocal_classification" not in result:
         try:
             from .vocals import detect_vocals_fast
             v = detect_vocals_fast(path)
@@ -223,8 +257,8 @@ def analyse_track_full(
         except Exception as e:
             _log.warning("Vocal detection failed for %s: %s", path.name, e)
 
-    # ── Mood classification ───────────────────────────────────────
-    if include_mood:
+    # ── Mood classification (skip if batched Essentia already did it)
+    if include_mood and "mood" not in result:
         try:
             from .mood import classify_mood_essentia
             m = classify_mood_essentia(path)

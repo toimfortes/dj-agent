@@ -58,13 +58,16 @@ def classify_mood_essentia(path: str | Path) -> MoodResult:
 
 def _essentia_mood(path: Path) -> MoodResult:
     """Run all Essentia mood classifiers."""
+    import os
     import essentia.standard as es  # type: ignore[import-untyped]
 
+    _models_dir = os.path.expanduser("~/.essentia/models")
     audio = es.MonoLoader(filename=str(path), sampleRate=16000)()
 
     # Shared embeddings
     embeddings = es.TensorflowPredictMusiCNN(
-        graphFilename="msd-musicnn-1.pb",
+        graphFilename=os.path.join(_models_dir, "msd-musicnn-1.pb"),
+        output="model/dense/BiasAdd",
     )(audio)
 
     mood_models = {
@@ -78,7 +81,10 @@ def _essentia_mood(path: Path) -> MoodResult:
     scores: dict[str, float] = {}
     for mood_name, model_file in mood_models.items():
         try:
-            preds = es.TensorflowPredict2D(graphFilename=model_file)(embeddings)
+            preds = es.TensorflowPredict2D(
+                graphFilename=os.path.join(_models_dir, model_file),
+                output="model/Softmax",
+            )(embeddings)
             scores[mood_name] = float(np.mean(preds[:, 1]))
         except Exception:
             scores[mood_name] = 0.0
@@ -90,14 +96,16 @@ def _essentia_mood(path: Path) -> MoodResult:
     valence = 0.5
     try:
         a_preds = es.TensorflowPredict2D(
-            graphFilename="emomusic-msd-musicnn-2.pb",
+            graphFilename=os.path.join(_models_dir, "emomusic-msd-musicnn-2.pb"),
+            output="model/Softmax",
         )(embeddings)
         arousal = float(np.clip(np.mean(a_preds), 0, 1))
     except Exception as _e:
         logging.getLogger(__name__).debug("Arousal model unavailable: %s", _e)
     try:
         v_preds = es.TensorflowPredict2D(
-            graphFilename="deam-msd-musicnn-2.pb",
+            graphFilename=os.path.join(_models_dir, "deam-msd-musicnn-2.pb"),
+            output="model/Softmax",
         )(embeddings)
         valence = float(np.clip(np.mean(v_preds), 0, 1))
     except Exception as _e:
