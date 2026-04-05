@@ -131,6 +131,27 @@ def test_generate_cue_xml_writes_hot_and_memory_cues(tmp_path: Path):
         assert s.get("Start") == m.get("Start")
 
 
+def test_generate_cue_xml_explicit_output_path(tmp_path: Path):
+    """An explicit output_path must override the default timestamped filename."""
+    tracks = [
+        {
+            "path": "/music/test.flac",
+            "title": "T",
+            "artist": "A",
+            "db_content_id": "1",
+            "cues": [{"position_ms": 0, "name": "Cue", "colour": "green"}],
+        }
+    ]
+    target = tmp_path / "rekordbox.xml"
+    result = generate_cue_xml(tracks, output_path=target)
+    assert result == target
+    assert target.exists()
+    # The parent dir must be created if missing
+    nested = tmp_path / "nested" / "deep" / "out.xml"
+    generate_cue_xml(tracks, output_path=nested)
+    assert nested.exists()
+
+
 def test_generate_cue_xml_skips_trackless(tmp_path: Path):
     from dj_agent.config import RekordboxConfig
 

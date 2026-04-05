@@ -123,6 +123,7 @@ def rb_url_encode(path: str) -> str:
 def generate_cue_xml(
     tracks: list[dict[str, Any]],
     config: RekordboxConfig | None = None,
+    output_path: Path | str | None = None,
 ) -> Path:
     """Generate a Rekordbox-compatible XML with hot cues.
 
@@ -131,20 +132,31 @@ def generate_cue_xml(
     tracks : list[dict]
         Each dict needs: ``path``, ``title``, ``artist``, ``db_content_id``,
         ``cues`` (list of :class:`CuePoint`-like dicts).
+    config : RekordboxConfig, optional
+        Used only when ``output_path`` is not given; the XML is written
+        as ``<xml_output_dir>/rekordbox_YYYY-MM-DD_HHMMSS.xml``.
+    output_path : Path or str, optional
+        Explicit output file path. When set, overrides the timestamped
+        default. Useful for overwriting an existing ``rekordbox.xml``
+        that the user already has configured as their Imported Library.
 
     Returns
     -------
     Path to the generated XML file.
     """
-    if config is None:
-        from .config import get_config
-        config = get_config().rekordbox
+    if output_path is not None:
+        xml_path = Path(output_path).expanduser()
+        xml_path.parent.mkdir(parents=True, exist_ok=True)
+    else:
+        if config is None:
+            from .config import get_config
+            config = get_config().rekordbox
 
-    output_dir = Path(config.xml_output_dir).expanduser()
-    output_dir.mkdir(parents=True, exist_ok=True)
+        output_dir = Path(config.xml_output_dir).expanduser()
+        output_dir.mkdir(parents=True, exist_ok=True)
 
-    stamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
-    xml_path = output_dir / f"rekordbox_{stamp}.xml"
+        stamp = datetime.now().strftime("%Y-%m-%d_%H%M%S")
+        xml_path = output_dir / f"rekordbox_{stamp}.xml"
 
     # Filter to tracks that have cues (so Entries count matches actual TRACK elements)
     tracks_with_cues = [t for t in tracks if t.get("cues")]
