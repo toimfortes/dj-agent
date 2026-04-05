@@ -29,6 +29,41 @@ DEFAULT_HYPHENATED_ARTISTS: set[str] = {
 # Title cleanup
 # ---------------------------------------------------------------------------
 
+def normalize_for_split(raw: str) -> str:
+    """Pre-split normalization of a raw filename stem.
+
+    Only converts filename-style underscores to spaces so that ``" - "``
+    delimiters become visible to :func:`split_artist_from_title`. Does NOT
+    apply title-specific rules (year stripping, store IDs, watermarks);
+    those must run after the split on the title half only, otherwise they
+    damage short numeric titles like ``"Binary Finary - 1998"``.
+    """
+    if raw.count("_") >= 3 and "-" in raw:
+        # Keep dashes literal; convert underscores to spaces.
+        normalized = raw.replace("_", " ")
+        normalized = re.sub(r"  +", " ", normalized).strip(" -")
+        return normalized
+    return raw
+
+
+def cleanup_artist(artist: str) -> tuple[str, list[str]]:
+    """Minimal artist-side cleanup: HTML entities and whitespace only.
+
+    Title-specific rules (trailing year, store IDs, watermarks, MASTER suffix,
+    etc.) must not run on the artist half — they'd mangle legitimate artist
+    names. Keep this intentionally narrow.
+    """
+    changes: list[str] = []
+    decoded = html.unescape(artist)
+    if decoded != artist:
+        changes.append("decoded HTML entities in artist")
+        artist = decoded
+    stripped = re.sub(r"  +", " ", artist.strip())
+    if stripped != artist:
+        changes.append("trimmed artist whitespace")
+    return stripped, changes
+
+
 def cleanup_title(title: str, artist: str = "") -> tuple[str, list[str]]:
     """Clean a track title, returning ``(cleaned, list_of_changes)``."""
     original = title

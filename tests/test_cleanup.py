@@ -1,8 +1,10 @@
 """Tests for title/artist cleanup."""
 
 from dj_agent.cleanup import (
+    cleanup_artist,
     cleanup_title,
     extract_featured_artists,
+    normalize_for_split,
     smart_title_case,
     split_artist_from_title,
 )
@@ -109,6 +111,76 @@ class TestFeaturedArtists:
         main, guests = extract_featured_artists("Bicep & Hammer")
         assert main == "Bicep"
         assert guests == ["Hammer"]
+
+
+class TestCleanupArtist:
+    def test_html_entities(self):
+        artist, changes = cleanup_artist("Beethoven&#39;s Band")
+        assert artist == "Beethoven's Band"
+        assert any("HTML" in c for c in changes)
+
+    def test_trims_whitespace(self):
+        artist, _ = cleanup_artist("  Artist Name  ")
+        assert artist == "Artist Name"
+
+    def test_does_not_strip_year(self):
+        # A title-side rule would eat "1998"; the artist cleanup must not.
+        artist, _ = cleanup_artist("Binary Finary 1998")
+        assert artist == "Binary Finary 1998"
+
+
+class TestPipelineOrder:
+    """Regression tests for split→cleanup order in the analysis pipeline."""
+
+    def test_numeric_title_not_stripped(self):
+        # "Binary Finary - 1998" must produce artist='Binary Finary',
+        # title='1998'. Previously cleanup_title stripped the year before
+        # the split could see it.
+        artist, title_part = split_artist_from_title("Binary Finary - 1998")
+        assert artist == "Binary Finary"
+        cleaned, _ = cleanup_title(title_part)
+        assert cleaned == "1998"
+
+    def test_watermark_after_split(self):
+        # Artist on the left must be preserved; watermark on the right
+        # must be cleaned from the title only.
+        artist, title_part = split_artist_from_title(
+            "Safar (FR) - Love Parade - www.electronicfre"
+        )
+        assert artist == "Safar (FR)"
+        cleaned, changes = cleanup_title(title_part)
+        assert cleaned == "Love Parade"
+        assert any("watermark" in c for c in changes)
+
+    def test_underscore_filename_splits_after_normalization(self):
+        # Files like "Einmusik_Aaron_Suiss_-_Sabai" must still split
+        # correctly after the pipeline reorder. The split regex needs
+        # whitespace around the dash, so underscores must be converted
+        # BEFORE the split — but without running title-specific rules.
+        normalized = normalize_for_split("Einmusik_Aaron_Suiss_-_Sabai")
+        artist, title_part = split_artist_from_title(normalized)
+        assert artist == "Einmusik Aaron Suiss"
+        assert title_part == "Sabai"
+
+    def test_normalize_preserves_short_numeric_title(self):
+        # Underscore normalization must not damage the numeric-title case.
+        normalized = normalize_for_split("Binary_Finary_-_1998")
+        artist, title_part = split_artist_from_title(normalized)
+        assert artist == "Binary Finary"
+        cleaned, _ = cleanup_title(title_part)
+        assert cleaned == "1998"
+
+    def test_normalize_leaves_simple_dashes_alone(self):
+        # No underscores -> no change, split still works on " - ".
+        assert normalize_for_split("Artist - Title") == "Artist - Title"
+
+    def test_trailing_year_in_real_title_still_stripped(self):
+        # Legitimate title-side year should still be removed by rule 10.
+        artist, title_part = split_artist_from_title("Some Artist - Song Name 2013")
+        assert artist == "Some Artist"
+        cleaned, changes = cleanup_title(title_part)
+        assert cleaned == "Song Name"
+        assert any("2013" in c for c in changes)
 
 
 class TestSmartTitleCase:

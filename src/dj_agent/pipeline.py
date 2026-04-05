@@ -17,7 +17,14 @@ import numpy as np
 
 from .audio import load_audio, measure_loudness
 from .calibration import apply_calibration
-from .cleanup import cleanup_title, split_artist_from_title, extract_featured_artists, smart_title_case
+from .cleanup import (
+    cleanup_artist,
+    cleanup_title,
+    extract_featured_artists,
+    normalize_for_split,
+    smart_title_case,
+    split_artist_from_title,
+)
 from .config import get_config
 from .cues import detect_cue_points
 from .energy import calculate_energy, energy_to_colour, energy_to_colour_id
@@ -150,26 +157,42 @@ def analyse_track_full(
     # ── Title cleanup ─────────────────────────────────────────────
     try:
         raw_name = path.stem
-        cleaned, changes = cleanup_title(raw_name)
-        artist, title = split_artist_from_title(cleaned)
+
+        # Pre-split: only normalize underscores so the delimiter becomes
+        # visible. Title-specific rules must NOT run here.
+        normalized_raw = normalize_for_split(raw_name)
+
+        # Split BEFORE title cleanup so rules like "strip trailing year"
+        # don't eat into the artist half or into short titles that happen
+        # to be numeric (e.g. "Binary Finary - 1998" must keep "1998").
+        artist, title_part = split_artist_from_title(normalized_raw)
+        if title_part is None:
+            title_part = normalized_raw
+
+        # Clean each half with the appropriate ruleset
+        cleaned_title, title_changes = cleanup_title(title_part)
+        if artist:
+            artist, artist_changes = cleanup_artist(artist)
+        else:
+            artist_changes = []
 
         # Featured artist extraction
-        featured = []
+        featured: list[str] = []
         if artist:
             artist, featured = extract_featured_artists(artist)
 
         # Smart title casing
-        if title:
-            title = smart_title_case(title)
+        if cleaned_title:
+            cleaned_title = smart_title_case(cleaned_title)
         if artist:
             artist = smart_title_case(artist)
 
         result["raw_filename"] = raw_name
-        result["cleaned_title"] = cleaned
+        result["cleaned_title"] = cleaned_title
         result["artist"] = artist or ""
-        result["title"] = title
+        result["title"] = cleaned_title
         result["featured_artists"] = featured
-        result["cleanup_changes"] = changes
+        result["cleanup_changes"] = title_changes + artist_changes
     except Exception as e:
         _log.warning("Cleanup failed for %s: %s", path.name, e)
 
