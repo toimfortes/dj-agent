@@ -17,6 +17,28 @@ from typing import Any
 from .config import RekordboxConfig
 
 
+# Path substrings that identify Rekordbox built-in tracks (sampler loops,
+# demo tracks) which must never be matched by filename-based sync, because
+# they use generic filenames like "House1.wav", "Techno1.wav", "Demo Track
+# 1.mp3" that collide with real user library entries. Anything whose
+# FolderPath contains one of these substrings should be skipped by the
+# caller's matching loop.
+BUILTIN_PATH_MARKERS: tuple[str, ...] = (
+    "rekordbox/Sampler",
+    "PioneerDJ/Demo",
+)
+
+
+def is_builtin_rekordbox_path(folder_path: str) -> bool:
+    """Return True if the given FolderPath is a Rekordbox built-in track.
+
+    Filename-based sync must skip these — they use generic filenames that
+    collide with real library tracks (e.g. House1.wav, Techno1.wav).
+    """
+    normalized = (folder_path or "").replace("\\", "/")
+    return any(marker in normalized for marker in BUILTIN_PATH_MARKERS)
+
+
 # ---------------------------------------------------------------------------
 # DB writes
 # ---------------------------------------------------------------------------
@@ -82,11 +104,20 @@ def rb_url_encode(path: str) -> str:
     """Encode a file path the way Rekordbox does in its XML.
 
     Rekordbox encodes spaces, ampersands, and other URI-unsafe characters
-    but leaves parentheses, commas, and hash signs literal.
+    but leaves parentheses, commas, hash signs, and drive-letter colons
+    literal.
+
+    Output format: ``file://localhost/<abs path>`` — the leading slash
+    after ``localhost`` is always required. On Unix the path already
+    starts with ``/``; on Windows the path starts with ``C:/...`` and
+    we must prepend a ``/`` so the final URL is
+    ``file://localhost/C:/...`` (with the colon kept literal).
     """
     from urllib.parse import quote
-    # quote() with safe="/" preserves path separators; encodes spaces, &, ?, [, ] etc.
-    return "file://localhost" + quote(path, safe="/(),#;!~")
+    if not path.startswith("/"):
+        path = "/" + path
+    # safe list includes ":" so Windows drive letters stay literal.
+    return "file://localhost" + quote(path, safe="/:(),#;!~")
 
 
 def generate_cue_xml(
