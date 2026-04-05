@@ -1,11 +1,20 @@
-"""Phrase-aware cue point detection.
+"""Phrase-aware cue point detection with multi-feature labelling.
 
-Improvements over the original:
+Detects structural segment boundaries via agglomerative clustering on a
+mel spectrogram, then extracts per-segment features (bass RMS, vocal-band
+harmonic ratio, percussive ratio, overall RMS, centroid) and labels each
+segment with a DJ-relevant name (Intro, Drop, Breakdown, Build, Vocal,
+Groove, Outro).
+
+Also detects vocal re-entry points: if vocals return after ≥4 bars of
+instrumental silence (BPM-aware), a "Vocal In" cue is emitted. 4 bars at
+120 BPM ≈ 8 s, scaling with tempo to match musical phrasing.
+
+Sources:
 - PSSI-first: reads Rekordbox song structure if available
 - Adaptive k based on track duration
-- Dual thresholds (hysteresis) instead of a single 0.6
-- Phrase-level snapping (8-bar boundaries, not random beats)
-- Smart intro (not always at 0:00)
+- Phrase-level snapping (8-bar boundaries)
+- Research: 4-bar threshold matches Mixed In Key's vocal-cue heuristic
 """
 
 from __future__ import annotations
@@ -32,12 +41,18 @@ def detect_cue_points(
     duration: float,
     config: CueConfig | None = None,
     anlz_path: str | Path | None = None,
+    has_vocals: bool | None = None,
 ) -> list[CuePoint]:
     """Detect structural cue points from audio.
 
     If *anlz_path* is provided and ``config.use_pssi`` is True, tries to
     read Rekordbox's PSSI (song structure) tag first.  Falls back to
     audio-based detection if PSSI is unavailable.
+
+    If *has_vocals* is False, vocal re-entry detection is skipped (it uses
+    a librosa heuristic that false-positives on instrumental tracks with
+    prominent synth leads in the 300-4000 Hz band). Pass the track-level
+    Essentia vocal classification if available.
 
     Returns a list of :class:`CuePoint` sorted by position.
     """
@@ -77,28 +92,34 @@ def detect_cue_points(
     phrase_sec = config.phrase_length_bars * beat_sec * 4  # 4 beats/bar
     bound_times = np.array([_snap_to_phrase(t, phrase_sec) for t in bound_times])
 
-    # Build segments with energy
-    segments = _build_segments(bound_times, rms, sr, duration)
+    # Build segments with multi-feature extraction
+    segments = _build_segments_with_features(bound_times, audio, sr, duration)
     if not segments:
         return []
 
-    # Normalise segment energy
-    max_rms = max(s["energy"] for s in segments)
-    if max_rms == 0:
-        return []
-    for s in segments:
-        s["energy"] /= max_rms
+    # Normalise features across segments (relative scoring per track)
+    _normalise_features(segments)
 
-    # Classify transitions using dual thresholds (hysteresis)
-    cues = _classify_transitions(
-        segments, duration, config, phrase_sec,
+    # Label each segment boundary using bass/vocal/RMS features.
+    # If the track is instrumental, suppress "Vocal" labels in segment
+    # classification — the vocal-band heuristic triggers on synth leads.
+    cues = _classify_segments(
+        segments, duration, config,
+        allow_vocal_label=(has_vocals is not False),
     )
+
+    # Detect vocal re-entry points (BPM-aware: ≥4 bars of instrumental gap).
+    # Skip entirely if the track is known to be instrumental.
+    if has_vocals is not False:
+        vocal_cues = _detect_vocal_entries(audio, sr, duration, bpm, segments)
+        cues.extend(vocal_cues)
 
     # Deduplicate cues that are too close
     cues = _deduplicate(cues, config.min_cue_distance_sec)
 
-    # Limit to 8 (Rekordbox hot-cue max)
-    return cues[:8]
+    # Cap at 8 (Rekordbox hot-cue max) — keep cues that span the whole
+    # track. Prefer Drops, Breakdowns, Vocal entries; always keep Intro/Outro.
+    return _select_top_cues(cues, max_cues=8)
 
 
 def detect_cue_points_from_pssi(anlz_path: str | Path) -> list[CuePoint] | None:
@@ -177,73 +198,337 @@ def _snap_to_phrase(time_sec: float, phrase_sec: float) -> float:
     return round(time_sec / phrase_sec) * phrase_sec
 
 
-def _build_segments(
+def _build_segments_with_features(
     bound_times: np.ndarray,
-    rms: np.ndarray,
+    audio: np.ndarray,
     sr: int,
     duration: float,
 ) -> list[dict]:
+    """Build segment records with per-segment audio features.
+
+    Each segment carries: start, end, rms, bass, vocal (vocal-band harmonic
+    ratio), perc (percussive ratio), centroid. Features are raw (not
+    normalised) — normalisation happens afterward per track.
+    """
     segments: list[dict] = []
     for i in range(len(bound_times)):
         start = float(bound_times[i])
         end = float(bound_times[i + 1]) if i + 1 < len(bound_times) else duration
-        sf = librosa.time_to_frames(start, sr=sr, hop_length=512)
-        ef = min(librosa.time_to_frames(end, sr=sr, hop_length=512), len(rms))
-        seg_rms = float(np.mean(rms[sf:ef])) if ef > sf else 0.0
-        segments.append({"start": start, "end": end, "energy": seg_rms})
+        if end - start < 2.0:  # skip tiny segments
+            continue
+        feats = _extract_features(audio, sr, start, end)
+        if feats is None:
+            continue
+        feats["start"] = start
+        feats["end"] = end
+        segments.append(feats)
     return segments
 
 
-def _classify_transitions(
+def _extract_features(
+    audio: np.ndarray, sr: int, start_sec: float, end_sec: float
+) -> dict | None:
+    """Extract DJ-relevant features for a single segment window."""
+    s = max(0, int(start_sec * sr))
+    e = min(len(audio), int(end_sec * sr))
+    if e - s < sr:  # need at least 1 s
+        return None
+    seg = audio[s:e]
+
+    # Overall RMS
+    rms = float(np.sqrt(np.mean(seg ** 2)))
+
+    # STFT for band-limited features
+    try:
+        stft = np.abs(librosa.stft(seg, n_fft=2048, hop_length=512))
+    except Exception:
+        return None
+    freqs = librosa.fft_frequencies(sr=sr, n_fft=2048)
+
+    # Bass energy (20-150 Hz) — tells us if kick+bass are present
+    bass_mask = (freqs >= 20) & (freqs <= 150)
+    bass = float(np.mean(stft[bass_mask])) if bass_mask.any() else 0.0
+
+    # Vocal-band harmonic ratio (300-4000 Hz) — proxy for vocal presence
+    try:
+        y_harm, y_perc = librosa.effects.hpss(seg, margin=1.0)
+        stft_h = np.abs(librosa.stft(y_harm, n_fft=2048, hop_length=512))
+        vocal_mask = (freqs >= 300) & (freqs <= 4000)
+        vocal_band = float(np.mean(stft_h[vocal_mask])) if vocal_mask.any() else 0.0
+        total_harm = float(np.mean(stft_h)) + 1e-8
+        vocal = vocal_band / total_harm
+        # Percussive vs total energy (drumless intro/break → low perc ratio)
+        perc_e = float(np.sqrt(np.mean(y_perc ** 2)))
+        harm_e = float(np.sqrt(np.mean(y_harm ** 2)))
+        perc_ratio = perc_e / (perc_e + harm_e + 1e-8)
+    except Exception:
+        vocal = 0.0
+        perc_ratio = 0.5
+
+    # Spectral centroid — brightness indicator (filter sweeps, rolloff)
+    try:
+        centroid = float(np.mean(librosa.feature.spectral_centroid(y=seg, sr=sr)))
+    except Exception:
+        centroid = 0.0
+
+    return {
+        "rms": rms,
+        "bass": bass,
+        "vocal": vocal,
+        "perc_ratio": perc_ratio,
+        "centroid": centroid,
+    }
+
+
+def _normalise_features(segments: list[dict]) -> None:
+    """Normalise rms/bass/vocal/centroid to [0,1] per track (in-place)."""
+    for key in ("rms", "bass", "vocal", "centroid"):
+        values = [s[key] for s in segments]
+        max_v = max(values) + 1e-8
+        for s in segments:
+            s[f"{key}_n"] = s[key] / max_v
+    # Keep a legacy "energy" alias for downstream code
+    for s in segments:
+        s["energy"] = s["rms_n"]
+
+
+def _classify_segments(
     segments: list[dict],
     duration: float,
     config: CueConfig,
-    phrase_sec: float,
+    allow_vocal_label: bool = True,
 ) -> list[CuePoint]:
-    """Use dual thresholds to classify transitions."""
-    lo = config.energy_threshold_low
-    hi = config.energy_threshold_high
+    """Label each segment boundary by its multi-feature signature.
 
+    Uses bass + rms + vocal + percussive ratio + position to distinguish:
+    - Intro: start of track, low bass/rms
+    - Drop: high bass + high rms, especially after a low-bass section
+    - Breakdown: low bass + mid-low rms in mid-track
+    - Build: rising rms, bass still developing (often pre-drop)
+    - Vocal: high vocal-band harmonic ratio + moderate+ rms
+    - Groove: sustained bass+rms, no vocal, between drops
+    - Outro: final segment with falling rms
+    """
     cues: list[CuePoint] = []
+    if not segments:
+        return cues
 
-    # Smart intro: first segment above low threshold
-    for s in segments:
-        if s["energy"] >= lo:
-            pos = int(s["start"] * 1000)
-            cues.append(CuePoint(position_ms=pos, name="Intro", colour="green"))
-            break
-    else:
-        # Fallback: start of track
-        cues.append(CuePoint(position_ms=0, name="Intro", colour="green"))
+    # First segment: Intro
+    first_pos = int(segments[0]["start"] * 1000)
+    cues.append(CuePoint(position_ms=first_pos, name="Intro", colour="green"))
 
-    # Drops and breakdowns
     for i in range(1, len(segments)):
-        prev_e = segments[i - 1]["energy"]
-        curr_e = segments[i]["energy"]
-        pos = int(segments[i]["start"] * 1000)
+        s = segments[i]
+        prev = segments[i - 1]
+        pos = int(s["start"] * 1000)
+        rel = s["start"] / duration if duration > 0 else 0
 
-        if prev_e < lo and curr_e >= hi:
-            cues.append(CuePoint(position_ms=pos, name="Drop", colour="red"))
-        elif prev_e >= hi and curr_e < lo:
-            cues.append(CuePoint(position_ms=pos, name="Breakdown", colour="blue"))
+        rms = s["rms_n"]
+        bass = s["bass_n"]
+        vocal = s["vocal_n"]
+        prev_bass = prev["bass_n"]
+        prev_rms = prev["rms_n"]
 
-    # Outro: last low-energy segment after 60% of track
-    for s in reversed(segments):
-        if s["energy"] < lo and s["start"] > duration * 0.60:
-            pos = int(s["start"] * 1000)
-            cues.append(CuePoint(position_ms=pos, name="Outro", colour="yellow"))
-            break
+        name, colour = _label_segment(
+            rms=rms, bass=bass, vocal=vocal,
+            prev_rms=prev_rms, prev_bass=prev_bass,
+            rel_pos=rel, is_last=(i == len(segments) - 1),
+            allow_vocal=allow_vocal_label,
+        )
+        cues.append(CuePoint(position_ms=pos, name=name, colour=colour))
+
+    return cues
+
+
+def _label_segment(
+    *,
+    rms: float, bass: float, vocal: float,
+    prev_rms: float, prev_bass: float,
+    rel_pos: float, is_last: bool,
+    allow_vocal: bool = True,
+) -> tuple[str, str]:
+    """Pick a DJ-relevant label from normalised segment features.
+
+    All inputs are in [0, 1] (track-relative). Decision order matters —
+    specific cases first, generic fallbacks last.
+    """
+    # Outro: final segment, RMS falling
+    if is_last and rel_pos > 0.60 and rms < 0.55:
+        return "Outro", "yellow"
+
+    # Drop: big bass + big RMS, ideally after a low-bass section
+    if bass >= 0.70 and rms >= 0.70:
+        if prev_bass < 0.45:
+            return "Drop", "red"  # classic drop entry
+        return "Peak", "red"      # sustained high energy
+
+    # Breakdown: low bass + dropped RMS in mid-track
+    if bass < 0.40 and rms < 0.60 and 0.15 < rel_pos < 0.85:
+        return "Breakdown", "blue"
+
+    # Build-up: RMS rising + bass still developing (common pre-drop pattern)
+    if rms > prev_rms + 0.12 and bass < 0.65:
+        return "Build", "yellow"
+
+    # Vocal section: strong vocal band + sustained RMS (only if track has vocals)
+    if allow_vocal and vocal >= 0.75 and rms >= 0.50:
+        return "Vocal", "green"
+
+    # Groove / main section: beat + bass present, no big change
+    if bass >= 0.50 and rms >= 0.50:
+        return "Groove", "red"
+
+    # Low-energy sustain (ambient, quiet section)
+    return "Break", "blue"
+
+
+def _detect_vocal_entries(
+    audio: np.ndarray,
+    sr: int,
+    duration: float,
+    bpm: float,
+    segments: list[dict],
+) -> list[CuePoint]:
+    """Detect vocal re-entry points as hot cues.
+
+    Slides a short analysis window across the track, tracks whether each
+    window contains vocals (harmonic energy in 300-4000 Hz band), and
+    emits a "Vocal In" cue whenever vocals return after ≥4 bars of
+    instrumental silence. BPM-aware: 4 bars at 120 BPM ≈ 8 s.
+    """
+    if bpm <= 0 or duration <= 0:
+        return []
+
+    # 4 bars of instrumental silence = phrase unit DJs treat as a section
+    beat_sec = 60.0 / bpm
+    min_gap_sec = 4 * 4 * beat_sec  # 4 bars × 4 beats
+
+    # Analysis window ≈ 2 beats, hop ≈ 1 beat — fine-grained but cheap
+    win_sec = max(2.0, 2 * beat_sec)
+    hop_sec = max(1.0, beat_sec)
+
+    # Establish a track-wide vocal threshold from the segments we already have
+    seg_vocals = sorted(s["vocal"] for s in segments)
+    if not seg_vocals:
+        return []
+    # Median + a margin — tracks vary in vocal loudness so use percentiles
+    median_vocal = seg_vocals[len(seg_vocals) // 2]
+    max_vocal = seg_vocals[-1] + 1e-8
+    # A window "has vocals" when its vocal ratio is well above the median
+    vocal_threshold = median_vocal + 0.15 * (max_vocal - median_vocal)
+
+    # Slide windows across the track
+    windows: list[tuple[float, bool]] = []
+    t = 0.0
+    while t + win_sec <= duration:
+        feats = _extract_features(audio, sr, t, t + win_sec)
+        if feats is not None:
+            windows.append((t, feats["vocal"] > vocal_threshold))
+        t += hop_sec
+
+    if not windows:
+        return []
+
+    # Walk windows, emit a cue when vocals return after a gap of ≥ min_gap_sec
+    cues: list[CuePoint] = []
+    last_vocal_end = -1e9
+    currently_vocal = False
+    for t_start, has_vocal in windows:
+        if has_vocal:
+            if not currently_vocal:
+                gap = t_start - last_vocal_end
+                if gap >= min_gap_sec and t_start > 0.5:  # not the very start
+                    cues.append(CuePoint(
+                        position_ms=int(t_start * 1000),
+                        name="Vocal",
+                        colour="green",
+                        confidence=0.8,
+                    ))
+            currently_vocal = True
+            last_vocal_end = t_start + win_sec
+        else:
+            currently_vocal = False
 
     return cues
 
 
 def _deduplicate(cues: list[CuePoint], min_dist_sec: float) -> list[CuePoint]:
-    """Remove cues that are too close together, keeping earlier ones."""
+    """Remove cues that are too close together or that repeat the same label.
+
+    Two rules:
+    1. Cues within *min_dist_sec* of each other are merged (keep the first).
+    2. Consecutive cues with the same name are collapsed — the repeated
+       ones are demoted rather than dropped, so structural markers win
+       and we still get varied labels. A chain of "Breakdown"s becomes a
+       single "Breakdown" followed by (nothing) — downstream selection
+       then fills remaining slots with other cue types.
+    """
     if not cues:
         return cues
     cues.sort(key=lambda c: c.position_ms)
-    result = [cues[0]]
+
+    # Pass 1: distance dedup
+    result: list[CuePoint] = [cues[0]]
     for cue in cues[1:]:
         if (cue.position_ms - result[-1].position_ms) >= min_dist_sec * 1000:
             result.append(cue)
-    return result
+
+    # Pass 2: collapse consecutive identical labels
+    collapsed: list[CuePoint] = []
+    for cue in result:
+        if collapsed and collapsed[-1].name == cue.name:
+            continue
+        collapsed.append(cue)
+    return collapsed
+
+
+# Structural-importance ranking for cue selection when we have more than 8
+_CUE_PRIORITY = {
+    "Intro": 0,     # always keep
+    "Outro": 1,     # always keep
+    "Drop": 2,      # DJ mix-in/out points
+    "Breakdown": 3, # build-up markers
+    "Vocal": 4,     # vocal re-entry after instrumental gap
+    "Build": 5,
+    "Peak": 6,
+    "Groove": 7,
+    "Break": 8,
+}
+
+
+def _select_top_cues(cues: list[CuePoint], max_cues: int = 8) -> list[CuePoint]:
+    """Rank cues and mark overflow as memory-only.
+
+    Strategy: always keep Intro (first) and Outro (last) as hot cues;
+    from the middle, pick cues by structural priority (Drops, Breakdowns,
+    Vocal entries first) until we hit the hot-cue limit. Any cue beyond
+    *max_cues* is kept but tagged with ``memory_only=True`` so sync.py
+    writes it as a memory cue only (Num=-1, no hot cue slot).
+
+    Returns ALL cues in chronological order — the first *max_cues* as
+    hot cues, the rest as memory-only.
+    """
+    if len(cues) <= max_cues:
+        return cues
+
+    # Sort by position so first=Intro, last=Outro
+    cues = sorted(cues, key=lambda c: c.position_ms)
+    hot_cue_indices: set[int] = {0, len(cues) - 1}  # always keep first + last
+
+    # Rank middle cues by priority, then by position (earlier first on ties)
+    middle_indices = list(range(1, len(cues) - 1))
+    middle_indices.sort(
+        key=lambda i: (_CUE_PRIORITY.get(cues[i].name, 99), cues[i].position_ms)
+    )
+
+    for i in middle_indices:
+        if len(hot_cue_indices) >= max_cues:
+            break
+        hot_cue_indices.add(i)
+
+    # Tag overflow cues as memory-only
+    for i, cue in enumerate(cues):
+        if i not in hot_cue_indices:
+            cue.memory_only = True
+
+    return cues

@@ -179,10 +179,17 @@ def analyse_track_full(
     # ── Cue points ────────────────────────────────────────────────
     if y is not None and duration > 0 and tempo > 0:
         try:
-            cues = detect_cue_points(y, sr, bpm=tempo, duration=duration)
+            # Use Essentia's vocal classification (set above) to gate the
+            # vocal-entry heuristic. "instrumental" → skip vocal cues.
+            vc = result.get("vocal_classification")
+            has_vox = None if vc is None else (vc != "instrumental")
+            cues = detect_cue_points(
+                y, sr, bpm=tempo, duration=duration, has_vocals=has_vox,
+            )
             result["cues"] = [
                 {"name": c.name, "position_ms": c.position_ms,
-                 "colour": c.colour, "confidence": c.confidence}
+                 "colour": c.colour, "confidence": c.confidence,
+                 "memory_only": c.memory_only}
                 for c in cues
             ]
         except Exception as e:

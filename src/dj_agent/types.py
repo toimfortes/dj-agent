@@ -40,12 +40,18 @@ class EnergyResult:
 
 @dataclass
 class CuePoint:
-    """A single hot-cue or memory-cue point."""
+    """A single hot-cue or memory-cue point.
+
+    If ``memory_only`` is True, this cue is written as a Rekordbox memory
+    cue only (Num="-1") with no hot cue slot. Used for cues beyond the
+    8-slot hot cue limit so the user still sees them in Rekordbox.
+    """
 
     position_ms: int
     name: str  # "Intro", "Drop", "Breakdown", "Outro"
     colour: str  # "green", "red", "blue", "yellow"
     confidence: float = 1.0
+    memory_only: bool = False
 
 
 @dataclass

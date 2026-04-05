@@ -183,14 +183,15 @@ def generate_cue_xml(
 
         # Rekordbox's XML format requires every hot cue to appear TWICE:
         # once in a hot-cue slot (Num="0".."7", i.e. Hot Cue A..H) and once
-        # as a memory cue (Num="-1"). If only the slot entry is present,
-        # Rekordbox imports the first as Hot Cue A and silently drops the
-        # rest. Write slot entries first, then memory entries, to match
-        # Rekordbox's own export order.
-        cues = t.get("cues", [])[:8]
+        # as a memory cue (Num="-1"). Cues flagged ``memory_only`` get only
+        # the Num="-1" entry (structural markers beyond the 8 hot-cue limit
+        # — the user still sees them in Rekordbox as memory cues).
+        all_cues = t.get("cues", [])
+        hot_cues = [c for c in all_cues if not c.get("memory_only")][:8]
+        memory_only_cues = [c for c in all_cues if c.get("memory_only")]
 
         # Hot cue slots (Num 0..7 = A..H)
-        for idx, cue in enumerate(cues):
+        for idx, cue in enumerate(hot_cues):
             rgb = COLOUR_MAP.get(cue.get("colour", "green"), COLOUR_MAP["green"])
             pos_sec = cue.get("position_ms", 0) / 1000.0
             ET.SubElement(
@@ -202,8 +203,21 @@ def generate_cue_xml(
                 Num=str(idx),
                 **rgb,
             )
-        # Memory cues (Num = -1)
-        for cue in cues:
+        # Memory cue counterparts for hot cues (required for Rekordbox import)
+        for cue in hot_cues:
+            rgb = COLOUR_MAP.get(cue.get("colour", "green"), COLOUR_MAP["green"])
+            pos_sec = cue.get("position_ms", 0) / 1000.0
+            ET.SubElement(
+                track_el,
+                "POSITION_MARK",
+                Name=cue.get("name", "Cue"),
+                Type="0",
+                Start=f"{pos_sec:.3f}",
+                Num="-1",
+                **rgb,
+            )
+        # Memory-only cues (overflow structural markers beyond the 8 hot-cue limit)
+        for cue in memory_only_cues:
             rgb = COLOUR_MAP.get(cue.get("colour", "green"), COLOUR_MAP["green"])
             pos_sec = cue.get("position_ms", 0) / 1000.0
             ET.SubElement(
