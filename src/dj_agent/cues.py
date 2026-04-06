@@ -111,7 +111,7 @@ def detect_cue_points(
     # Detect vocal re-entry points (BPM-aware: ≥4 bars of instrumental gap).
     # Skip entirely if the track is known to be instrumental.
     if has_vocals is not False:
-        vocal_cues = _detect_vocal_entries(audio, sr, duration, bpm, segments)
+        vocal_cues = detect_vocal_entries(audio, sr, duration, bpm, segments)
         cues.extend(vocal_cues)
 
     # Deduplicate cues that are too close
@@ -446,19 +446,23 @@ def _label_segment(
     return "Break", "blue"
 
 
-def _detect_vocal_entries(
+def detect_vocal_entries(
     audio: np.ndarray,
     sr: int,
     duration: float,
     bpm: float,
-    segments: list[dict],
+    segments: list[dict] | None = None,
 ) -> list[CuePoint]:
     """Detect vocal re-entry points as hot cues.
 
     Slides a short analysis window across the track, tracks whether each
     window contains vocals (harmonic energy in 300-4000 Hz band), and
-    emits a "Vocal In" cue whenever vocals return after ≥4 bars of
+    emits a "Vocal" cue whenever vocals return after ≥4 bars of
     instrumental silence. BPM-aware: 4 bars at 120 BPM ≈ 8 s.
+
+    Works with both librosa segments (if already computed) and standalone
+    (e.g. after PSSI cue detection) — when ``segments`` is None, a quick
+    first pass over the track establishes the vocal threshold directly.
     """
     if bpm <= 0 or duration <= 0:
         return []
@@ -471,11 +475,20 @@ def _detect_vocal_entries(
     win_sec = max(2.0, 2 * beat_sec)
     hop_sec = max(1.0, beat_sec)
 
-    # Establish a track-wide vocal threshold from the segments we already have
-    seg_vocals = sorted(s["vocal"] for s in segments)
+    # Establish vocal threshold from segments (if available) or from
+    # a quick scan of the track at ~30s intervals
+    if segments and all("vocal" in s for s in segments):
+        seg_vocals = sorted(s["vocal"] for s in segments)
+    else:
+        seg_vocals = []
+        for t_scan in np.arange(0, duration - win_sec, 30.0):
+            feats = _extract_features(audio, sr, t_scan, t_scan + win_sec)
+            if feats is not None:
+                seg_vocals.append(feats["vocal"])
+        seg_vocals.sort()
+
     if not seg_vocals:
         return []
-    # Median + a margin — tracks vary in vocal loudness so use percentiles
     median_vocal = seg_vocals[len(seg_vocals) // 2]
     max_vocal = seg_vocals[-1] + 1e-8
     # A window "has vocals" when its vocal ratio is well above the median
