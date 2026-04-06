@@ -108,6 +108,7 @@ def analyse_track_full(
     skip_if_cached: bool = True,
     include_vocals: bool = True,
     include_mood: bool = True,
+    anlz_path: str | Path | None = None,
     include_reasoning: bool = False,
     reasoning_backend: str = "auto",
 ) -> dict[str, Any]:
@@ -243,10 +244,33 @@ def analyse_track_full(
         pass
 
     # ── Cue points ────────────────────────────────────────────────
-    if y is not None and duration > 0 and tempo > 0:
+    # Strategy: try Rekordbox's PSSI phrase analysis first (when the
+    # Rekordbox library is available — i.e. anlz_path is set). PSSI
+    # uses an ML model trained on DJ music and gives beat-grid-aligned
+    # phrase boundaries. Falls back to librosa-based segmentation when
+    # only audio files are available (e.g. running on a machine without
+    # Rekordbox).
+    cue_dicts: list[dict] | None = None
+
+    # Try PSSI first (requires Rekordbox ANLZ files)
+    if anlz_path and tempo > 0:
         try:
-            # Use Essentia's vocal classification (set above) to gate the
-            # vocal-entry heuristic. "instrumental" → skip vocal cues.
+            from .cues import detect_cue_points_from_pssi
+            pssi_cues = detect_cue_points_from_pssi(anlz_path, bpm=tempo)
+            if pssi_cues:
+                cue_dicts = [
+                    {"name": c.name, "position_ms": c.position_ms,
+                     "colour": c.colour, "confidence": c.confidence,
+                     "memory_only": c.memory_only}
+                    for c in pssi_cues
+                ]
+                _log.info("Used PSSI for cues on %s (%d cues)", path.name, len(cue_dicts))
+        except Exception as e:
+            _log.debug("PSSI unavailable for %s: %s", path.name, e)
+
+    # Fallback: librosa-based segmentation (needs audio)
+    if cue_dicts is None and y is not None and duration > 0 and tempo > 0:
+        try:
             vc = result.get("vocal_classification")
             has_vox = None if vc is None else (vc != "instrumental")
             cues = detect_cue_points(
@@ -258,13 +282,16 @@ def analyse_track_full(
                  "memory_only": c.memory_only}
                 for c in cues
             ]
+        except Exception as e:
+            _log.warning("Cues failed for %s: %s", path.name, e)
 
-            # ── Per-segment energy ────────────────────────────────
-            # Calculate the energy of each section between consecutive
-            # cue points. Useful for DJs to see at a glance how intense
-            # each segment is (e.g. "Drop E:8", "Breakdown E:4").
-            # Reuses the already-loaded audio array y — incremental
-            # cost is ~0.5-1s per track for 7 segments.
+    if cue_dicts:
+        # ── Per-segment energy ────────────────────────────────
+        # Calculate the energy of each section between consecutive
+        # cue points. Works with BOTH PSSI and librosa cues — just
+        # slices the audio array between cue positions. Skipped when
+        # audio is unavailable (e.g. PSSI-only Windows run).
+        if y is not None and len(y) > 0:
             try:
                 _compute_segment_energies(
                     cue_dicts, y, sr, bpm=tempo,
@@ -273,9 +300,7 @@ def analyse_track_full(
             except Exception as e:
                 _log.warning("Segment energy failed for %s: %s", path.name, e)
 
-            result["cues"] = cue_dicts
-        except Exception as e:
-            _log.warning("Cues failed for %s: %s", path.name, e)
+        result["cues"] = cue_dicts
 
     # ── Title cleanup ─────────────────────────────────────────────
     try:

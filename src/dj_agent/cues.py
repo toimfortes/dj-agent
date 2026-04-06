@@ -122,63 +122,127 @@ def detect_cue_points(
     return _select_top_cues(cues, max_cues=8)
 
 
-def detect_cue_points_from_pssi(anlz_path: str | Path) -> list[CuePoint] | None:
-    """Try to read cue points from Rekordbox PSSI (song structure) tag.
+def detect_cue_points_from_pssi(
+    anlz_path: str | Path,
+    bpm: float = 0,
+) -> list[CuePoint] | None:
+    """Read cue points from Rekordbox's PSSI (Phrase Structure) tag.
 
-    Returns ``None`` if the PSSI tag is not present or pyrekordbox cannot
-    parse it.
+    Uses Rekordbox's own ML-based phrase analysis — much more accurate
+    than librosa segmentation because it uses a purpose-trained model
+    and the track's own beat grid.
+
+    The ``kind`` field meaning depends on the track's ``mood`` value:
+
+      - High mood (1): Intro(1), Up/Build(2), Down/Breakdown(3),
+        Chorus/Drop(5), Outro(6)
+      - Mid mood (2): Intro(1), Verse 1-6(2-7), Bridge(8), Chorus(9),
+        Outro(10)
+      - Low mood (3): same as Mid but fewer verse variants
+
+    PSSI spec: https://djl-analysis.deepsymmetry.org/rekordbox-export-analysis/anlz.html
+
+    Returns ``None`` if the PSSI tag is not present.
     """
     try:
         from pyrekordbox.anlz import AnlzFile  # type: ignore[import-untyped]
 
-        anlz = AnlzFile.parse_file(str(anlz_path))
-        pssi = None
-        for tag in anlz.tags:
-            if tag.type == "PSSI":
-                pssi = tag
-                break
-        if pssi is None:
+        ext_path = Path(anlz_path).with_suffix(".EXT")
+        if not ext_path.exists():
             return None
 
-        label_map = {
-            "intro": ("Intro", "green"),
-            "verse": ("Verse", "green"),
-            "chorus": ("Drop", "red"),
-            "drop": ("Drop", "red"),
-            "bridge": ("Breakdown", "blue"),
-            "breakdown": ("Breakdown", "blue"),
-            "outro": ("Outro", "yellow"),
-        }
+        anlz = AnlzFile.parse_file(str(ext_path))
+        pssi_tags = anlz.getall("PSSI")
+        if not pssi_tags or not pssi_tags[0].entries:
+            return None
 
+        pssi = pssi_tags[0]
+        entries = pssi.entries
+
+        # Select kind mapping based on mood
+        mood = getattr(pssi, "mood", None)
+        mood_val = mood if isinstance(mood, int) else getattr(mood, "value", None)
+        kind_map = _PSSI_MOOD_MAPS.get(mood_val, _PSSI_KIND_HIGH)
+
+        # Convert beat indices to ms
+        if bpm <= 0:
+            bpm = 120.0  # safe fallback
+
+        # Emit a cue at each phrase TRANSITION (where label changes).
+        # Consecutive same-label phrases are a sustained section — only
+        # the first gets a hot cue.
         cues: list[CuePoint] = []
-        for entry in pssi.entries:
-            label = (getattr(entry, "mood", "") or "").lower()
-            for key, (name, colour) in label_map.items():
-                if key in label:
-                    # PSSI entries may have 'beat' (beat index) or 'start'
-                    # (time in ms). Try time-based first, fall back to beat.
-                    confidence = 1.0
-                    if hasattr(entry, "start") and entry.start is not None:
-                        pos_ms = int(entry.start)
-                    elif hasattr(entry, "beat") and entry.beat is not None:
-                        # beat index without BPM — approximate, mark low confidence
-                        pos_ms = int(entry.beat * 500)  # ~120 BPM assumed
-                        confidence = 0.3
-                    else:
-                        pos_ms = 0
-                        confidence = 0.1
-                    cues.append(CuePoint(
-                        position_ms=pos_ms,
-                        name=name,
-                        colour=colour,
-                        confidence=confidence,
-                    ))
-                    break
+        prev_label = None
+        for entry in entries:
+            kind = entry.kind
+            kind_val = kind if isinstance(kind, int) else getattr(kind, "value", kind)
 
-        return cues if cues else None
+            label = kind_map.get(kind_val, "Section")
+            colour = _PSSI_LABEL_COLOURS.get(label, "green")
+
+            # k1/k2 variants for high mood (e.g. "Drop" vs "Drop 2")
+            k1 = getattr(entry, "k1", 0)
+            k2 = getattr(entry, "k2", 0)
+            variant = ""
+            if kind_map is _PSSI_KIND_HIGH and label in ("Drop", "Build", "Intro"):
+                if k2:
+                    variant = " 2"
+            full_label = f"{label}{variant}"
+
+            if full_label == prev_label:
+                continue
+            prev_label = full_label
+
+            pos_ms = int((entry.beat - 1) * 60000.0 / bpm)
+
+            cues.append(CuePoint(
+                position_ms=pos_ms,
+                name=full_label,
+                colour=colour,
+                confidence=1.0,
+            ))
+
+        if not cues:
+            return None
+
+        # Mark overflow beyond 8 hot cues as memory-only
+        if len(cues) > 8:
+            _priority = {"Intro": 0, "Outro": 1, "Drop": 2, "Chorus": 2,
+                         "Breakdown": 3, "Bridge": 3, "Build": 4, "Verse": 5}
+            hot = {0, len(cues) - 1}
+            middle = sorted(
+                range(1, len(cues) - 1),
+                key=lambda i: _priority.get(cues[i].name.split()[0], 9),
+            )
+            for i in middle:
+                if len(hot) >= 8:
+                    break
+                hot.add(i)
+            for i, c in enumerate(cues):
+                if i not in hot:
+                    c.memory_only = True
+
+        return cues
 
     except Exception:
         return None
+
+
+# Kind mapping tables per PSSI mood type
+_PSSI_KIND_HIGH: dict[int, str] = {
+    1: "Intro", 2: "Build", 3: "Breakdown", 5: "Drop", 6: "Outro",
+}
+_PSSI_KIND_MID: dict[int, str] = {
+    1: "Intro", 2: "Verse", 3: "Verse", 4: "Verse", 5: "Verse",
+    6: "Verse", 7: "Verse", 8: "Bridge", 9: "Chorus", 10: "Outro",
+}
+_PSSI_KIND_LOW: dict[int, str] = _PSSI_KIND_MID  # same structure
+_PSSI_MOOD_MAPS = {1: _PSSI_KIND_HIGH, 2: _PSSI_KIND_MID, 3: _PSSI_KIND_LOW}
+_PSSI_LABEL_COLOURS: dict[str, str] = {
+    "Intro": "green", "Build": "yellow", "Breakdown": "blue",
+    "Drop": "red", "Outro": "green", "Verse": "green",
+    "Bridge": "blue", "Chorus": "red",
+}
 
 
 # ---------------------------------------------------------------------------
