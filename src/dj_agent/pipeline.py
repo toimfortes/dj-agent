@@ -265,6 +265,32 @@ def analyse_track_full(
                     for c in pssi_cues
                 ]
                 _log.info("Used PSSI for cues on %s (%d cues)", path.name, len(cue_dicts))
+
+                # PSSI gives structural labels (Intro/Drop/Breakdown) but
+                # no vocal information. Run vocal re-entry detection on the
+                # audio and merge "Vocal" cues alongside the PSSI cues.
+                vc = result.get("vocal_classification")
+                if y is not None and vc and vc != "instrumental":
+                    try:
+                        from .cues import detect_vocal_entries, _deduplicate
+                        vocal_cues = detect_vocal_entries(
+                            y, sr, duration, bpm=tempo,
+                        )
+                        if vocal_cues:
+                            for vc_cue in vocal_cues:
+                                cue_dicts.append({
+                                    "name": vc_cue.name,
+                                    "position_ms": vc_cue.position_ms,
+                                    "colour": vc_cue.colour,
+                                    "confidence": vc_cue.confidence,
+                                    "memory_only": True,  # extras beyond PSSI → memory cue
+                                })
+                            _log.info(
+                                "Added %d vocal cues to PSSI for %s",
+                                len(vocal_cues), path.name,
+                            )
+                    except Exception as e:
+                        _log.debug("Vocal cue detection failed for %s: %s", path.name, e)
         except Exception as e:
             _log.debug("PSSI unavailable for %s: %s", path.name, e)
 
