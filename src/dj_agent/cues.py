@@ -547,16 +547,26 @@ def _deduplicate(cues: list[CuePoint], min_dist_sec: float) -> list[CuePoint]:
 
 
 # Structural-importance ranking for cue selection when we have more than 8
+#
+# Hot cues = structural (for NAVIGATION — press a letter to jump).
+# Memory cues = vocal entries (for AWARENESS — visible on waveform).
+#
+# This gives the DJ 8 structural navigation points as hot cues (Intro,
+# Drop, Breakdown, Build, Outro) PLUS vocal entry markers as memory
+# cues visible on the waveform without consuming hot cue slots.
 _CUE_PRIORITY = {
     "Intro": 0,     # always keep
     "Outro": 1,     # always keep
     "Drop": 2,      # DJ mix-in/out points
-    "Breakdown": 3, # build-up markers
-    "Vocal": 4,     # vocal re-entry after instrumental gap
-    "Build": 5,
-    "Peak": 6,
-    "Groove": 7,
-    "Break": 8,
+    "Breakdown": 3, # energy dip markers
+    "Build": 4,
+    "Chorus": 5,
+    "Bridge": 5,
+    "Verse": 6,
+    "Peak": 7,
+    "Groove": 8,
+    "Break": 9,
+    "Vocal": 10,    # memory cue — visible on waveform, doesn't take hot slots
 }
 
 

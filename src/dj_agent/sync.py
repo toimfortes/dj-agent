@@ -182,17 +182,15 @@ def update_genre(content: Any, genre: str) -> None:
 # ---------------------------------------------------------------------------
 
 def _format_cue_name(cue: dict) -> str:
-    """Format a cue name, appending per-segment energy if available.
+    """Format a cue name for XML export.
 
-    ``"Drop"`` with ``segment_energy=8`` becomes ``"Drop E:8"``.
-    Without ``segment_energy`` the name is returned as-is, so existing
-    cues that pre-date segment energy analysis still work.
+    segment_energy is stored in the cue dict for programmatic use
+    (analytics, set builder, smart playlists) but is NOT included in
+    the display name. Rekordbox 7.2.13's XML import silently drops
+    all cues after the first if any cue name contains a colon (the
+    "E:8" suffix we used to append). Plain names import reliably.
     """
-    name = cue.get("name") or "Cue"
-    seg_e = cue.get("segment_energy")
-    if seg_e is not None:
-        return f"{name} E:{seg_e}"
-    return name
+    return cue.get("name") or "Cue"
 
 
 COLOUR_MAP = {
