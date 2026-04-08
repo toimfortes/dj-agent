@@ -52,6 +52,24 @@ Rekordbox XML, Traktor NML, Serato ID3 (MP3/AIFF), Engine DJ SQLite, VirtualDJ X
 
 ---
 
+## Prerequisites
+
+### Required Files (Windows)
+
+DJ Agent reads and writes these files. Make sure they exist before running:
+
+| File | Size | Purpose |
+|---|---|---|
+| `%APPDATA%\Pioneer\rekordbox\master.db` | ~37 MB | Rekordbox database (tracks, playlists, tags, cues) |
+| `%APPDATA%\Pioneer\rekordbox\share\PIONEER\USBANLZ\` | ~567 MB | Rekordbox phrase/waveform analysis (PSSI data for cue detection) |
+| `%USERPROFILE%\.dj-agent\memory.json` | ~5 MB | Agent memory (processed tracks, corrections, calibration) — created automatically on first run |
+| `config.yaml` (project root) | ~1 KB | Agent configuration (energy weights, cue thresholds, etc.) |
+| Rekordbox XML export | ~3 MB | Used for cue/playlist sync (path configured in `config.yaml`) |
+
+> **Close Rekordbox before running DJ Agent.** Rekordbox holds an exclusive lock on `master.db` while running — the agent cannot read or write the database until Rekordbox is closed. The agent checks for this automatically and will refuse to proceed if Rekordbox is detected.
+
+---
+
 ## Quick Start
 
 ```bash

@@ -56,7 +56,11 @@ def main() -> None:
         else:
             mem_by_fn[fn] = entry
 
-    db = Rekordbox6Database()
+    db_path = Path.home() / ".local" / "share" / "Pioneer" / "rekordbox" / "master.db"
+    if db_path.exists():
+        db = Rekordbox6Database(path=db_path)
+    else:
+        db = Rekordbox6Database()
     all_content = list(db.get_content())
     matched = match_memory_to_db(mem_by_fn, all_content)
 
