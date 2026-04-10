@@ -26,7 +26,8 @@ memory:
 rekordbox:
   check_process: true
   backup_before_write: true
-  xml_output_dir: C:/Users/Antonio Fortes/OneDrive/Documents/rekordbox/
+  # Set this to your Rekordbox XML output directory
+  xml_output_dir: ~/Documents/DJ/dj-agent/
 
 duplicates:
   hash_chunk_size: 65536
