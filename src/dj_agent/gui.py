@@ -9,6 +9,8 @@ Opens at http://localhost:7860
 
 from __future__ import annotations
 
+import atexit
+import shutil
 import tempfile
 from pathlib import Path
 from typing import Any
@@ -17,6 +19,16 @@ import gradio as gr
 import numpy as np
 
 from .master import TEMPLATES, MasterTemplate, format_comparison, master_track
+
+_temp_dirs: list[Path] = []
+
+
+def _cleanup_temp_dirs() -> None:
+    for d in _temp_dirs:
+        shutil.rmtree(d, ignore_errors=True)
+
+
+atexit.register(_cleanup_temp_dirs)
 
 
 # ---------------------------------------------------------------------------
@@ -36,6 +48,7 @@ def _process_single(
 
     input_path = Path(audio_path)
     output_dir = Path(tempfile.mkdtemp(prefix="dj_agent_"))
+    _temp_dirs.append(output_dir)
     output_path = output_dir / f"{input_path.stem}_mastered{input_path.suffix}"
 
     template_key = template_name.lower().replace(" ", "_")
@@ -68,6 +81,7 @@ def _process_batch(
         template_key = "official"
 
     output_dir = Path(tempfile.mkdtemp(prefix="dj_agent_batch_"))
+    _temp_dirs.append(output_dir)
     results: list[dict[str, Any]] = []
     errors: list[str] = []
 
@@ -254,6 +268,7 @@ def create_app() -> gr.Blocks:
                         from .stems import export_stems
                         import tempfile
                         output_dir = Path(tempfile.mkdtemp(prefix="dj_stems_"))
+                        _temp_dirs.append(output_dir)
                         paths = export_stems(audio_path, output_dir)
                         path_map = {p.stem: str(p) for p in paths}
                         # Handle variant stem names across Demucs models

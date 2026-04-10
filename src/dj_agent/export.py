@@ -325,7 +325,7 @@ def write_virtualdj_xml(
 
 def export_cues(
     tracks: list[dict[str, Any]],
-    format: str,
+    output_format: str,
     output_path: str | Path | None = None,
     **kwargs: Any,
 ) -> Any:
@@ -333,21 +333,21 @@ def export_cues(
 
     Parameters
     ----------
-    format : "rekordbox", "traktor", "serato", "engine", "virtualdj"
+    output_format : "rekordbox", "traktor", "serato", "engine", "virtualdj"
     """
-    if format == "traktor":
+    if output_format == "traktor":
         return write_traktor_nml(tracks, output_path or "traktor_collection.nml")
-    elif format == "serato":
+    elif output_format == "serato":
         return write_serato_markers(tracks)
-    elif format == "engine":
+    elif output_format == "engine":
         return write_engine_cues(tracks, kwargs.get("db_path", output_path))
-    elif format == "virtualdj":
+    elif output_format == "virtualdj":
         return write_virtualdj_xml(tracks, output_path or "virtualdj_database.xml")
-    elif format == "rekordbox":
+    elif output_format == "rekordbox":
         from .sync import generate_cue_xml
         return generate_cue_xml(tracks)
     else:
-        raise ValueError(f"Unknown format: {format}. Supported: rekordbox, traktor, serato, engine, virtualdj")
+        raise ValueError(f"Unknown format: {output_format}. Supported: rekordbox, traktor, serato, engine, virtualdj")
 
 
 # ---------------------------------------------------------------------------

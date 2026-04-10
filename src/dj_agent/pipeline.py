@@ -45,10 +45,6 @@ def _compute_segment_energies(
     consecutive cue points and store it in each cue dict as
     ``segment_energy``.
 
-    The cue name is also updated to include the energy level, e.g.
-    ``"Drop"`` becomes ``"Drop E:8"``. This lets DJs see section
-    intensity at a glance on CDJ screens and Rekordbox waveforms.
-
     Operates on the already-loaded audio array ``y`` — no additional
     file I/O. Uses RMS-to-dB as a proxy for LUFS on segments (avoids
     a second stereo-native-SR load), which is accurate enough for

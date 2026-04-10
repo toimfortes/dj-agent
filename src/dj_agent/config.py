@@ -24,6 +24,13 @@ class EnergyConfig:
     dynamic_range_weight: float = 0.10
     bass_energy_weight: float = 0.15
 
+    def __post_init__(self) -> None:
+        total = (self.lufs_weight + self.spectral_centroid_weight
+                 + self.onset_density_weight + self.bpm_weight
+                 + self.dynamic_range_weight + self.bass_energy_weight)
+        if abs(total - 1.0) > 0.01:
+            raise ValueError(f"Energy weights must sum to 1.0, got {total:.4f}")
+
     # BPM ranges per genre (lo, hi) for BPM normalisation
     genre_bpm_ranges: dict[str, tuple[float, float]] = field(default_factory=lambda: {
         "ambient": (60, 100),

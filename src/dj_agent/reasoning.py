@@ -237,11 +237,8 @@ def cleanup_temp_snippets() -> int:
     return count
 
 
-# Clean up on import (handles zombies from SIGKILL/power loss)
-try:
-    cleanup_temp_snippets()
-except Exception:
-    pass
+import atexit
+atexit.register(cleanup_temp_snippets)
 
 
 # ---------------------------------------------------------------------------

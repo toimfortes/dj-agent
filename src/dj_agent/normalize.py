@@ -36,8 +36,8 @@ def measure_batch(paths: list[str | Path]) -> list[tuple[Path, LoudnessResult]]:
             results.append((p, lr))
         except Exception as exc:
             results.append((p, LoudnessResult(
-                integrated_lufs=0.0, sample_peak_dbfs=0.0,
-                loudness_range_lu=0.0, short_term_max_lufs=0.0,
+                integrated_lufs=float("-inf"), sample_peak_dbfs=float("-inf"),
+                loudness_range_lu=0.0, short_term_max_lufs=float("-inf"),
             )))
     return results
 
