@@ -107,6 +107,7 @@ class ReasoningConfig:
     quantization: str = "4bit"  # 4bit, 8bit, none
     max_new_tokens: int = 150
     snippet_duration_sec: float = 30.0
+    trust_remote_code: bool = False  # HuggingFace trust_remote_code — opt-in only
 
 
 @dataclass

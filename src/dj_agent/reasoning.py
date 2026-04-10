@@ -378,14 +378,15 @@ def _load_flamingo() -> tuple[Any, Any]:
         elif config.quantization == "8bit":
             bnb_config = BitsAndBytesConfig(load_in_8bit=True)
 
+        trust = config.trust_remote_code
         _FLAMINGO_PROCESSOR = AutoProcessor.from_pretrained(
-            model_id, trust_remote_code=True
+            model_id, trust_remote_code=trust
         )
         _FLAMINGO_MODEL = AudioFlamingo3ForConditionalGeneration.from_pretrained(
             model_id,
             quantization_config=bnb_config,
             device_map="auto",
-            trust_remote_code=True,
+            trust_remote_code=trust,
             torch_dtype=torch.float16 if bnb_config else torch.float32,
         )
         return _FLAMINGO_MODEL, _FLAMINGO_PROCESSOR
