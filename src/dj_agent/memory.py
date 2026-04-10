@@ -170,8 +170,11 @@ def _migrate_v1_to_v2(data: dict[str, Any]) -> dict[str, Any]:
 
 def _validate(data: dict[str, Any]) -> None:
     """Basic structural validation."""
-    assert isinstance(data.get("processed_tracks"), dict), "processed_tracks must be a dict"
-    assert isinstance(data.get("energy_calibration"), dict), "energy_calibration must be a dict"
-    assert data.get("version") == CURRENT_SCHEMA_VERSION, (
-        f"expected version {CURRENT_SCHEMA_VERSION}, got {data.get('version')}"
-    )
+    if not isinstance(data.get("processed_tracks"), dict):
+        raise ValueError("processed_tracks must be a dict")
+    if not isinstance(data.get("energy_calibration"), dict):
+        raise ValueError("energy_calibration must be a dict")
+    if data.get("version") != CURRENT_SCHEMA_VERSION:
+        raise ValueError(
+            f"expected version {CURRENT_SCHEMA_VERSION}, got {data.get('version')}"
+        )

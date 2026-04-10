@@ -135,14 +135,18 @@ class Config:
                      if k in CueConfig.__dataclass_fields__}
         reasoning_data = {k: v for k, v in data.get("reasoning", {}).items()
                           if k in ReasoningConfig.__dataclass_fields__}
+        def _filter(dc_cls, section: str) -> dict:
+            raw = data.get(section, {})
+            return {k: v for k, v in raw.items() if k in dc_cls.__dataclass_fields__}
+
         return cls(
             energy=EnergyConfig(**energy_data),
             cues=CueConfig(**cues_data),
             reasoning=ReasoningConfig(**reasoning_data),
-            memory=MemoryConfig(**data.get("memory", {})),
-            rekordbox=RekordboxConfig(**data.get("rekordbox", {})),
-            duplicates=DuplicateConfig(**data.get("duplicates", {})),
-            normalize=NormalizeConfig(**data.get("normalize", {})),
+            memory=MemoryConfig(**_filter(MemoryConfig, "memory")),
+            rekordbox=RekordboxConfig(**_filter(RekordboxConfig, "rekordbox")),
+            duplicates=DuplicateConfig(**_filter(DuplicateConfig, "duplicates")),
+            normalize=NormalizeConfig(**_filter(NormalizeConfig, "normalize")),
             processing_tier=data.get("processing_tier", "fast"),
         )
 

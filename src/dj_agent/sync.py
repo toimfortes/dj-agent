@@ -7,7 +7,6 @@ Fixes:
 
 from __future__ import annotations
 
-import random
 import uuid
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
@@ -115,7 +114,7 @@ def set_artist(db: Any, content: Any, artist_name: str) -> None:
     if not existing:
         now = datetime.now(timezone.utc)
         existing = tables.DjmdArtist(
-            ID=str(random.randint(100_000_000, 4_294_967_295)),
+            ID=str(uuid.uuid4().int % 4_294_967_295 + 1),
             Name=artist_name,
             UUID=str(uuid.uuid4()),
             rb_data_status=0,

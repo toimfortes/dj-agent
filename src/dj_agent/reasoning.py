@@ -179,8 +179,8 @@ def _extract_json(raw: str) -> dict[str, Any]:
             except (json.JSONDecodeError, ValueError):
                 pass
 
-    # 3. Find first { ... } block in the response
-    match = re.search(r"\{[^{}]*\}", raw, re.DOTALL)
+    # 3. Find first { ... } block in the response (supports nested braces)
+    match = re.search(r"\{(?:[^{}]|\{[^{}]*\})*\}", raw, re.DOTALL)
     if match:
         try:
             return _ensure_dict(json.loads(match.group(0)))

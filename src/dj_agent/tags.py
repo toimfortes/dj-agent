@@ -6,7 +6,6 @@ My Tag system via direct DB access.
 
 from __future__ import annotations
 
-import random
 import uuid
 from datetime import datetime, timezone
 from typing import Any
@@ -126,5 +125,5 @@ def write_colour(db: Any, content_id: str, colour_id: int) -> None:
 # ---------------------------------------------------------------------------
 
 def _new_id() -> str:
-    """Generate a random Rekordbox-style ID (string of digits)."""
-    return str(random.randint(100_000_000, 4_294_967_295))
+    """Generate a unique Rekordbox-style ID (string of digits)."""
+    return str(uuid.uuid4().int % 4_294_967_295 + 1)
