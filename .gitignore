@@ -8,6 +8,7 @@ rekordbox_*.xml
 # Python
 __pycache__/
 *.pyc
+*.egg-info/
 
 # Runtime logs
 *.log
